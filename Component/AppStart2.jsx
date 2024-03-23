@@ -18,9 +18,21 @@ const AppStart2 = () => {
             width:1000,
             height:500,
         };
+
+        
         /** @type {import('lightweight-charts').IChartApi} */
         // const chart = createChart(document.getElementById('container'), chartOptions);
         const chart = createChart(chartContainerRef.current, chartOptions)
+        chart.applyOptions({
+            watermark: {
+                visible: true,
+                fontSize: 72,
+                horzAlign: 'left',
+                vertAlign: 'top',
+                color: 'grey',
+                text: 'TradeSensei',
+            },
+        })
 
         const series = chart.addCandlestickSeries({
             upColor: '#26a69a', downColor: '#ef5350', borderVisible: false,
@@ -756,6 +768,37 @@ const AppStart2 = () => {
                 text: 'D',
             },
         ];
+
+        // create price line**********************************************************
+        let myPriceLine = {
+            price: 42,
+            color: '#3179F5',
+            lineWidth: 2,
+            lineStyle: 2, // LineStyle.Dashed
+            axisLabelVisible: true,
+            title: 'Bought',
+        };        
+
+        series.createPriceLine(myPriceLine);
+
+        myPriceLine = {
+            price: 75,
+            color: 'red',
+            lineWidth: 2,
+            lineStyle: 2, // LineStyle.Dashed
+            axisLabelVisible: true,
+            title: 'Sold',
+        };
+
+        series.createPriceLine(myPriceLine);
+        // create price line**********************************************************
+
+        // hide price line
+        series.applyOptions({
+            lastValueVisible: false,
+            priceLineVisible: false,
+        });
+
       
         for (let i = 0; i < datesForMarkers.length; i++) {
             if (i !== indexOfMinPrice) {
