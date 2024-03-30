@@ -1,62 +1,133 @@
 // https://testnet.binancefuture.com/en/futures/BTCUSDT
-'use strict';
+// https://binance-docs.github.io/apidocs/futures/en/#general-info
+// https://docs.ccxt.com/#/examples/js/
+// https://data.binance.vision/?prefix=data/futures/um/daily/klines/BTCUSDT/5m/
+"use strict";
 
-const ccxt = require ('ccxt');
+const ccxt = require("ccxt");
 
-(async function () {
-    let binance = new ccxt.binance({
-        apiKey: "key",
-        secret: "secret",
-        'enableRateLimit': true,
-        'options': {
-            'defaultType': 'future',
-            'urls': {
-                'api': 'https://testnet.binancefuture.com',
-                'test': 'https://testnet.binancefuture.com',
-            },
-        },
-    })
-    binance.set_sandbox_mode(true)
 
-    let data = {"priceIn":0.0,"timeIn":"", "priceOut":0.0, "timeOut":""}
-    let traderData= []
-    let isStart=false;
-    const binanceData = await binance.fetch_closed_orders("BTCUSDT")
-    for (const datum in binanceData){
-        const reduceOnly = binanceData[datum].info.reduceOnly
-        // console.log (datum + " reduceOnly = " +  JSON.stringify(reduceOnly) )
+async function applicantData() { 
 
-        if (!reduceOnly){ // opening trade
-            if (isStart===false)
-            {
-                isStart= true
-            }
-            // console.log (datum + " avgPrice = " + JSON.stringify(binanceData[datum].info.avgPrice) )
-            
-            let datetime = binanceData[datum].datetime // example 2024-03-25T13:16:40.209Z
-            // console.log(datum + " datetime " + datetime )
-            let splitDate = datetime.split("T")
-            
-            const date = splitDate[0]
-            // console.log(date)
+  let binance = new ccxt.binance({
+    apiKey: `${process.env.BINANCE_PUBLIC_API_KEY}`,
+    secret: `${process.env.BINANCE_SECRET_PRIVATE_KEY}`,
 
-            const time= splitDate[1].split(".")[0]// to hh:mm:ss
-            // console.log(time)
+    enableRateLimit: true,
+    options: {
+      defaultType: "future",
+      urls: {
+        // api: "https://api.binance.com",
+        // test: "https://api.binance.com",        
+        api: "https://testnet.binancefuture.com",
+        test: "https://testnet.binancefuture.com",
+      },
+    },
+  });
+  binance.set_sandbox_mode(true);
 
-            data = {"priceIn":binanceData[datum].info.avgPrice,"timeIn":binanceData[datum].datetime, "priceOut":0.0, "timeOut":""}
-        }
-        else{// closing trade
-            if (isStart===true){
-                data["priceOut"]= binanceData[datum].info.avgPrice
-                data["timeOut"]= binanceData[datum].datetime
-                traderData.push(data)
-            }
-        }
+  let data = { priceIn: 0.0, timeIn: "", priceOut: 0.0, timeOut: "" };
+  let traderData = [];
+  let isStart = false;
+  // const binanceData = await binance.fetch_closed_orders("BTCUSDT");
+  const binanceData = await binance.fetchClosedOrders("BTCUSDT");
+  
+  for (const datum in binanceData) {
+    const reduceOnly = binanceData[datum].info.reduceOnly;
+    // console.log (datum + " reduceOnly = " +  JSON.stringify(reduceOnly) )
+
+    if (!reduceOnly) {
+      // opening trade
+      if (isStart === false) {
+        isStart = true;
+      }
+      // console.log (datum + " avgPrice = " + JSON.stringify(binanceData[datum].info.avgPrice) )
+
+      let datetime = binanceData[datum].datetime; // example 2024-03-25T13:16:40.209Z
+      // console.log(datum + " datetime " + datetime )
+      let splitDate = datetime.split("T");
+
+      const date = splitDate[0];
+      // console.log(date)
+
+      const time = splitDate[1].split(".")[0]; // to hh:mm:ss
+      // console.log(time)
+
+      data = {
+        priceIn: binanceData[datum].info.avgPrice,
+        timeIn: binanceData[datum].datetime,
+        priceOut: 0.0,
+        timeOut: "",
+      };
+    } else {
+      // closing trade
+      if (isStart === true) {
+        data["priceOut"] = binanceData[datum].info.avgPrice;
+        data["timeOut"] = binanceData[datum].datetime;
+        traderData.push(data);
+      }
     }
-    console.log("printing results: ")
-    console.log(JSON.stringify(traderData))
+  }
+  console.log("printing results: ");
+  console.log(JSON.stringify(traderData));
+}
 
-}) ();
+async function priceData() { 
+  let binance = new ccxt.binance({
+    apiKey: `${process.env.BINANCE_PUBLIC_API_KEY}`,
+    secret: `${process.env.BINANCE_SECRET_PRIVATE_KEY}`,
+    enableRateLimit: true,
+    options: {
+      defaultType: "future",
+      urls: {
+        // api: "https://api.binance.com",
+        // test: "https://api.binance.com",
+        api: "https://testnet.binancefuture.com",
+        test: "https://testnet.binancefuture.com",
+      },
+    },
+  });
+  binance.set_sandbox_mode(true);
+  // console.log(JSON.stringify(binance.timeframes))
+  let data = { 
+    open: 0.0,
+    high: 0.0,
+    low: 0.0,
+    close: 0.0,
+    volume: 0.0
+  };
+  let traderData = [];
+  let isStart = false;
+  let from_ts = binance.parse8601('2024-03-01T00:00:00.000Z')
+  // fetchOHLCV(symbol: string, timeframe?: string, since?: Int, limit?: Int, params?: {}): Promise<OHLCV[]>;
+
+  // FOR 5m CALCULATION---------------
+  // 288 constitute 5*12*24 = 5*288 = 1440 mins in a full day(24hrs)  (2880 rep 10days...)
+  // 12 constitute 1hr (24 rep 2hrs....)
+  // 1 constiute 5mins (6 rep 30mins...)
+  const binanceData = await binance.fetchOHLCV("BTCUSDT", "5m", from_ts,288);
+
+  // console.log(from_ts)
+  // console.log(new Date(binanceData[0][0]))
+  // console.log(new Date(binanceData[1][0]))
+  // console.log(binanceData[0][0])
+
+  // console.log("binanceData " + JSON.stringify(binanceData[0]))
+  for (const datum in binanceData) {
+    data = { 
+      open:   binanceData[datum][1],
+      high:   binanceData[datum][2],
+      low:    binanceData[datum][3],
+      close:  binanceData[datum][4],
+      volume: binanceData[datum][5]
+    };    
+    console.log(datum + " " + new Date(binanceData[datum][0]))
+  }
+}
+
+
+// priceData()
+applicantData()
 
 
 // sample data return from binance api
@@ -64,6 +135,7 @@ const ccxt = require ('ccxt');
 // using "reduceOnly" as condition to differentiate between opening and closing trade.
 // "reduceOnly" === false // opening trade
 // "reduceOnly" === true  // closing trade
+// oldest data to latest data , timezone in UTC 0
 
 // [
 //     {
@@ -165,7 +237,6 @@ const ccxt = require ('ccxt');
 //         "fees": []
 //     }
 // ]
-
 
 // sample data extracted for TradeSensei use
 
