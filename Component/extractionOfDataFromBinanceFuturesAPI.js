@@ -7,7 +7,7 @@
 const ccxt = require("ccxt");
 // const { timeout } = require("ccxt/js/src/base/functions");
 
-
+//test
 async function applicantData() { 
 
   let binance = new ccxt.binance({
