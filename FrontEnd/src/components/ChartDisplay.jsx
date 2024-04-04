@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useContext } from "react";
 import CandleStick2 from "./CandleStick2";
 import useFetch from "../hooks/useFetch";
 import UserContext from "../context/user";
+import styles from "./Chart.module.css";
 
 const ChartDisplay = () => {
   const userCtx = useContext(UserContext);
