@@ -7,7 +7,9 @@
 const ccxt = require("ccxt");
 // const { timeout } = require("ccxt/js/src/base/functions");
 
+
 async function applicantData() {
+
   let binance = new ccxt.binance({
     apiKey: "33abb9bbd90c07de6420d2c782df3efb8fbc7ab65be3b3091e1ad0de3a1f1831",
     secret: "5c19a06e96ad5572c938b14f0b6776a6a19cde77d2e4f1baf10ba55bd1acc11c",
@@ -45,10 +47,12 @@ async function applicantData() {
       }
       // console.log (datum + " avgPrice = " + JSON.stringify(binanceData[datum].info.avgPrice) )
 
+
       // let datetime = binanceData[datum].datetime; // example 2024-03-25T13:16:40.209Z
       // let splitDate = datetime.split("T");
       // const date = splitDate[0];
       // const time = splitDate[1].split(".")[0]; // to hh:mm:ss
+
 
       // console.log(datum + " datetime " + datetime )
       // console.log(date)
@@ -78,6 +82,7 @@ async function applicantData() {
   // console.log(datediff)
   // const datediffString = new Date(datediff)
   // console.log(`datediffString=${datediffString}`)
+
   return traderData;
 } // end of function applicantData
 
@@ -178,6 +183,7 @@ function demoApplicantData() {
 }
 
 async function priceData(dateString, numberOfDays) {
+
   let binance = new ccxt.binance({
     apiKey: "33abb9bbd90c07de6420d2c782df3efb8fbc7ab65be3b3091e1ad0de3a1f1831",
     secret: "5c19a06e96ad5572c938b14f0b6776a6a19cde77d2e4f1baf10ba55bd1acc11c",
@@ -202,9 +208,11 @@ async function priceData(dateString, numberOfDays) {
   let isStart = false;
   // dateString = "2024-03-28T00:00:00.000Z"
   // dateString = "2023-12-05T11:00:00Z" //working
+
   dateString = JSON.stringify(dateString);
   dateString = dateString.replace(/\"/g, "");
   let from_ts = binance.parse8601(dateString);
+
   // console.log(`dateString=${dateString}`)
   // console.log(`from_ts=${from_ts}`)
   // fetchOHLCV(symbol: string, timeframe?: string, since?: Int, limit?: Int, params?: {}): Promise<OHLCV[]>;
@@ -216,6 +224,7 @@ async function priceData(dateString, numberOfDays) {
 
   // FOR 1d CALCULATION---------------
   // 30 constitute roughly 1 month
+
   const binanceData = await binance.fetchOHLCV(
     "BTCUSDT",
     "1d",
@@ -223,11 +232,14 @@ async function priceData(dateString, numberOfDays) {
     numberOfDays
   );
 
+
   // console.log(from_ts)
   // console.log(new Date(binanceData[0][0]))
   // console.log(new Date(binanceData[1][0]))
   // console.log(binanceData[0][0])
   // console.log("binanceData " + JSON.stringify(binanceData[0]))
+
+
 
   // console.log(binanceData[0][0])  //1709251200000
   // console.log(new Date(binanceData[0][0]))               //Fri Mar 01 2024 08:00:00 GMT+0800 (Singapore Standard Time)
@@ -245,13 +257,16 @@ async function priceData(dateString, numberOfDays) {
   // console.log(JSON.stringify(new Date(binanceData[0][0]).getUTCMonth())) //2  why 2? should be 3 since it is march
   // console.log(JSON.stringify(new Date(binanceData[0][0]).getMonth())) //2   why 2? should be 3 since it is march
 
+
   let data = [];
   let singleData = {
     time: { year: -1, month: -1, day: -1 },
+
     open: 0.0,
     high: 0.0,
     low: 0.0,
     close: 0.0,
+
     volume: 0.0,
   };
 
@@ -282,9 +297,11 @@ const getFullRangeOfPriceChart = async (req, res) => {
   console.log("getFullRangeOfPriceChart");
   // async function getFullRangeOfPriceChart() {
 
+
   // const applicantTrades= await applicantData()
   const applicantTrades = demoApplicantData();
   console.log("after demo = " + JSON.stringify(applicantTrades));
+
 
   let getApplicantDataAndPriceChart = [];
   let oneData = {};
@@ -512,3 +529,4 @@ function getDayDiff(timeIn, timeOut) {
 // ]
 
 module.exports = { getFullRangeOfPriceChart };
+
