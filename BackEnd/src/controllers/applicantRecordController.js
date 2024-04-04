@@ -24,6 +24,66 @@ const ManagerFinalRecordModel = require("../models/ManagerFinalRecordModel");
 //     }
 // }
 
+//
+//     {
+//       applicantId: "A1000",
+//
+//     },
+//     {
+//       applicantId: "A1000",
+//       executedQty: 1.0,
+//       tradeType: "short",
+//       priceIn: "52183.14286",
+//       timeIn: "2024-02-15T14:47:27.131Z",
+//       priceOut: "52183.20000",
+//       timeOut: "2024-02-22T14:47:50.690Z",
+//     },
+//     {
+//       applicantId: "A1000",
+//       executedQty: 1.0,
+//       tradeType:"long",
+//       priceIn: "51452.00000",
+//       timeIn: "2024-02-24T03:08:00.448Z",
+//       priceOut: "61689.00000",
+//       timeOut: "2024-02-29T03:10:50.919Z",
+//     },
+//     {
+//       applicantId: "A1000",
+//       executedQty: 1.0,
+//       tradeType:"long",
+//       priceIn: "68270.00000",
+//       timeIn: "2024-03-04T04:52:27.270Z",
+//       priceOut: "61202.57497",
+//       timeOut: "2024-03-05T11:03:52.544Z",
+//     },
+//     {
+//       applicantId: "A1000",
+//       executedQty: 1.0,
+//       tradeType: "short",
+//       priceIn: "67783.10000",
+//       timeIn: "2024-03-08T11:04:59.819Z",
+//       priceOut: "72170.00000",
+//       timeOut: "2024-03-11T11:05:19.755Z",
+//     },
+//     {
+//       applicantId: "A1000",
+//       executedQty: 1.0,
+//       tradeType: "short",
+//       priceIn: "67295.60000",
+//       timeIn: "2024-03-19T11:09:53.263Z",
+//       priceOut: "64614.20000",
+//       timeOut: "2024-03-24T11:10:00.331Z",
+//     },
+//     {
+//       applicantId: "A1000",
+//       executedQty: 1.0,
+//       priceIn: "64614.60000",
+//       timeIn: "2024-03-24T11:10:11.055Z",
+//       priceOut: "69002.27788",
+//       timeOut: "2024-03-27T11:10:15.312Z",
+//     },
+//   ]
+
 const seedApplicant = async (req, res) => {
     try {
         await ApplicantRecordModel.deleteMany({});
@@ -32,11 +92,13 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "660e0df3c050096882b8950b", // to check on object id
                 applicantId: "A1000",
-                username: "Adam",
-                priceIn: 68930.0,
-                timeIn: "2024-04-02T03:08:00.448Z",
-                priceOut: 67118.0,
-                timeOut: "2024-04-02T03:10:50.919Z",
+                applicantName: "Adam",
+                executedQty: 1.0,
+                tradeType: "long",
+                priceIn: "27485.60000",
+                timeIn: "2023-10-16T11:10:29.551Z",
+                priceOut: "35460.00000",
+                timeOut: "2023-10-23T11:16:44.991Z",
                 managers: [
                     {
                         staffId: "M20000",
@@ -61,11 +123,13 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "660e0e74c050096882b8950d", // to check on object id
                 applicantId: "A1000",
-                username: "Adam",
-                priceIn: 70380.0,
-                timeIn: "2024-04-02T03:08:00.448Z",
-                priceOut: 66272.57479,
-                timeOut: "2024-04-02T03:10:50.919Z",
+                applicantName: "Adam",
+                executedQty: 1.0,
+                tradeType: "long",
+                priceIn: "38290.00000",
+                timeIn: "2023-12-01T11:16:52.687Z",
+                priceOut: "43896.71990",
+                timeOut: "2023-12-06T11:17:07.259Z",
                 managers: [
                     {
                         staffId: "M20000",
@@ -92,48 +156,121 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "660e0ea3c050096882b8950f", // to check on object id
                 applicantId: "A1000",
-                username: "Adam",
-                priceIn: 57748.0,
-                timeIn: "2024-04-02T03:08:00.448Z",
-                priceOut: 63829.8372,
-                timeOut: "2024-04-02T03:10:50.919Z",
+                applicantName: "Adam",
+                executedQty: 1.0,
+                tradeType: "long",
+                priceIn: "44384.14286",
+                timeIn: "2024-01-08T14:47:27.131Z",
+                priceOut: "45846.20000",
+                timeOut: "2024-01-12T14:47:50.690Z",
                 managers: [
                     {
                         staffId: "M20000",
                         grade: 4.0,
                         comment:
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat sodales gravida.",
-                        // profile: "loginAuth ObjectId", // get the object id from loginAuth
                     },
                     {
                         staffId: "M30000",
                         grade: 3.0,
                         comment:
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat sodales gravida.",
-                        // profile: "loginAuth ObjectId", // get the object id from loginAuth
                     },
                     {
                         staffId: "M40000",
                         grade: 3.5,
                         comment: "test onearok jfodije i",
-                        // profile: "loginAuth ObjectId", // get the object id from loginAuth
                     },
                 ],
             },
             {
                 _id: "660e0ecbc050096882b89511", // to check on object id
                 applicantId: "A1000",
-                username: "Adam",
-                priceIn: 65943.38782,
-                timeIn: "2024-04-02T03:08:00.448Z",
-                priceOut: 67316.4872,
-                timeOut: "2024-04-02T03:10:50.919Z",
+                applicantName: "Adam",
+                executedQty: 1.0,
+                tradeType: "long",
+                priceIn: "42677.00000",
+                timeIn: "2024-02-04T11:16:52.687Z",
+                priceOut: "49502.71990",
+                timeOut: "2024-02-13T11:17:07.259Z",
                 managers: [],
             },
             {
-                _id: "660e0efbc050096882b89513", // to check on object id
+                _id: "660e0efbc053496882b89414",
+                applicantId: "A1000",
+                applicantName: "Adam",
+                executedQty: 1.0,
+                tradeType: "short",
+                priceIn: "52183.14286",
+                timeIn: "2024-02-15T14:47:27.131Z",
+                priceOut: "52183.20000",
+                timeOut: "2024-02-22T14:47:50.690Z",
+                manager: []
+            },
+            {
+                _id: "660e0efbc053496882b89313",
+                applicantId: "A1000",
+                applicantName: "Adam",
+                executedQty: 1.0,
+                tradeType: "long",
+                priceIn: "51452.00000",
+                timeIn: "2024-02-24T03:08:00.448Z",
+                priceOut: "61689.00000",
+                timeOut: "2024-02-29T03:10:50.919Z",
+                manager: []
+            },
+            {
+                _id: "660e0efbc053496882b89583",
+                applicantId: "A1000",
+                applicantName: "Adam",
+                executedQty: 1.0,
+                tradeType: "long",
+                priceIn: "68270.00000",
+                timeIn: "2024-03-04T04:52:27.270Z",
+                priceOut: "61202.57497",
+                timeOut: "2024-03-05T11:03:52.544Z",
+                manager: []
+            },
+            {
+                _id: "660e0efbc053496882b89511",
+                applicantId: "A1000",
+                applicantName: "Adam",
+                executedQty: 1.0,
+                tradeType: "short",
+                priceIn: "67783.10000",
+                timeIn: "2024-03-08T11:04:59.819Z",
+                priceOut: "72170.00000",
+                timeOut: "2024-03-11T11:05:19.755Z",
+                manager: []
+            },
+            {
+                _id: "660e0efbc053496882b89514",
+                applicantId: "A1000",
+                applicantName: "Adam",
+                executedQty: 1.0,
+                tradeType: "short",
+                priceIn: "67295.60000",
+                timeIn: "2024-03-19T11:09:53.263Z",
+                priceOut: "64614.20000",
+                timeOut: "2024-03-24T11:10:00.331Z",
+                manager: []
+            },
+            {
+                _id: "660e0efbc053496882b89513",
+                applicantId: "A1000",
+                applicantName: "Adam",
+                executedQty: 1.0,
+                priceIn: "64614.60000",
+                timeIn: "2024-03-24T11:10:11.055Z",
+                priceOut: "69002.27788",
+                timeOut: "2024-03-27T11:10:15.312Z",
+                manager: []
+            },
+            // ----------------------------------------------------------------------------------------------------
+            {
+                _id: "670e0efbc050096882b89513", // to check on object id
                 applicantId: "A2000",
-                username: "Bryant",
+                applicantName: "Bryant",
                 priceIn: 69394.9848,
                 timeIn: "2024-04-02T03:08:00.448Z",
                 priceOut: 65118.9248,
@@ -153,6 +290,172 @@ const seedApplicant = async (req, res) => {
                         // profile: "loginAuth ObjectId", // get the object id from loginAuth
                     },
                 ],
+            },
+            {
+                _id: "670e0df3c050096882b8950b", // to check on object id
+                applicantId: "A2000",
+                applicantName: "Bryant",
+                executedQty: 1.0,
+                tradeType: "long",
+                priceIn: "27485.60000",
+                timeIn: "2023-10-16T11:10:29.551Z",
+                priceOut: "35460.00000",
+                timeOut: "2023-10-23T11:16:44.991Z",
+                managers: [
+                    {
+                        staffId: "M20000",
+                        grade: 4.5,
+                        comment: "applicant priced out at the right time!",
+                        // profile: "loginAuth ObjectId", // get the object id from loginAuth
+                    },
+                    {
+                        staffId: "M30000",
+                        grade: 4.0,
+                        comment: "NA",
+                        // profile: "loginAuth ObjectId", // get the object id from loginAuth
+                    },
+                    {
+                        staffId: "M40000",
+                        grade: 4.5,
+                        comment: "expecting a lower price-in",
+                        // profile: "loginAuth ObjectId", // get the object id from loginAuth
+                    },
+                ],
+            },
+            {
+                _id: "670e0e74c050096882b8950d", // to check on object id
+                applicantId: "A2000",
+                applicantName: "Bryant",
+                executedQty: 1.0,
+                tradeType: "long",
+                priceIn: "38290.00000",
+                timeIn: "2023-12-01T11:16:52.687Z",
+                priceOut: "43896.71990",
+                timeOut: "2023-12-06T11:17:07.259Z",
+                managers: [
+                    {
+                        staffId: "M20000",
+                        grade: 3.5,
+                        comment:
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat sodales gravida.",
+                        // profile: "loginAuth ObjectId", // get the object id from loginAuth
+                    },
+                    {
+                        staffId: "M30000",
+                        grade: 4.0,
+                        comment: "NA",
+                        // profile: "loginAuth ObjectId", // get the object id from loginAuth
+                    },
+                    {
+                        staffId: "M40000",
+                        grade: 4.5,
+                        comment:
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat sodales gravida.",
+                        // profile: "loginAuth ObjectId", // get the object id from loginAuth
+                    },
+                ],
+            },
+            {
+                _id: "670e0ea3c050096882b8950f", // to check on object id
+                applicantId: "A2000",
+                applicantName: "Bryant",
+                executedQty: 1.0,
+                tradeType: "long",
+                priceIn: "44384.14286",
+                timeIn: "2024-01-08T14:47:27.131Z",
+                priceOut: "45846.20000",
+                timeOut: "2024-01-12T14:47:50.690Z",
+                managers: [
+                    {
+                        staffId: "M20000",
+                        grade: 4.0,
+                        comment:
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat sodales gravida.",
+                    },
+                    {
+                        staffId: "M30000",
+                        grade: 3.0,
+                        comment:
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat sodales gravida.",
+                    },
+                    {
+                        staffId: "M40000",
+                        grade: 3.5,
+                        comment: "test onearok jfodije i",
+                    },
+                ],
+            },
+            {
+                _id: "670e0ecbc050096882b89511", // to check on object id
+                applicantId: "A2000",
+                applicantName: "Bryant",
+                executedQty: 1.0,
+                tradeType: "long",
+                priceIn: "42677.00000",
+                timeIn: "2024-02-04T11:16:52.687Z",
+                priceOut: "49502.71990",
+                timeOut: "2024-02-13T11:17:07.259Z",
+                managers: [],
+            },
+            {
+                _id: "670e0efbc053496882b89414",
+                applicantId: "A2000",
+                applicantName: "Bryant",
+                executedQty: 1.0,
+                tradeType: "short",
+                priceIn: "52183.14286",
+                timeIn: "2024-02-15T14:47:27.131Z",
+                priceOut: "52183.20000",
+                timeOut: "2024-02-22T14:47:50.690Z",
+                manager: []
+            },
+            {
+                _id: "670e0efbc053496882b89313",
+                applicantId: "A2000",
+                applicantName: "Bryant",
+                executedQty: 1.0,
+                tradeType: "long",
+                priceIn: "51452.00000",
+                timeIn: "2024-02-24T03:08:00.448Z",
+                priceOut: "61689.00000",
+                timeOut: "2024-02-29T03:10:50.919Z",
+                manager: []
+            },
+            {
+                _id: "670e0efbc053496882b89583",
+                applicantId: "A2000",
+                applicantName: "Bryant",
+                executedQty: 1.0,
+                tradeType: "long",
+                priceIn: "68270.00000",
+                timeIn: "2024-03-04T04:52:27.270Z",
+                priceOut: "61202.57497",
+                timeOut: "2024-03-05T11:03:52.544Z",
+                manager: []
+            },
+            {
+                _id: "670e0efbc053496882b89511",
+                applicantId: "A2000",
+                applicantName: "Bryant",
+                executedQty: 1.0,
+                tradeType: "short",
+                priceIn: "67783.10000",
+                timeIn: "2024-03-08T11:04:59.819Z",
+                priceOut: "72170.00000",
+                timeOut: "2024-03-11T11:05:19.755Z",
+                manager: []
+            },
+            {
+                _id: "670e0efbc053496882b89514",
+                applicantId: "A2000",
+                applicantName: "Bryant",
+                executedQty: 1.0,
+                tradeType: "short",
+                priceIn: "67295.60000",
+                timeIn: "2024-03-19T11:09:53.263Z",
+                priceOut: "64614.20000",
+                timeOut: "2024-03-24T11:10:00.331Z",
+                manager: []
             },
         ]);
         res.json({ status: "ok", msg: "seeding successful" });
@@ -475,7 +778,7 @@ const updateManagerFinalRecord = async (req, res) => {
                 );
             }
 
-            console.log("after calculation")
+            console.log("after calculation");
             updateManagerRecord.applicantId = req.body.applicantId;
             updateManagerRecord.staffId = req.body.staffId;
             updateManagerRecord.finalGrade = gradeSum;
@@ -532,7 +835,7 @@ const updateManagerFinalRecord = async (req, res) => {
         //     updateManagerRecord.isRecommended = req.body.isRecommended;
         // }
 
-        console.log(JSON.stringify(updateManagerRecord))
+        console.log(JSON.stringify(updateManagerRecord));
         await ManagerFinalRecordModel.findByIdAndUpdate(
             req.params.id,
             updateManagerRecord
@@ -573,7 +876,7 @@ const calculateGradeSumByManager = (applicantManagerRecords, staffId) => {
             if (manager.staffId === staffId) gradeSum += manager.grade;
         });
     }
-    console.log(gradeSum)
+    console.log(gradeSum);
     return gradeSum;
 };
 
