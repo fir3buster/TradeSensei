@@ -5,6 +5,10 @@ import Scoresection from "./Scoresection";
 // import Registration from "./components/Registration";
 
 function App() {
+  // const [accessToken, setAccessToken] = useState("");
+  // const [role, setRole] = useState("");
+  // const [showLogin, setShowLogin] = useState(true);
+
   return (
     <div>
       {/* <h2>TradeSensei</h2> */}

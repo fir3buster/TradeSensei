@@ -5,8 +5,8 @@ const Header = () => {
   return (
     <>
       <div className={styles.header}>
-        <div className={styles.logo}>TradeSensei - manager</div>
-        {/* <div className={styles.user}>Manager</div> */}
+        <div className={styles.logo}>TradeSensei</div>
+        <div className={styles.user}>Manager</div>
       </div>
     </>
   );
