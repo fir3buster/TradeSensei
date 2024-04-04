@@ -1,0 +1,41 @@
+.chart {
+  /* background-color: white; */
+  width: 900px;
+  height: 600px;
+  margin: 20px 0px 0px 100px;
+}
+
+.carousel {
+  position: absolute;
+  bottom: 0px;
+  width: 1000px;
+  height: 100px;
+  background-color: grey;
+  margin: 30px;
+}
+
+.header {
+  margin: 30px 0px 20px 30px;
+  font-size: 20px;
+}
+
+/* body {
+  margin: 0;
+  padding: 0;
+} */
+
+h3 {
+  font-size: 40px;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+  padding: 250px 0;
+  margin: 0px auto;
+  font-family: sans-serif;
+  margin: 0 50px;
+}
+
+.slick-dots {
+  color: white; /* Change 'red' to your desired color */
+}

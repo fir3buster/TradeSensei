@@ -1,0 +1,35 @@
+@import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+@import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
+
+.candidate {
+  color: white;
+  padding: 30px;
+}
+
+.box {
+  background-color: white;
+  width: 300px;
+  height: 200px;
+  border-radius: 12px;
+  margin-left: 30px;
+}
+
+.comment {
+  color: white;
+  margin-left: 30px;
+  margin-bottom: 10px;
+}
+
+.commentbox {
+  position: fixed;
+  bottom: 130px;
+}
+
+.nextbutton {
+  width: 300px;
+  margin: 30px;
+  border-radius: 20px;
+  height: 40px;
+  position: fixed;
+  bottom: 20px;
+}

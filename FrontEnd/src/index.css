@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap"); */
 
 * {
   box-sizing: border-box;
@@ -10,7 +10,8 @@ html {
 
 body {
   margin: 0;
-  background-color: whitesmoke;
+  background-color: black;
+  color: white;
 }
 
 .centered {
@@ -19,4 +20,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.scoresection {
+  width: 400px;
+  height: 1000px;
+  background-color: grey;
+  position: fixed;
+  right: 0px;
+  top: 0px;
 }
