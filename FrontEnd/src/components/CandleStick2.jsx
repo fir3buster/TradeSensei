@@ -83,7 +83,14 @@ const CandleStick2 = (props) => {
             const timeOut  = props.tradeData["applicantTrade"]["timeOut"].split("T")[0]
             const priceIn  = parseFloat(props.tradeData["applicantTrade"]["priceIn"])
             const priceOut = parseFloat(props.tradeData["applicantTrade"]["priceOut"])
+            const executedQty = props.tradeData["applicantTrade"]["executedQty"]
+            let longPnL = ((priceOut-priceIn)*executedQty)
+            longPnL= (Math.round(longPnL * 100) / 100).toFixed(2);
+            let shortPnL = ((priceIn-priceOut)*executedQty)
+            shortPnL= (Math.round(shortPnL * 100) / 100).toFixed(2);
 
+            console.log(`longPnL=${longPnL}`)
+            console.log(`shortPnL=${shortPnL}`)
 
             if (props.tradeData["applicantTrade"]["tradeType"]==="long"){
                 markers.push({
@@ -103,6 +110,25 @@ const CandleStick2 = (props) => {
                     shape: 'arrowDown',
                     text: 'Close Trade @ $' + Math.floor(priceOut),
                 });
+
+                if (longPnL>0){
+                    markers.push({
+                            time: timeOut,
+                            position: 'aboveBar',
+                            color: 'lime',
+                            shape: 'circle',
+                            text: `Profit: $${longPnL}`,
+                    })
+                }else{
+                    markers.push({
+                        time: timeOut,
+                        position: 'aboveBar',
+                        color: 'white',
+                        shape: 'circle',
+                        text: `Loss: $${longPnL}`,
+                    })
+                }
+                
 
                 myPriceLine = {
                     price: priceIn,
@@ -143,6 +169,24 @@ const CandleStick2 = (props) => {
                     text: 'Close Trade @ ' + Math.floor(priceOut),
                 });
 
+                if (shortPnL>0){
+                    markers.push({
+                            time: timeOut,
+                            position: 'aboveBar',
+                            color: 'lime',
+                            shape: 'circle',
+                            text: `Profit: $${shortPnL}`,
+                    })
+                }else{
+                    markers.push({
+                        time: timeOut,
+                        position: 'aboveBar',
+                        color: 'white',
+                        shape: 'circle',
+                        text: `Loss: $${shortPnL}`,
+                    })
+                }
+
                 myPriceLine = {
                     price: priceIn,
                     color: 'red',
@@ -164,7 +208,7 @@ const CandleStick2 = (props) => {
     
                 series.createPriceLine(myPriceLine);                
             }
-
+            
             series.setMarkers(markers);
 
             // hide price line
