@@ -5,14 +5,9 @@
 "use strict";
 
 const ccxt = require("ccxt");
+// const { timeout } = require("ccxt/js/src/base/functions");
 
-<<<<<<< Updated upstream
-
-async function applicantData() { 
-
-=======
 async function applicantData() {
->>>>>>> Stashed changes
   let binance = new ccxt.binance({
     apiKey: "33abb9bbd90c07de6420d2c782df3efb8fbc7ab65be3b3091e1ad0de3a1f1831",
     secret: "5c19a06e96ad5572c938b14f0b6776a6a19cde77d2e4f1baf10ba55bd1acc11c",
@@ -50,22 +45,13 @@ async function applicantData() {
       }
       // console.log (datum + " avgPrice = " + JSON.stringify(binanceData[datum].info.avgPrice) )
 
-<<<<<<< Updated upstream
-      let datetime = binanceData[datum].datetime; // example 2024-03-25T13:16:40.209Z
-=======
       // let datetime = binanceData[datum].datetime; // example 2024-03-25T13:16:40.209Z
       // let splitDate = datetime.split("T");
       // const date = splitDate[0];
       // const time = splitDate[1].split(".")[0]; // to hh:mm:ss
 
->>>>>>> Stashed changes
       // console.log(datum + " datetime " + datetime )
-      let splitDate = datetime.split("T");
-
-      const date = splitDate[0];
       // console.log(date)
-
-      const time = splitDate[1].split(".")[0]; // to hh:mm:ss
       // console.log(time)
 
       data = {
@@ -81,16 +67,13 @@ async function applicantData() {
         data["priceOut"] = binanceData[datum].info.avgPrice;
         data["timeOut"] = binanceData[datum].datetime;
         traderData.push(data);
+        // console.log(data)
       }
     }
   }
-  console.log("printing results: ");
-  console.log(JSON.stringify(traderData));
-}
+  // console.log("printing results: ");
+  // console.log(JSON.stringify(traderData));
 
-<<<<<<< Updated upstream
-async function priceData() { 
-=======
   // const datediff = binance.parse8601(traderData[0].timeOut)-binance.parse8601(traderData[0].timeIn)
   // console.log(datediff)
   // const datediffString = new Date(datediff)
@@ -102,6 +85,7 @@ function demoApplicantData() {
   const traderData = [
     {
       applicantId: "A1000",
+      executedQty: 1.0,
       tradeType:"long",
       priceIn: "27485.60000",
       timeIn: "2023-10-16T11:10:29.551Z",
@@ -110,6 +94,7 @@ function demoApplicantData() {
     },
     {
       applicantId: "A1000",
+      executedQty: 1.0,
       tradeType:"long",
       priceIn: "38290.00000",
       timeIn: "2023-12-01T11:16:52.687Z",
@@ -118,6 +103,7 @@ function demoApplicantData() {
     },
     {
       applicantId: "A1000",
+      executedQty: 1.0,
       tradeType:"long",      
       priceIn: "44384.14286",
       timeIn: "2024-01-08T14:47:27.131Z",
@@ -126,6 +112,7 @@ function demoApplicantData() {
     },
     {
       applicantId: "A1000",
+      executedQty: 1.0,
       tradeType:"long",      
       priceIn: "42677.00000",
       timeIn: "2024-02-04T11:16:52.687Z",
@@ -134,6 +121,7 @@ function demoApplicantData() {
     },
     {
       applicantId: "A1000",
+      executedQty: 1.0,
       tradeType: "short",      
       priceIn: "52183.14286",
       timeIn: "2024-02-15T14:47:27.131Z",
@@ -142,6 +130,7 @@ function demoApplicantData() {
     },    
     {
       applicantId: "A1000",
+      executedQty: 1.0,
       tradeType:"long",
       priceIn: "51452.00000",
       timeIn: "2024-02-24T03:08:00.448Z",
@@ -150,6 +139,7 @@ function demoApplicantData() {
     },
     {
       applicantId: "A1000",
+      executedQty: 1.0,
       tradeType:"long",
       priceIn: "68270.00000",
       timeIn: "2024-03-04T04:52:27.270Z",
@@ -158,6 +148,7 @@ function demoApplicantData() {
     },
     {
       applicantId: "A1000",
+      executedQty: 1.0,
       tradeType: "short",
       priceIn: "67783.10000",
       timeIn: "2024-03-08T11:04:59.819Z",
@@ -166,6 +157,7 @@ function demoApplicantData() {
     },
     {
       applicantId: "A1000",
+      executedQty: 1.0,
       tradeType: "short",
       priceIn: "67295.60000",
       timeIn: "2024-03-19T11:09:53.263Z",
@@ -174,6 +166,7 @@ function demoApplicantData() {
     },
     {
       applicantId: "A1000",
+      executedQty: 1.0,
       priceIn: "64614.60000",
       timeIn: "2024-03-24T11:10:11.055Z",
       priceOut: "69002.27788",
@@ -185,7 +178,6 @@ function demoApplicantData() {
 }
 
 async function priceData(dateString, numberOfDays) {
->>>>>>> Stashed changes
   let binance = new ccxt.binance({
     apiKey: "33abb9bbd90c07de6420d2c782df3efb8fbc7ab65be3b3091e1ad0de3a1f1831",
     secret: "5c19a06e96ad5572c938b14f0b6776a6a19cde77d2e4f1baf10ba55bd1acc11c",
@@ -205,9 +197,6 @@ async function priceData(dateString, numberOfDays) {
   });
   binance.set_sandbox_mode(true);
   // console.log(JSON.stringify(binance.timeframes))
-<<<<<<< Updated upstream
-  let data = { 
-=======
 
   let traderData = [];
   let isStart = false;
@@ -259,42 +248,13 @@ async function priceData(dateString, numberOfDays) {
   let data = [];
   let singleData = {
     time: { year: -1, month: -1, day: -1 },
->>>>>>> Stashed changes
     open: 0.0,
     high: 0.0,
     low: 0.0,
     close: 0.0,
     volume: 0.0,
   };
-  let traderData = [];
-  let isStart = false;
-  let from_ts = binance.parse8601('2024-03-01T00:00:00.000Z')
-  // fetchOHLCV(symbol: string, timeframe?: string, since?: Int, limit?: Int, params?: {}): Promise<OHLCV[]>;
 
-<<<<<<< Updated upstream
-  // FOR 5m CALCULATION---------------
-  // 288 constitute 5*12*24 = 5*288 = 1440 mins in a full day(24hrs)  (2880 rep 10days...)
-  // 12 constitute 1hr (24 rep 2hrs....)
-  // 1 constiute 5mins (6 rep 30mins...)
-  const binanceData = await binance.fetchOHLCV("BTCUSDT", "5m", from_ts,288);
-
-  // console.log(from_ts)
-  // console.log(new Date(binanceData[0][0]))
-  // console.log(new Date(binanceData[1][0]))
-  // console.log(binanceData[0][0])
-
-  // console.log("binanceData " + JSON.stringify(binanceData[0]))
-  for (const datum in binanceData) {
-    data = { 
-      open:   binanceData[datum][1],
-      high:   binanceData[datum][2],
-      low:    binanceData[datum][3],
-      close:  binanceData[datum][4],
-      volume: binanceData[datum][5]
-    };    
-    console.log(datum + " " + new Date(binanceData[datum][0]))
-  }
-=======
   for (const datum in binanceData) {
     const date = new Date(binanceData[datum][0]);
 
@@ -316,18 +276,12 @@ async function priceData(dateString, numberOfDays) {
   }
   // console.log(JSON.stringify(data))
   return data;
->>>>>>> Stashed changes
 }
 
 const getFullRangeOfPriceChart = async (req, res) => {
   console.log("getFullRangeOfPriceChart");
   // async function getFullRangeOfPriceChart() {
 
-<<<<<<< Updated upstream
-// priceData()
-applicantData()
-
-=======
   // const applicantTrades= await applicantData()
   const applicantTrades = demoApplicantData();
   console.log("after demo = " + JSON.stringify(applicantTrades));
@@ -383,7 +337,6 @@ function getDayDiff(timeIn, timeOut) {
 // getFullRangeOfPriceChart()
 // priceData("2023-12-05T11:00:00.000Z", 10)
 // priceData("2023-12-05T11:00:00Z", 10)
->>>>>>> Stashed changes
 
 // sample data return from binance api
 // needed data are price and datetime
@@ -557,8 +510,5 @@ function getDayDiff(timeIn, timeOut) {
 //         "timeOut": "2024-03-25T14:34:49.255Z"
 //     }
 // ]
-<<<<<<< Updated upstream
-=======
 
 module.exports = { getFullRangeOfPriceChart };
->>>>>>> Stashed changes
