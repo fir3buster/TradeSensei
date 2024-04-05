@@ -16,7 +16,7 @@ const ChartDisplay = () => {
 
   const getTradeData = async () => {
     const res = await fetchData(
-      "/api/tradeData",
+      "/api/chart/tradeData",
       undefined,
       undefined,
       undefined /*userCtx.accessToken*/
