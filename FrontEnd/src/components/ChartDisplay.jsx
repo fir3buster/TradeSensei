@@ -5,7 +5,10 @@ import UserContext from "../context/user";
 import styles from "./Chart.module.css";
 
 const ChartDisplay = () => {
-  const userCtx = useContext(UserContext);
+  // const userCtx = useContext(UserContext);
+
+  const [context, setContext] = useContext(UserContext);
+
   const [tradeData, setTradeData] = useState([]);
   const [activeTradeData, setActiveTradeData] = useState([]);
   const [page, setPage] = useState(-1);
@@ -21,7 +24,12 @@ const ChartDisplay = () => {
 
     if (res.ok) {
       console.log("getTradeData data ok");
-      // console.log(JSON.stringify(res.data))
+      
+      
+      console.log(`res.data[0]["applicantTrade"]["applicantId"] = ${JSON.stringify(res.data[0]["applicantTrade"]["applicantId"])}`)
+      setContext(res.data[0]["applicantTrade"]["applicantId"])
+
+
       setTradeData(res.data);
       setPage(0);
     } else {

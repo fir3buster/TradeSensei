@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , useContext} from "react";
 import styles from "./Score.module.css";
-
+import UserContext from "../context/user";
 const Candidate = () => {
+  const [context, setContext] = useContext(UserContext);
+
   // const [candidateIDs, setCandidateIDs] = useState([]);
 
   // const [selectedID, setSelectedID] = useState("");
@@ -23,7 +25,8 @@ const Candidate = () => {
         {/* Render dropdown */}
         {/* <select value={selectedID} onChange={handleSelectChange}> */}
         <select>
-          <option value="">Select Candidate ID</option>
+        <option value={context}>{context}</option>
+        {/* <option value="">Select Candidate ID</option> */}
           {/* Map over candidateIDs to render options */}
           {/* {candidateIDs.map((id) => (
             <option key={id} value={id}>
