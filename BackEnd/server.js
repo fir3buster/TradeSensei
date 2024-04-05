@@ -8,7 +8,7 @@ const loginAuth = require("./src/routers/loginAuthRouter");
 const applicants = require("./src/routers/applicantRecordRouter");
 const extractionOfDataFromBinanceFuturesAPI = require("./src/routers/extractionOfDataFromBinanceFuturesAPI");
 const roles = require("./src/routers/rolesRouter");
-const RolesModel = require("./src/models/RolesModel");
+
 connectDB();
 
 const limiter = rateLimit({});
