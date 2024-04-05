@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("", loginAuth);
 app.use("/api", applicants);
-app.use("/api/chart", extractionOfDataFromBinanceFuturesAPI);
+app.use("/api", extractionOfDataFromBinanceFuturesAPI);
 
 app.listen(process.env.PORT, () => {
     console.log(`listening to ${process.env.PORT}`);
