@@ -3,9 +3,9 @@ const mongoose = require("mongoose");
 const generateId = "A" + Math.floor(Math.random() * 10000);
 
 const ManagerSchema = new mongoose.Schema({
-    staffId: { type: String, required: true, match: /[M][1-9]\d{4}/ },
-    grade: { type: Number, required: true, min: 0, max: 5 },
-    comment: { type: String, required: true, min: 0, max: 250 },
+    staffId: { type: String, require: true, match: /[M][1-9]\d{4}/ },
+    grade: { type: Number, require: true, min: 0, max: 5 },
+    comment: { type: String, require: true, min: 0, max: 250 },
     // profile: {
     //     type: mongoose.Schema.Types.ObjectId,
     //     ref: "LoginAuth",

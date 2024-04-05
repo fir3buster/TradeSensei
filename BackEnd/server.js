@@ -7,7 +7,8 @@ const connectDB = require("./src/db/db");
 const loginAuth = require("./src/routers/loginAuthRouter");
 const applicants = require("./src/routers/applicantRecordRouter");
 const extractionOfDataFromBinanceFuturesAPI = require("./src/routers/extractionOfDataFromBinanceFuturesAPI");
-
+const roles = require("./src/routers/rolesRouter");
+const RolesModel = require("./src/models/RolesModel");
 connectDB();
 
 const limiter = rateLimit({});
@@ -22,7 +23,8 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("", loginAuth);
 app.use("/api", applicants);
-app.use("/api", extractionOfDataFromBinanceFuturesAPI);
+app.use("/api/chart", extractionOfDataFromBinanceFuturesAPI);
+app.use("", roles);
 
 app.listen(process.env.PORT, () => {
     console.log(`listening to ${process.env.PORT}`);

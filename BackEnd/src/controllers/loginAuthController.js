@@ -40,6 +40,7 @@ const register = async (req, res) => {
         await LoginAuthModel.create({
             email: req.body.email,
             hash,
+            staffId: req.body.staffId,
             role: req.body.role || "manager",
         });
 
