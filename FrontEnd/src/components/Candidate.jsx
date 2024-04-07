@@ -9,7 +9,7 @@ const Candidate = () => {
       <div className={styles.candidate}>
         <div>Select the Applicant's ID:</div>
         <select className={styles.candidatebox}>
-          <option value={context}>{context}</option>
+          <option value={context.id}>{context.id}</option>
         </select>
         <hr />
       </div>
