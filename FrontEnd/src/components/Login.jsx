@@ -1,29 +1,29 @@
 import React, { useState, useContext } from "react";
-// import useFetch from "./hooks/useFetch";
-// import UserContext from "../context/user";
-// import { jwtDecode } from "jwt-decode";
+import useFetch from "../hooks/useFetch";
+import UserContext from "../context/user";
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
-  // const fetchData = useFetch();
+  const fetchData = useFetch();
 
-  // const userCtx = useContext(UserContext);
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
+  const userCtx = useContext(UserContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  // const handleLogin = async () => {
-  //     const res = await fetchData("/auth/login", "POST", { email, password });
+  const handleLogin = async () => {
+    const res = await fetchData("/login", "POST", { email, password });
 
-  //     if (res.ok) {
-  //         // set access token
-  //         userCtx.setAccessToken(res.data.access);
-  //         // decode the claims from backend
-  //         const decoded = jwtDecode(res.data.access);
-  //         // get the role from the decoded claims
-  //         userCtx.setRole(decoded.role);
-  //     } else {
-  //         alert(JSON.stringify(res.data));
-  //     }
-  // };
+    if (res.ok) {
+      // set access token
+      userCtx.setAccessToken(res.data.access);
+      // decode the claims from backend
+      const decoded = jwtDecode(res.data.access);
+      // get the role from the decoded claims
+      userCtx.setRole(decoded.role);
+    } else {
+      alert(JSON.stringify(res.data));
+    }
+  };
 
   return (
     <>
@@ -34,8 +34,8 @@ const Login = () => {
           type="text"
           className="col-md-4"
           placeholder="email"
-          //   value={email}
-          //   onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <div className="col-md-4"></div>
       </div>
@@ -45,8 +45,8 @@ const Login = () => {
           type="password"
           className="col-md-4"
           placeholder="password"
-          //   value={password}
-          //   onChange={(e) => setPassword(e.target.value)}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <div className="col-md-4"></div>
       </div>

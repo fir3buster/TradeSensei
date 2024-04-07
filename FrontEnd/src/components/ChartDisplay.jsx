@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useContext } from "react";
 import CandleStick2 from "./CandleStick2";
 import useFetch from "../hooks/useFetch";
 import UserContext from "../context/user";
+import Score from "./Score";
 import styles from "./Chart.module.css";
 
 const ChartDisplay = () => {
@@ -12,6 +13,7 @@ const ChartDisplay = () => {
   const [tradeData, setTradeData] = useState([]);
   const [activeTradeData, setActiveTradeData] = useState([]);
   const [page, setPage] = useState(-1);
+  const [scores, setScores] = useState(Array.from({ length: 10 }, () => 0));
   const fetchData = useFetch();
 
   const getTradeData = async () => {
@@ -24,11 +26,13 @@ const ChartDisplay = () => {
 
     if (res.ok) {
       console.log("getTradeData data ok");
-      
-      
-      console.log(`res.data[0]["applicantTrade"]["applicantId"] = ${JSON.stringify(res.data[0]["applicantTrade"]["applicantId"])}`)
-      setContext(res.data[0]["applicantTrade"]["applicantId"])
 
+      console.log(
+        `res.data[0]["applicantTrade"]["applicantId"] = ${JSON.stringify(
+          res.data[0]["applicantTrade"]["applicantId"]
+        )}`
+      );
+      setContext(res.data[0]["applicantTrade"]["applicantId"]);
 
       setTradeData(res.data);
       setPage(0);
@@ -38,14 +42,25 @@ const ChartDisplay = () => {
     }
   };
 
-  const nextPage = async () => {
-    if (page === 9) setPage(0);
-    else setPage(page + 1);
+  const updateScore = (index, score) => {
+    // Update the score for the chart at the given index
+    setScores((prevScores) => {
+      const newScores = [...prevScores];
+      newScores[index] = score;
+      return newScores;
+    });
   };
 
-  const prevPage = async () => {
-    if (page != 0) setPage(page - 1);
-    else setPage(9);
+  const nextPage = () => {
+    if (page < tradeData.length - 1) {
+      setPage(page + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (page > 0) {
+      setPage(page - 1);
+    }
   };
 
   useEffect(() => {
@@ -54,16 +69,39 @@ const ChartDisplay = () => {
   }, []);
 
   return (
-    <div className="">
+    <div className="centered">
       <div className="">
-        <CandleStick2
-          activePage={page}
-          tradeData={tradeData[page]}
-        ></CandleStick2>
-        <div className="">
-          <button onClick={prevPage}>Turn Left</button>
-          <label className="">Page {page + 1}</label>
-          <button onClick={nextPage}>Turn Right</button>
+        <div className="chartandbuttons">
+          <CandleStick2
+            activePage={page}
+            tradeData={tradeData[page]}
+          ></CandleStick2>
+
+          <div className={styles.chartbuttons}>
+            <button
+              className={styles.buttonchart}
+              onClick={prevPage}
+              disabled={page === 0}
+            >
+              Prev Chart
+            </button>
+            <label className="">Page {page + 1}</label>
+            <button
+              className={styles.buttonchart}
+              onClick={nextPage}
+              disabled={page === tradeData.length - 1}
+            >
+              Next Chart
+            </button>
+          </div>
+        </div>
+
+        <div className={styles.score}>
+          <Score
+            score={scores[page]}
+            updateScore={(score) => updateScore(page, score)}
+            className=""
+          />
         </div>
       </div>
     </div>

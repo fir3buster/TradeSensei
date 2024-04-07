@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Chart.module.css";
+// import UserContext from "../context/user";
 
-const Header = () => {
+const Role = () => {
   // const [role, setRole] = useState("User");
+  // const [context, setContext] = useContext(UserContext);
 
   // useEffect(() => {
 
@@ -23,10 +25,10 @@ const Header = () => {
       <div className={styles.header}>
         {/* Display the account holder's role */}
         {/* <div className={styles.user}>{role}</div> */}
-        <div className={styles.user}>Role</div>
+        <div className={styles.user}>Role - Manager</div>
       </div>
     </>
   );
 };
 
-export default Header;
+export default Role;

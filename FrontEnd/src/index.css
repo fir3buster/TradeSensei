@@ -10,7 +10,7 @@ html {
 
 body {
   margin: 0;
-  background-color: black;
+  background-color: #1a1a1a;
   color: white;
 }
 
@@ -22,11 +22,11 @@ body {
   align-items: center;
 }
 
-.scoresection {
-  width: 400px;
-  height: 1000px;
-  background-color: grey;
-  position: fixed;
-  right: 0px;
-  top: 0px;
+.chartandbuttons {
+  left: 300px;
+}
+
+.header {
+  height: 100px;
+  background-color: black;
 }

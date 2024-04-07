@@ -15,3 +15,4 @@ export const Radio = styled.input`
 export const Rating = styled.div`
   cursor: pointer;
 `;
+

@@ -1,42 +1,42 @@
 import React, { useEffect, useState } from "react";
-// import useFetch from "./hooks/useFetch";
+import useFetch from "../hooks/useFetch";
 
 const Registration = () => {
-  //   const fetchData = useFetch();
+  const fetchData = useFetch();
 
-  //   const [roles, setRoles] = useState([]);
-  //   const [email, setEmail] = useState("");
-  //   const [password, setPassword] = useState("");
-  //   const [role, setRole] = useState("");
+  const [roles, setRoles] = useState([]);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
 
-  //   const getRoles = async () => {
-  //     const res = await fetchData("/roles");
-  //     if (res.ok) {
-  //       setRoles(res.data);
-  //     } else {
-  //       console.log(res.data);
-  //     }
-  //   };
+  const getRoles = async () => {
+    const res = await fetchData("/users", "GET");
+    if (res.ok) {
+      setRoles(res.data);
+    } else {
+      console.log(res.data);
+    }
+  };
 
-  //   const registerUser = async () => {
-  //     const res = await fetchData("/auth/register", "PUT", {
-  //       email,
-  //       password,
-  //       role,
-  //     });
+  const registerUser = async () => {
+    const res = await fetchData("/register", "PUT", {
+      email,
+      password,
+      role,
+    });
 
-  //     if (res.ok) {
-  //       setEmail("");
-  //       setPassword("");
-  //       setRole("");
-  //     } else {
-  //       console.log(res.data);
-  //     }
-  //   };
+    if (res.ok) {
+      setEmail("");
+      setPassword("");
+      setRole("");
+    } else {
+      console.log(res.data);
+    }
+  };
 
-  //   useEffect(() => {
-  //     getRoles();
-  //   }, []);
+  useEffect(() => {
+    getRoles();
+  }, []);
 
   return (
     <>
