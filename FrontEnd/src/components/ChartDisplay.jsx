@@ -11,7 +11,6 @@ const ChartDisplay = () => {
   const [context, setContext] = useContext(UserContext);
 
   const [tradeData, setTradeData] = useState([]);
-  const [activeTradeData, setActiveTradeData] = useState([]);
   const [page, setPage] = useState(-1);
   const [scores, setScores] = useState(Array.from({ length: 10 }, () => 0));
   const fetchData = useFetch();
@@ -43,7 +42,6 @@ const ChartDisplay = () => {
   };
 
   const updateScore = (index, score) => {
-    // Update the score for the chart at the given index
     setScores((prevScores) => {
       const newScores = [...prevScores];
       newScores[index] = score;
@@ -69,40 +67,38 @@ const ChartDisplay = () => {
   }, []);
 
   return (
-    <div className="centered">
-      <div className="">
-        <div className="chartandbuttons">
+    <div className="">
+      <div className={styles.chartwrapper}>
+        <div className={styles.chart}>
           <CandleStick2
             activePage={page}
             tradeData={tradeData[page]}
           ></CandleStick2>
-
-          <div className={styles.chartbuttons}>
-            <button
-              className={styles.buttonchart}
-              onClick={prevPage}
-              disabled={page === 0}
-            >
-              Prev Chart
-            </button>
-            <label className="">Page {page + 1}</label>
-            <button
-              className={styles.buttonchart}
-              onClick={nextPage}
-              disabled={page === tradeData.length - 1}
-            >
-              Next Chart
-            </button>
-          </div>
         </div>
-
-        <div className={styles.score}>
-          <Score
-            score={scores[page]}
-            updateScore={(score) => updateScore(page, score)}
-            className=""
-          />
+        <div className={styles.chartbuttons}>
+          <button
+            className={styles.buttonchart}
+            onClick={prevPage}
+            disabled={page === 0}
+          >
+            Prev Chart
+          </button>
+          <label>Page {page + 1}</label>
+          <button
+            className={styles.buttonchart}
+            onClick={nextPage}
+            disabled={page === tradeData.length - 1}
+          >
+            Next Chart
+          </button>
         </div>
+      </div>
+
+      <div>
+        <Score
+          score={scores[page]}
+          updateScore={(score) => updateScore(page, score)}
+        />
       </div>
     </div>
   );

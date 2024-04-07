@@ -66,10 +66,10 @@ const Score = () => {
   }, []);
 
   return (
-    <div className="">
+    <div className={styles.score}>
       <div>
         <Container>
-          <div className={styles.titlestars}>
+          <div className="">
             <div className={styles.scoregrade}>
               What is your grade for this trade?
             </div>
@@ -82,7 +82,6 @@ const Score = () => {
                     value={givenRating}
                     onClick={() => {
                       setRate(givenRating);
-                      // alert(`Are you sure you want to give ${givenRating} stars ?`);
                     }}
                   />
                   <Rating>
@@ -99,7 +98,7 @@ const Score = () => {
         </Container>
       </div>
       <div className={styles.commentbox}>
-        <div className={styles.comment}>Your comment - optional:</div>
+        <div className="">Your comment - optional:</div>
         <input
           type="text"
           value={comment}
