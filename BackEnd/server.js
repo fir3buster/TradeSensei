@@ -10,8 +10,13 @@ const extractionOfDataFromBinanceFuturesAPI = require("./src/routers/extractionO
 const roles = require("./src/routers/rolesRouter");
 
 connectDB();
+const limiter = rateLimit({
+    windowMS: 15 * 60 * 1000,
+    max: 100,
+    standardHeaders: true,
+    legacyHeaders: false,
+});
 
-const limiter = rateLimit({});
 
 const app = express();
 app.use(cors());
