@@ -3,6 +3,7 @@ import CandleStick2 from "./CandleStick2";
 import useFetch from "../hooks/useFetch";
 import UserContext from "../context/user";
 import styles from "./Chart.module.css";
+import Score from "./Score";
 
 const ChartDisplay = () => {
   const userCtx = useContext(UserContext);
@@ -11,7 +12,7 @@ const ChartDisplay = () => {
 
   const [tradeData, setTradeData] = useState([]);
   const [page, setPage] = useState(-1);
-  const [scores, setScores] = useState(Array.from({ length: 10 }, () => 0));
+  // const [scores, setScores] = useState(Array.from({ length: 10 }, () => 0));
   const fetchData = useFetch();
 
   const getTradeData = async () => {
@@ -73,7 +74,7 @@ const ChartDisplay = () => {
   };
 
   const updateScore = (index, score) => {
-    setScores((prevScores) => {
+    userCtx.setScore((prevScores) => {
       const newScores = [...prevScores];
       newScores[index] = score;
       return newScores;
@@ -83,12 +84,17 @@ const ChartDisplay = () => {
   const nextPage = () => {
     if (page < tradeData.length - 1) {
       setPage(page + 1);
+      // get function to post api into db (grade & comments )
+      // update frunction to post api into db (grade & comments )
+
     }
   };
 
   const prevPage = () => {
     if (page > 0) {
       setPage(page - 1);
+      // get function to post api into db (grade & comments )
+      // update frunction to post api into db (grade & comments )
     }
   };
 
@@ -109,6 +115,7 @@ const ChartDisplay = () => {
           <CandleStick2
             activePage={page}
             tradeData={tradeData[page]}
+            changePage={userCtx.activeApplicantId}
           ></CandleStick2>
         </div>
         <div className={styles.chartbuttons}>
