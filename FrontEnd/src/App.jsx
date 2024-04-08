@@ -1,9 +1,8 @@
 import React, { useState, createContext, useContext } from "react";
 import ChartScore from "./ChartScore";
 import UserContext from "./context/user";
-// import Login from "./components/Login";
-// import Registration from "./components/Registration";
-// import UserLoginContext from "./context/login";
+import Login from "./components/Login";
+import Registration from "./components/Registration";
 
 function App() {
   const [accessToken, setAccessToken] = useState("");
@@ -50,11 +49,7 @@ function App() {
           setApplicantIds,          
         }}
       >
-        <ChartScore></ChartScore>
-      </UserContext.Provider>
-      {/* <UserLoginContext.Provider
-        value={{ accessToken, setAccessToken, role, setRole }}
-      >
+        {/* <ChartScore></ChartScore> */}
         {accessToken.length > 0 && <ChartScore></ChartScore>}
         {accessToken.length === 0 && showLogin && (
           <Login setShowLogin={setShowLogin}></Login>
@@ -62,8 +57,7 @@ function App() {
         {accessToken.length === 0 && !showLogin && (
           <Registration setShowLogin={setShowLogin}></Registration>
         )}
-      </UserLoginContext.Provider> */}
-      {/* </> */}
+      </UserContext.Provider>
     </div>
   );
 }
