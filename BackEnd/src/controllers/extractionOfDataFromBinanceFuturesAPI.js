@@ -9,9 +9,9 @@ const ApplicantRecordModel = require("../models/ApplicantRecordModel");
 // const { timeout } = require("ccxt/js/src/base/functions");
 async function seedApplicant(traderData) {
     try {
+        await ApplicantRecordModel.deleteMany({});        
         for (const cycleNumber in traderData) {
             console.log(JSON.stringify(traderData));
-            await ApplicantRecordModel.deleteMany({});
 
             await ApplicantRecordModel.create([
                 {
@@ -107,7 +107,9 @@ async function applicantData() {
     console.log(
         "adsfdsfjdsalfkdjflkdsjflkadsjflksajlfkdsajflkdsajfldaksfjldksfjldsakjfkdskjfldsjlfdsa  "
     );
-    console.log(traderData);
+    console.log("hello" + JSON.stringify(traderData));
+    traderData = structuredClone(demoApplicantData())
+    console.log("hello2" + JSON.stringify(traderData));
     seedApplicant(traderData);
     return traderData;
 } // end of function applicantData
@@ -203,6 +205,189 @@ function demoApplicantData() {
             priceOut: "69002.27788",
             timeOut: "2024-03-27T11:10:15.312Z",
         },
+
+        
+
+        {
+            applicantId: "A2000",
+            executedQty: 1.0,
+            tradeType: "long",
+            priceIn: "27485.60000",
+            timeIn: "2023-10-16T11:10:29.551Z",
+            priceOut: "35460.00000",
+            timeOut: "2023-10-23T11:16:44.991Z",
+        },
+        {
+            applicantId: "A2000",
+            executedQty: 1.0,
+            tradeType: "long",
+            priceIn: "38290.00000",
+            timeIn: "2023-12-01T11:16:52.687Z",
+            priceOut: "43896.71990",
+            timeOut: "2023-12-06T11:17:07.259Z",
+        },
+        {
+            applicantId: "A2000",
+            executedQty: 1.0,
+            tradeType: "long",
+            priceIn: "44384.14286",
+            timeIn: "2024-01-08T14:47:27.131Z",
+            priceOut: "45846.20000",
+            timeOut: "2024-01-12T14:47:50.690Z",
+        },
+        {
+            applicantId: "A2000",
+            executedQty: 1.0,
+            tradeType: "long",
+            priceIn: "42677.00000",
+            timeIn: "2024-02-04T11:16:52.687Z",
+            priceOut: "49502.71990",
+            timeOut: "2024-02-13T11:17:07.259Z",
+        },
+        {
+            applicantId: "A2000",
+            executedQty: 1.0,
+            tradeType: "short",
+            priceIn: "52183.14286",
+            timeIn: "2024-02-15T14:47:27.131Z",
+            priceOut: "52183.20000",
+            timeOut: "2024-02-22T14:47:50.690Z",
+        },
+        {
+            applicantId: "A2000",
+            executedQty: 1.0,
+            tradeType: "long",
+            priceIn: "51452.00000",
+            timeIn: "2024-02-24T03:08:00.448Z",
+            priceOut: "61689.00000",
+            timeOut: "2024-02-29T03:10:50.919Z",
+        },
+        {
+            applicantId: "A2000",
+            executedQty: 1.0,
+            tradeType: "long",
+            priceIn: "68270.00000",
+            timeIn: "2024-03-04T04:52:27.270Z",
+            priceOut: "61202.57497",
+            timeOut: "2024-03-05T11:03:52.544Z",
+        },
+        {
+            applicantId: "A2000",
+            executedQty: 1.0,
+            tradeType: "short",
+            priceIn: "67783.10000",
+            timeIn: "2024-03-08T11:04:59.819Z",
+            priceOut: "72170.00000",
+            timeOut: "2024-03-11T11:05:19.755Z",
+        },
+        {
+            applicantId: "A2000",
+            executedQty: 1.0,
+            tradeType: "short",
+            priceIn: "67295.60000",
+            timeIn: "2024-03-19T11:09:53.263Z",
+            priceOut: "64614.20000",
+            timeOut: "2024-03-24T11:10:00.331Z",
+        },
+        {
+            applicantId: "A2000",
+            executedQty: 1.0,
+            priceIn: "64614.60000",
+            timeIn: "2024-03-24T11:10:11.055Z",
+            priceOut: "69002.27788",
+            timeOut: "2024-03-27T11:10:15.312Z",
+        },        
+
+
+        {
+            applicantId: "A3000",
+            executedQty: 1.0,
+            tradeType: "long",
+            priceIn: "27485.60000",
+            timeIn: "2023-10-16T11:10:29.551Z",
+            priceOut: "35460.00000",
+            timeOut: "2023-10-23T11:16:44.991Z",
+        },
+        {
+            applicantId: "A3000",
+            executedQty: 1.0,
+            tradeType: "long",
+            priceIn: "38290.00000",
+            timeIn: "2023-12-01T11:16:52.687Z",
+            priceOut: "43896.71990",
+            timeOut: "2023-12-06T11:17:07.259Z",
+        },
+        {
+            applicantId: "A3000",
+            executedQty: 1.0,
+            tradeType: "long",
+            priceIn: "44384.14286",
+            timeIn: "2024-01-08T14:47:27.131Z",
+            priceOut: "45846.20000",
+            timeOut: "2024-01-12T14:47:50.690Z",
+        },
+        {
+            applicantId: "A3000",
+            executedQty: 1.0,
+            tradeType: "long",
+            priceIn: "42677.00000",
+            timeIn: "2024-02-04T11:16:52.687Z",
+            priceOut: "49502.71990",
+            timeOut: "2024-02-13T11:17:07.259Z",
+        },
+        {
+            applicantId: "A3000",
+            executedQty: 1.0,
+            tradeType: "short",
+            priceIn: "52183.14286",
+            timeIn: "2024-02-15T14:47:27.131Z",
+            priceOut: "52183.20000",
+            timeOut: "2024-02-22T14:47:50.690Z",
+        },
+        {
+            applicantId: "A3000",
+            executedQty: 1.0,
+            tradeType: "long",
+            priceIn: "51452.00000",
+            timeIn: "2024-02-24T03:08:00.448Z",
+            priceOut: "61689.00000",
+            timeOut: "2024-02-29T03:10:50.919Z",
+        },
+        {
+            applicantId: "A3000",
+            executedQty: 1.0,
+            tradeType: "long",
+            priceIn: "68270.00000",
+            timeIn: "2024-03-04T04:52:27.270Z",
+            priceOut: "61202.57497",
+            timeOut: "2024-03-05T11:03:52.544Z",
+        },
+        {
+            applicantId: "A3000",
+            executedQty: 1.0,
+            tradeType: "short",
+            priceIn: "67783.10000",
+            timeIn: "2024-03-08T11:04:59.819Z",
+            priceOut: "72170.00000",
+            timeOut: "2024-03-11T11:05:19.755Z",
+        },
+        {
+            applicantId: "A3000",
+            executedQty: 1.0,
+            tradeType: "short",
+            priceIn: "67295.60000",
+            timeIn: "2024-03-19T11:09:53.263Z",
+            priceOut: "64614.20000",
+            timeOut: "2024-03-24T11:10:00.331Z",
+        },
+        {
+            applicantId: "A3000",
+            executedQty: 1.0,
+            priceIn: "64614.60000",
+            timeIn: "2024-03-24T11:10:11.055Z",
+            priceOut: "69002.27788",
+            timeOut: "2024-03-27T11:10:15.312Z",
+        },           
     ];
     console.log(`traderData= ${JSON.stringify(traderData)}`);
     return traderData;
@@ -313,8 +498,8 @@ const getFullRangeOfPriceChart = async (req, res) => {
     console.log("getFullRangeOfPriceChart");
     // async function getFullRangeOfPriceChart() {
 
-    // const applicantTrades= await applicantData()
-    const applicantTrades = demoApplicantData();
+    const applicantTrades= await applicantData()
+    // const applicantTrades = demoApplicantData();
     console.log("after demo = " + JSON.stringify(applicantTrades));
 
     let getApplicantDataAndPriceChart = [];
