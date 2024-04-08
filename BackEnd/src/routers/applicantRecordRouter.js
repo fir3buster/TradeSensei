@@ -31,7 +31,8 @@ router.get("/applicants", getAllApplicantsRecords);
 router.get("/applicants/:applicantId", getApplicantRecordsByApplicantId);
 router.post("/applicants", addNewApplicantRecord);
 router.patch("/applicants/:id", updateApplicantRecord);
-router.patch("/applicants/manager/:id", updateApplicantManagerRecord);
+// router.patch("/applicants/manager/:id", updateApplicantManagerRecord);
+router.patch("/applicants/managers/:pageNumber", updateApplicantManagerRecord)
 router.delete("/applicants/:id", deleteApplicantRecord);
 
 router.get("/seedManager", seedManager);

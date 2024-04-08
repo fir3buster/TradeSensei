@@ -728,8 +728,8 @@ const updateApplicantRecord = async (req, res) => {
 
         if ("applicantId" in req.body)
             updateApplicant.applicantId = req.body.applicantId;
-        if ("username" in req.body)
-            updateApplicant.username = req.body.username;
+        if ("applicantName" in req.body)
+            updateApplicant.applicantName = req.body.applicantName;
         if ("priceIn" in req.body) updateApplicant.priceIn = req.body.priceIn;
         if ("timeIn" in req.body) updateApplicant.timeIn = req.body.timeIn;
         if ("priceOut" in req.body)
@@ -752,8 +752,64 @@ const updateApplicantRecord = async (req, res) => {
 };
 
 // update manager's grade and comment
+// const updateApplicantManagerRecord = async (req, res) => {
+//     try {
+//         console.log("in function")
+//         const updateManager = {
+//             staffId: req.body.staffId,
+//             grade: req.body.grade,
+//             comment: req.body.comment,
+//         };
+
+//         // check if manager's record is already in
+//         const existingRecord = await ApplicantRecordModel.findOne({
+//             _id: req.params.id,
+//             "managers.staffId": req.body.staffId,
+//         });
+
+//         // if exist, update the grade and comment of existing staffId
+//         if (existingRecord) {
+//             const response = await ApplicantRecordModel.updateOne(
+//                 {
+//                     _id: req.params.id,
+//                     "managers.staffId": req.body.staffId,
+//                 },
+//                 {
+//                     $Set: {
+//                         "managers.staffId": req.body.staffId,
+//                         "managers.grade": req.body.grade,
+//                         "managers.comment": req.body.comment,
+//                     },
+//                 }
+//             );
+
+//             return res.json({ status: "ok", msg: "manager grade updated" });
+//         }
+
+//         const response = await ApplicantRecordModel.updateOne(
+//             {
+//                 _id: req.params.id,
+//             },
+//             {
+//                 $addToSet: { managers: updateManager },
+//             }
+//         );
+
+//         return res.json({ status: "ok", msg: "manager grade updated" });
+//     } catch (error) {
+//         console.error(error.message);
+//         res.status(400).json({
+//             status: "error",
+//             msg: "Error updating applicant record",
+//         });
+//     }
+// };
+
 const updateApplicantManagerRecord = async (req, res) => {
+    // console.log("in function")
     try {
+        console.log("in function")
+        console.log(JSON.stringify(req.body))
         const updateManager = {
             staffId: req.body.staffId,
             grade: req.body.grade,
@@ -762,7 +818,7 @@ const updateApplicantManagerRecord = async (req, res) => {
 
         // check if manager's record is already in
         const existingRecord = await ApplicantRecordModel.findOne({
-            _id: req.params.id,
+            pageNumber: req.params.pageNumber,
             "managers.staffId": req.body.staffId,
         });
 
@@ -770,7 +826,7 @@ const updateApplicantManagerRecord = async (req, res) => {
         if (existingRecord) {
             const response = await ApplicantRecordModel.updateOne(
                 {
-                    _id: req.params.id,
+                    pageNumber: req.params.pageNumber,
                     "managers.staffId": req.body.staffId,
                 },
                 {
@@ -787,7 +843,7 @@ const updateApplicantManagerRecord = async (req, res) => {
 
         const response = await ApplicantRecordModel.updateOne(
             {
-                _id: req.params.id,
+                pageNumber: req.params.pageNumber,
             },
             {
                 $addToSet: { managers: updateManager },

@@ -8,120 +8,122 @@ import ChartFunctionsContext from "../context/ChartFunctionsContext";
 import Recommend from "./Recommend";
 
 const Score = () => {
-  const userCtx = useContext(UserContext);
-  const [rate, setRate] = useState(0);
-  const [score, setScore] = useState([]);
-  const [comment, setComment] = useState("");
-  const [data, setData] = useState(null);
-  const { nextPage, prevPage, resetRateAndComment } = useContext(
-    ChartFunctionsContext
-  );
-  const fetchData = useFetch();
-  // const [context, setContext] = useContext(UserContext);
-
-  // const idRef = useRef();
-  // const gradeRef = useRef();
-  // const yearRef = useRef();
-
-  const getScore = async () => {
-    const res = await fetchData(
-      "/api/applicants",
-      "GET",
-      undefined,
-      userCtx.accessToken
+    const userCtx = useContext(UserContext);
+    const [rate, setRate] = useState(0);
+    const [score, setScore] = useState([]);
+    const [comment, setComment] = useState("");
+    const [data, setData] = useState(null);
+    const { nextPage, prevPage, resetRateAndComment } = useContext(
+        ChartFunctionsContext
     );
-    if (res.ok) {
-      setScore(res.data);
-    } else {
-      alert(JSON.stringify(res.data));
-      console.log(res.data);
-    }
-  };
+    const fetchData = useFetch();
+    // const [context, setContext] = useContext(UserContext);
 
-  const addScore = async (id) => {
-    console.log("patch data=" + rate + comment)
-    const res = await fetchData(
-      "/api/applicants/manager/" + id,
-      "PATCH",
-      {
-        staffId: "M10000",
-        grade: rate,
-        comment: comment,        
-      },
-      // undefined
-      // userCtx.accessToken
-    );
-    if (res.ok) {
-      getScore();
-    } else {
-      alert(JSON.stringify(res.data));
-      console.log(res.data);
-    }
-  };
+    // const idRef = useRef();
+    // const gradeRef = useRef();
+    // const yearRef = useRef();
 
-  useEffect(() => {
-    getScore();
-  }, []);
+    const getScore = async () => {
+        const res = await fetchData(
+            "/api/applicants",
+            "GET",
+            undefined,
+            userCtx.accessToken
+        );
+        if (res.ok) {
+            setScore(res.data);
+        } else {
+            alert(JSON.stringify(res.data));
+            console.log(res.data);
+        }
+    };
 
-  useEffect(() => {
-    resetRateAndComment();
-  }, []);
+    const addScore = async (pageNumber) => {
+        console.log("patch data=" + rate + comment);
+        const res = await fetchData(
+            "/api/applicants/managers/" + pageNumber,
+            "PATCH",
+            {
+                staffId: "M30000",
+                grade: rate,
+                comment: comment,
+            },
+            //   undefined,
+            userCtx.accessToken
+        );
+        if (res.ok) {
+            getScore();
+        } else {
+            alert(JSON.stringify(res.data));
+            console.log(res.data);
+        }
+    };
 
-  return (
-    <div className={styles.score}>
-      <div>
-        <Container>
-          <div className="">
-            <div className={styles.scoregrade}>
-              What is your grade for this trade?
+    useEffect(() => {
+        getScore();
+    }, []);
+
+    useEffect(() => {
+        resetRateAndComment();
+    }, []);
+
+    return (
+        <div className={styles.score}>
+            <div>
+                <Container>
+                    <div className="">
+                        <div className={styles.scoregrade}>
+                            What is your grade for this trade?
+                        </div>
+                        {[...Array(5)].map((item, index) => {
+                            const givenRating = index + 1;
+                            return (
+                                <label key={index}>
+                                    <Radio
+                                        type="radio"
+                                        value={givenRating}
+                                        onClick={() => {
+                                            setRate(givenRating);
+                                        }}
+                                    />
+                                    <Rating>
+                                        <FaStar
+                                            color={
+                                                givenRating <= rate
+                                                    ? "#FFD700"
+                                                    : "rgb(192,192,192)"
+                                            }
+                                        />
+                                    </Rating>
+                                </label>
+                            );
+                        })}
+                    </div>
+                </Container>
             </div>
-            {[...Array(5)].map((item, index) => {
-              const givenRating = index + 1;
-              return (
-                <label key={index}>
-                  <Radio
-                    type="radio"
-                    value={givenRating}
+            <div className={styles.commentbox}>
+                <div className="">Your comment - optional:</div>
+                <input
+                    type="text"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                    className={styles.box}
+                />
+            </div>
+            <div>
+                <button
                     onClick={() => {
-                      setRate(givenRating);
+                        addScore(userCtx.activePageContext);
+                        nextPage();
+                        setComment();
                     }}
-                  />
-                  <Rating>
-                    <FaStar
-                      color={
-                        givenRating <= rate ? "#FFD700" : "rgb(192,192,192)"
-                      }
-                    />
-                  </Rating>
-                </label>
-              );
-            })}
-          </div>
-        </Container>
-      </div>
-      <div className={styles.commentbox}>
-        <div className="">Your comment - optional:</div>
-        <input
-          type="text"
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          className={styles.box}
-        />
-      </div>
-      <div>
-        <button
-          onClick={() => {
-            addScore("6613b65a4236aa7996bf1bc9");
-            nextPage();
-            setComment();
-          }}
-          className={styles.button}
-        >
-          Submit
-        </button>
-      </div>
-    </div>
-  );
+                    className={styles.button}
+                >
+                    Submit
+                </button>
+            </div>
+        </div>
+    );
 };
 
 export default Score;
