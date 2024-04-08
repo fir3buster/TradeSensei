@@ -35,6 +35,7 @@ const ManagerSchema = new mongoose.Schema({
 
 const ApplicantRecordSchema = new mongoose.Schema(
     {
+        pageNumber: {type: Number, require: true},
         applicantId: {
             type: String,
             match: /[A][1-9]\d{3}/,

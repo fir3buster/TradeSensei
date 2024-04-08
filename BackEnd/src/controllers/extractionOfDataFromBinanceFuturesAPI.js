@@ -16,6 +16,7 @@ async function seedApplicant(traderData) {
             await ApplicantRecordModel.create([
                 {
                     _id: traderData[cycleNumber]._id,
+                    pageNumber: traderData[cycleNumber].pageNumber,
                     applicantId: traderData[cycleNumber].applicantId,
                     applicantName: "Adam",
                     executedQty: traderData[cycleNumber].executedQty,
@@ -119,6 +120,7 @@ function demoApplicantData() {
     const traderData = [
         {
             _id : "6613b65a4236aa7996bf1bc8",
+            pageNumber: 1,            
             applicantId: "A1000",
             executedQty: 1.0,
             tradeType: "long",
@@ -129,6 +131,7 @@ function demoApplicantData() {
         },
         {
             _id : "6613b65a4236aa7996bf1bc9",
+            pageNumber: 2,            
             applicantId: "A1000",
             executedQty: 1.0,
             tradeType: "long",
@@ -139,6 +142,7 @@ function demoApplicantData() {
         },
         {
             _id : "6613b65a4236aa7996bf1bd1",
+            pageNumber: 3,            
             applicantId: "A1000",
             executedQty: 1.0,
             tradeType: "long",
@@ -149,6 +153,7 @@ function demoApplicantData() {
         },
         {
             _id : "6613b65a4236aa7996bf1bd2",
+            pageNumber: 4,            
             applicantId: "A1000",
             executedQty: 1.0,
             tradeType: "long",
@@ -159,6 +164,7 @@ function demoApplicantData() {
         },
         {
             _id : "6613b65a4236aa7996bf1bd3",
+            pageNumber: 5,            
             applicantId: "A1000",
             executedQty: 1.0,
             tradeType: "short",
@@ -169,6 +175,7 @@ function demoApplicantData() {
         },
         {
             _id : "6613b65a4236aa7996bf1bd4",
+            pageNumber: 6,            
             applicantId: "A1000",
             executedQty: 1.0,
             tradeType: "long",
@@ -179,6 +186,7 @@ function demoApplicantData() {
         },
         {
             _id : "6613b65a4236aa7996bf1bd5",
+            pageNumber: 7,            
             applicantId: "A1000",
             executedQty: 1.0,
             tradeType: "long",
@@ -189,6 +197,7 @@ function demoApplicantData() {
         },
         {
             _id : "6613b65a4236aa7996bf1bd6",
+            pageNumber: 8,            
             applicantId: "A1000",
             executedQty: 1.0,
             tradeType: "short",
@@ -199,6 +208,7 @@ function demoApplicantData() {
         },
         {
             _id : "6613b65a4236aa7996bf1bd7",
+            pageNumber: 9,           
             applicantId: "A1000",
             executedQty: 1.0,
             tradeType: "short",
@@ -209,6 +219,7 @@ function demoApplicantData() {
         },
         {
             _id : "6613b65a4236aa7996bf1bd8",
+            pageNumber: 10,            
             applicantId: "A1000",
             executedQty: 1.0,
             priceIn: "64614.60000",

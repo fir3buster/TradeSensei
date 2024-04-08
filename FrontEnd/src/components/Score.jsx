@@ -46,7 +46,7 @@ const Score = () => {
       {
         staffId: "M10000",
         grade: rate,
-        comment: comment,
+        comment: comment,        
       },
       // undefined
       // userCtx.accessToken
