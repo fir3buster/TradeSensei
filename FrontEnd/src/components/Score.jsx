@@ -40,10 +40,13 @@ const Score = () => {
 
     const addScore = async (pageNumber) => {
         console.log("patch data=" + rate + comment);
+        // create params: (useContext => app => candidate) applicantId + (useContext => app => score) pageNumber to use for multiple applicants
+        // currently use for one
         const res = await fetchData(
-            "/api/applicants/managers/" + pageNumber,
+            "/api/applicants/managers/" + pageNumber ,
             "PATCH",
             {
+                // applicantId: userCtx.activeApplicantId,
                 staffId: "M30000",
                 grade: rate,
                 comment: comment,
@@ -113,7 +116,7 @@ const Score = () => {
             <div>
                 <button
                     onClick={() => {
-                        addScore(userCtx.activePageContext);
+                        addScore(userCtx.activePageContext + 1);
                         nextPage();
                         setComment();
                     }}

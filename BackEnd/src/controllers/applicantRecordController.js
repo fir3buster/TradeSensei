@@ -860,6 +860,83 @@ const updateApplicantManagerRecord = async (req, res) => {
     }
 };
 
+// const updateApplicantManagerRecord = async (req, res) => {
+//     // console.log("in function")
+//     try {
+//         console.log("in function");
+//         console.log(JSON.stringify(req.body));
+//         const updateManager = {
+//             staffId: req.body.staffId,
+//             grade: req.body.grade,
+//             comment: req.body.comment,
+//         };
+
+//         // check if manager's record is already in
+//         const existingRecord = await ApplicantRecordModel.find({
+//             pageNumber: req.params.pageNumber,
+//             // applicantId: req.body.applicantId,
+//             "managers.staffId": req.body.staffId,
+//         });
+
+//         console.log(existingRecord);
+
+//         let existingApplicantRecord = [];
+
+//         // existingRecord.forEach((record) => {
+//         //     if (record.applicantId === req.body.applicantId) {
+//         //         existingApplicantRecord.push(record)
+//         //     }
+//         // });
+
+//         for (const record of existingRecord) {
+//             console.log(record.applicantId)
+//             if (record.applicantId === req.body.applicantId) {
+//             existingApplicantRecord.push(record)
+//             }
+//         }
+
+//         console.log(existingApplicantRecord)
+//         if (existingApplicantRecord.length === 0) {
+//             return res.json({ status: "error", msg: "could not find applicantID"})
+//         }
+
+//         // if exist, update the grade and comment of existing staffId
+//         if (existingApplicantRecord) {
+//             const response = await ApplicantRecordModel.findByIdAndUpdate(
+//                 {
+//                     id: existingApplicantRecord.id
+//                 },
+//                 {
+//                     $Set: {
+//                         "managers.staffId": req.body.staffId,
+//                         "managers.grade": req.body.grade,
+//                         "managers.comment": req.body.comment,
+//                     },
+//                 }
+//             );
+
+//             return res.json({ status: "ok", msg: "manager grade updated" });
+//         }
+
+//         const response = await ApplicantRecordModel.findByIdAndUpdate(
+//             {
+//                 pageNumber: req.params.pageNumber,
+//             },
+//             {
+//                 $addToSet: { managers: updateManager },
+//             }
+//         );
+
+//         return res.json({ status: "ok", msg: "manager grade updated" });
+//     } catch (error) {
+//         console.error(error.message);
+//         res.status(400).json({
+//             status: "error",
+//             msg: "Error updating applicant record",
+//         });
+//     }
+// };
+
 // delete an applicant record
 const deleteApplicantRecord = async (req, res) => {
     try {
