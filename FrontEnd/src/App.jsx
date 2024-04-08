@@ -9,12 +9,15 @@ function App() {
   const [role, setRole] = useState("");
   const [showLogin, setShowLogin] = useState(true);
   const [userCtx, setUserCtx] = useState({});
+
   const [userScoreCtx, setUserScoreCtx] = useState({});
   const [nextPageCtx, setNextPageCtx] = useState({});
   const [prevPageCtx, setPrevPageCtx] = useState({});
   const [activeApplicantId, setActiveApplicantId] = useState("");
   const [applicantIds, setApplicantIds] = useState([]);
+  const [page, setPage] = useState(-1);
 
+  const [score, setScore] = useState(0);
 
   const [resetRateAndCommentContext, setResetRateAndCommentContext] = useState(
     {}
@@ -25,6 +28,12 @@ function App() {
     <div>
       <UserContext.Provider
         value={{
+          
+          score, 
+          setScore,
+          page, 
+          setPage,
+
           accessToken,
           setAccessToken,
           role,
@@ -44,7 +53,7 @@ function App() {
           activeApplicantId,
           setActiveApplicantId,
           activePageContext,
-          setActiePageConent,
+          setActivePageConent,
           applicantIds, 
           setApplicantIds,          
         }}
