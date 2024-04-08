@@ -22,7 +22,7 @@ function App() {
   const [resetRateAndCommentContext, setResetRateAndCommentContext] = useState(
     {}
   );
-  const [activePageContext, setActiePageConent] = useState({});
+  const [activePageContext, setActivePageContext] = useState({});
 
   return (
     <div>
@@ -53,7 +53,7 @@ function App() {
           activeApplicantId,
           setActiveApplicantId,
           activePageContext,
-          setActivePageConent,
+          setActivePageContext,
           applicantIds, 
           setApplicantIds,          
         }}
