@@ -2,13 +2,12 @@ import React, { useEffect, useRef, useState, useContext } from "react";
 import CandleStick2 from "./CandleStick2";
 import useFetch from "../hooks/useFetch";
 import UserContext from "../context/user";
-import Score from "./Score";
 import styles from "./Chart.module.css";
 
 const ChartDisplay = () => {
-  // const userCtx = useContext(UserContext);
+  const userCtx = useContext(UserContext);
 
-  const [context, setContext] = useContext(UserContext);
+  // const [context, setContext] = useContext(UserContext);
 
   const [tradeData, setTradeData] = useState([]);
   const [page, setPage] = useState(-1);
@@ -20,7 +19,8 @@ const ChartDisplay = () => {
       "/api/chart/tradeData",
       undefined,
       undefined,
-      undefined /*userCtx.accessToken*/
+      undefined,
+      userCtx.accessToken
     );
 
     if (res.ok) {
@@ -31,9 +31,40 @@ const ChartDisplay = () => {
           res.data[0]["applicantTrade"]["applicantId"]
         )}`
       );
-      setContext(res.data[0]["applicantTrade"]["applicantId"]);
 
-      setTradeData(res.data);
+      let temp = []
+      for (let index = 0; index < res.data.length; index++) {
+        if( temp.includes(res.data[index]["applicantTrade"]["applicantId"])){
+          console.log("have already")
+        }
+        else{
+          console.log("hellokitty: " + res.data[index]["applicantTrade"]["applicantId"])
+          temp.push(res.data[index]["applicantTrade"]["applicantId"])
+        }
+        
+      }
+
+      console.log("temp array = " + JSON.stringify(temp))
+      userCtx.setApplicantIds(temp)
+
+      userCtx.setActiveApplicantId(
+        res.data[0]["applicantTrade"]["applicantId"]
+      );
+      
+      console.log("userCtx.activeApplicantId = "+ userCtx.activeApplicantId )
+      console.log("res.data" + res.data)
+      let activeData=[]
+      for ( const datum in res.data){
+        if (res.data[0]["applicantTrade"]["applicantId"] === res.data[datum]["applicantTrade"]["applicantId"]){
+          console.log("hello dino" + res.data[datum]["applicantTrade"]["applicantId"])
+          activeData.push(res.data[datum])
+        }
+      }
+      console.log("activeData" + JSON.stringify(activeData))
+
+      
+      setTradeData(activeData);      
+      // setTradeData(res.data);
       setPage(0);
     } else {
       alert(JSON.stringify(res.data));
@@ -66,6 +97,11 @@ const ChartDisplay = () => {
     getTradeData();
   }, []);
 
+  // useEffect(() => {
+  //   console.log("chartdisplay useeffect");
+  //   getTradeData();
+  // }, userCtx.activeApplicantId);
+
   return (
     <div className="">
       <div className={styles.chartwrapper}>
@@ -94,12 +130,12 @@ const ChartDisplay = () => {
         </div>
       </div>
 
-      <div>
+      {/* <div>
         <Score
           score={scores[page]}
           updateScore={(score) => updateScore(page, score)}
         />
-      </div>
+      </div> */}
     </div>
   );
 };
