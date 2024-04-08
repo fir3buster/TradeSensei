@@ -14,8 +14,8 @@ const Candidate = () => {
         <select className={styles.candidatebox}>
         
         {userCtx.applicantIds && 
-          userCtx.applicantIds.map((applicantId)=>(
-            <option value={applicantId}>{applicantId}</option>
+          userCtx.applicantIds.map((applicantId, idx)=>(
+            <option key={idx} value={applicantId}>{applicantId}</option>
         ))}
           
             

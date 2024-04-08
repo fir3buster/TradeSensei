@@ -52,7 +52,7 @@ const Login = () => {
       </div>
       <div className="row">
         <div className="col-md-4"></div>
-        <button className="col-md-4" type="submit">
+        <button className="col-md-4" onClick={handleLogin} type="submit">
           login
         </button>
         <div className="col-md-4"></div>

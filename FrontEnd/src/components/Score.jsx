@@ -27,7 +27,7 @@ const Score = () => {
     const res = await fetchData(
       "/api/applicants",
       "GET",
-      null,
+      undefined,
       userCtx.accessToken
     );
     if (res.ok) {
@@ -38,16 +38,18 @@ const Score = () => {
     }
   };
 
-  const addScore = async () => {
+  const addScore = async (id) => {
+    console.log("patch data=" + rate + comment)
     const res = await fetchData(
-      "/api/applicants",
-      "POST",
+      "/api/applicants/manager/" + id,
+      "PATCH",
       {
-        applicantId: userCtx,
+        staffId: "M10000",
         grade: rate,
         comment: comment,
       },
-      userCtx.accessToken
+      // undefined
+      // userCtx.accessToken
     );
     if (res.ok) {
       getScore();
@@ -109,7 +111,7 @@ const Score = () => {
       <div>
         <button
           onClick={() => {
-            addScore();
+            addScore("6613b65a4236aa7996bf1bc9");
             nextPage();
             setComment();
           }}

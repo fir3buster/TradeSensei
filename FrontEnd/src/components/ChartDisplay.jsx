@@ -137,12 +137,13 @@ const ChartDisplay = () => {
         </div>
       </div>
 
-      {/* <div>
-        <Score
+      <div>
+        <Score></Score>
+        {/* <Score
           score={scores[page]}
           updateScore={(score) => updateScore(page, score)}
-        />
-      </div> */}
+        /> */}
+      </div>
     </div>
   );
 };
