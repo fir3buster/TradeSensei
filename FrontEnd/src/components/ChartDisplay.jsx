@@ -84,6 +84,7 @@ const ChartDisplay = () => {
   const nextPage = () => {
     if (page < tradeData.length - 1) {
       setPage(page + 1);
+      userCtx.setActivePageContext(page + 1)
       // get function to post api into db (grade & comments )
       // update frunction to post api into db (grade & comments )
 
@@ -93,6 +94,7 @@ const ChartDisplay = () => {
   const prevPage = () => {
     if (page > 0) {
       setPage(page - 1);
+      userCtx.setActivePageContext(page - 1)
       // get function to post api into db (grade & comments )
       // update frunction to post api into db (grade & comments )
     }
