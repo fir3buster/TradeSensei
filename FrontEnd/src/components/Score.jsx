@@ -31,6 +31,7 @@ const Score = () => {
             userCtx.accessToken
         );
         if (res.ok) {
+            console.log("getScore=" + JSON.stringify(res.data))
             setScore(res.data);
         } else {
             alert(JSON.stringify(res.data));
@@ -43,10 +44,11 @@ const Score = () => {
         // create params: (useContext => app => candidate) applicantId + (useContext => app => score) pageNumber to use for multiple applicants
         // currently use for one
         const res = await fetchData(
-            "/api/applicants/managers?" + "pageNumber=" +  pageNumber  + "&" + "applicantId=" + userCtx.activeApplicantId,
+            // "/api/applicants/managers?" + "pageNumber=" +  pageNumber  + "&" + "applicantId=" + userCtx.activeApplicantId,
+            "/api/applicants/managers/" +  pageNumber,
             "PATCH",
             {
-                // applicantId: userCtx.activeApplicantId,
+                applicantId: userCtx.activeApplicantId,
                 staffId: "M30000",
                 grade: rate,
                 comment: comment,
