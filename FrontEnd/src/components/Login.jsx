@@ -21,8 +21,8 @@ const Login = () => {
       // get the role from the decoded claims
       userCtx.setRole(decoded.role);
 
-      userCtx.setActiveManagerId(res.data.claims.staffID)
-      
+      userCtx.setActiveStaffId(res.data.claims.staffID)
+
     } else {
       alert(JSON.stringify(res.data));
     }
