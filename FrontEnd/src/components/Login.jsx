@@ -20,8 +20,8 @@ const Login = (props) => {
       const decoded = jwtDecode(res.data.access);
       // get the role from the decoded claims
       userCtx.setRole(decoded.role);
-
-      userCtx.setActiveStaffId(res.data.claims.staffID)
+      
+      userCtx.setActiveStaffId(decoded.staffID)
 
     } else {
       alert(JSON.stringify(res.data));
