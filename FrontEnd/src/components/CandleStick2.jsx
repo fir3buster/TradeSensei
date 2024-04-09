@@ -1,9 +1,13 @@
 import { ColorType, createChart } from 'lightweight-charts';
-import React,  {useEffect, useRef , useState} from 'react';
+import React,  {useEffect, useRef , useState, useContext} from 'react';
+import UserContext from "../context/user";
 
 const CandleStick2 = (props) => {
     const [activePage, setActivePage] = useState(-99)
     const chartContainerRef = useRef()
+    const userCtx = useContext(UserContext);
+
+
     console.log("into candlestick2")
     // console.log(`JSON candlestick2= ${JSON.stringify(props.tradeData)}`)    
 
@@ -117,7 +121,7 @@ const CandleStick2 = (props) => {
                             position: 'aboveBar',
                             color: 'lime',
                             shape: 'circle',
-                            text: `Profit: $${longPnL}`,
+                            text: `${userCtx.activeApplicantId} Profit: $${longPnL}`,
                     })
                 }else{
                     markers.push({
@@ -125,7 +129,7 @@ const CandleStick2 = (props) => {
                         position: 'aboveBar',
                         color: 'white',
                         shape: 'circle',
-                        text: `Loss: $${longPnL}`,
+                        text: `${userCtx.activeApplicantId} Loss: $${longPnL}`,
                     })
                 }
                 
@@ -175,7 +179,7 @@ const CandleStick2 = (props) => {
                             position: 'aboveBar',
                             color: 'lime',
                             shape: 'circle',
-                            text: `Profit: $${shortPnL}`,
+                            text: `${userCtx.activeApplicantId} Profit: $${shortPnL}`,
                     })
                 }else{
                     markers.push({
@@ -183,7 +187,7 @@ const CandleStick2 = (props) => {
                         position: 'aboveBar',
                         color: 'white',
                         shape: 'circle',
-                        text: `Loss: $${shortPnL}`,
+                        text: `${userCtx.activeApplicantId} Loss: $${shortPnL}`,
                     })
                 }
 
@@ -222,9 +226,7 @@ const CandleStick2 = (props) => {
             return () => [chart.remove()]
         } // end of [if(props.tradeData)] check
     // }, [])
-    }, [activePage])
-
-    
+    }, [activePage, userCtx.activeApplicantId])
 
     return <div ref={chartContainerRef}></div>
 };

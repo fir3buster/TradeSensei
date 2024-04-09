@@ -41,7 +41,7 @@ const ApplicantRecordSchema = new mongoose.Schema(
             match: /[A][1-9]\d{3}/,
             default: generateId,
         },
-        applicantName: { type: String, require: true, minLength: 3, maxLength: 15 },
+        // applicantName: { type: String, require: true, minLength: 3, maxLength: 15 },
         executedQty: { type: Number, require: true },
         tradeType: { type: String, require:true, enum:["long", "short"]},
         priceIn: { type: Number, require: true },

@@ -39,12 +39,12 @@ const Score = () => {
     };
 
     const addScore = async (pageNumber) => {
-        console.log("patch data=" + rate + comment);
+        console.log("patch data: rate=" + rate + " comment= "+ comment + " pageNumber= "+ pageNumber);
         // create params: (useContext => app => candidate) applicantId + (useContext => app => score) pageNumber to use for multiple applicants
         // currently use for one
         // {{server}}/api/flights?airline=AIRASIA&airport=KUL
         const res = await fetchData(
-            "/api/applicants/managers?" + pageNumber ,
+            "/api/applicants/managers?" + "pageNumber=" +  pageNumber  + "&" + "applicantId=" + userCtx.activeApplicantId,
             "PATCH",
             {
                 // applicantId: userCtx.activeApplicantId,
@@ -70,6 +70,25 @@ const Score = () => {
     useEffect(() => {
         resetRateAndComment();
     }, []);
+
+    useEffect(() => {
+        console.log("triggered")
+        getScore()
+        console.log("userCtx.activePageContext=" + userCtx.activePageContext)
+        if (score[userCtx.activePageContext]){
+            console.log("score=" + JSON.stringify(score[userCtx.activePageContext]))
+            console.log("managers=" + JSON.stringify(score[userCtx.activePageContext]["managers"]))
+            console.log("userCtx.role=" + userCtx.role)
+            if(score[userCtx.activePageContext]["managers"]){
+                console.log("into managers")
+                if (score[userCtx.activePageContext]["managers"] === userCtx.activeStaffId){
+                    console.log("grade=" + score[userCtx.activePageContext]["managers"]["grade"])
+                    console.log("comment=" + score[userCtx.activePageContext]["managers"]["comment"])
+                }
+            }
+        }
+    }, [userCtx.activePageContext]);
+
 
     return (
         <div className={styles.score}>
@@ -112,7 +131,7 @@ const Score = () => {
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
                     className={styles.box}
-                />
+                ></input>
             </div>
             <div>
                 <button
