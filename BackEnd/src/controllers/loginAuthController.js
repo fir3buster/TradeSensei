@@ -40,7 +40,7 @@ const register = async (req, res) => {
         await LoginAuthModel.create({
             email: req.body.email,
             hash,
-            staffId: req.body.staffId,
+            // staffId: req.body.staffId,
             role: req.body.role || "manager",
         });
 
@@ -58,7 +58,7 @@ const login = async (req, res) => {
             email: req.body.email,
         });
         if (!userAuth) {
-            console.log("in usernot authorized statement!")
+            console.log("in usernot authorized statement!");
             return res
                 .status(400)
                 .json({ status: "error", msg: "not authorized" });

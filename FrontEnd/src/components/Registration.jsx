@@ -26,9 +26,12 @@ const Registration = (props) => {
         });
 
         if (res.ok) {
+            // console.log("successfully Registered!")
             setEmail("");
             setPassword("");
             setRole("");
+            alert("successfully Registered!");
+            props.setShowLogin(true)
         } else {
             console.log(res.data);
         }
@@ -36,9 +39,9 @@ const Registration = (props) => {
 
     const handleOnChange = (event) => {
         // console.log("selected option="+ props.reference)
-        console.log("event.target.value=" + event.target.value)
-        setRole(event.target.value)
-    }
+        console.log("event.target.value=" + event.target.value);
+        setRole(event.target.value);
+    };
 
     useEffect(() => {
         getRoles();
@@ -77,7 +80,13 @@ const Registration = (props) => {
 
             <div className="row">
                 <div className="col-md-4"></div>
-                <select onChange={handleOnChange} name="roles" id="roles" className="col-md-4">
+                <select
+                    onChange={handleOnChange}
+                    value={role}
+                    name="roles"
+                    id="roles"
+                    className="col-md-4"
+                >
                     <option value="none">please select</option>
                     {roles.map((item) => {
                         return (
