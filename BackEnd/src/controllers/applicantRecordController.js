@@ -93,7 +93,7 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "660e0df3c050096882b8950b", // to check on object id
                 applicantId: "A1000",
-                applicantName: "Adam",
+                // applicantName: "Adam",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "27485.60000",
@@ -124,7 +124,7 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "660e0e74c050096882b8950d", // to check on object id
                 applicantId: "A1000",
-                applicantName: "Adam",
+                // applicantName: "Adam",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "38290.00000",
@@ -157,7 +157,7 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "660e0ea3c050096882b8950f", // to check on object id
                 applicantId: "A1000",
-                applicantName: "Adam",
+                // applicantName: "Adam",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "44384.14286",
@@ -187,7 +187,7 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "660e0ecbc050096882b89511", // to check on object id
                 applicantId: "A1000",
-                applicantName: "Adam",
+                // applicantName: "Adam",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "42677.00000",
@@ -199,7 +199,7 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "660e0efbc053496882b89414",
                 applicantId: "A1000",
-                applicantName: "Adam",
+                // applicantName: "Adam",
                 executedQty: 1.0,
                 tradeType: "short",
                 priceIn: "52183.14286",
@@ -211,7 +211,7 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "660e0efbc053496882b89313",
                 applicantId: "A1000",
-                applicantName: "Adam",
+                // applicantName: "Adam",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "51452.00000",
@@ -223,7 +223,7 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "660e0efbc053496882b89583",
                 applicantId: "A1000",
-                applicantName: "Adam",
+                // applicantName: "Adam",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "68270.00000",
@@ -235,7 +235,7 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "660e0efbc053496882b89511",
                 applicantId: "A1000",
-                applicantName: "Adam",
+                // applicantName: "Adam",
                 executedQty: 1.0,
                 tradeType: "short",
                 priceIn: "67783.10000",
@@ -247,7 +247,7 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "660e0efbc053496882b89514",
                 applicantId: "A1000",
-                applicantName: "Adam",
+                // applicantName: "Adam",
                 executedQty: 1.0,
                 tradeType: "short",
                 priceIn: "67295.60000",
@@ -259,7 +259,7 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "660e0efbc053496882b89513",
                 applicantId: "A1000",
-                applicantName: "Adam",
+                // applicantName: "Adam",
                 executedQty: 1.0,
                 priceIn: "64614.60000",
                 timeIn: "2024-03-24T11:10:11.055Z",
@@ -271,7 +271,7 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "670e0efbc050096882b89513", // to check on object id
                 applicantId: "A2000",
-                applicantName: "Bryant",
+                // applicantName: "Bryant",
                 priceIn: 69394.9848,
                 timeIn: "2024-04-02T03:08:00.448Z",
                 priceOut: 65118.9248,
@@ -295,7 +295,7 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "670e0df3c050096882b8950b", // to check on object id
                 applicantId: "A2000",
-                applicantName: "Bryant",
+                // applicantName: "Bryant",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "27485.60000",
@@ -326,7 +326,7 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "670e0e74c050096882b8950d", // to check on object id
                 applicantId: "A2000",
-                applicantName: "Bryant",
+                // applicantName: "Bryant",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "38290.00000",
@@ -359,7 +359,7 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "670e0ea3c050096882b8950f", // to check on object id
                 applicantId: "A2000",
-                applicantName: "Bryant",
+                // applicantName: "Bryant",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "44384.14286",
@@ -389,7 +389,7 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "670e0ecbc050096882b89511", // to check on object id
                 applicantId: "A2000",
-                applicantName: "Bryant",
+                // applicantName: "Bryant",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "42677.00000",
@@ -401,7 +401,7 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "670e0efbc053496882b89414",
                 applicantId: "A2000",
-                applicantName: "Bryant",
+                // applicantName: "Bryant",
                 executedQty: 1.0,
                 tradeType: "short",
                 priceIn: "52183.14286",
@@ -413,7 +413,7 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "670e0efbc053496882b89313",
                 applicantId: "A2000",
-                applicantName: "Bryant",
+                // applicantName: "Bryant",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "51452.00000",
@@ -425,7 +425,7 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "670e0efbc053496882b89583",
                 applicantId: "A2000",
-                applicantName: "Bryant",
+                // applicantName: "Bryant",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "68270.00000",
@@ -437,7 +437,7 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "670e0efbc053496882b89511",
                 applicantId: "A2000",
-                applicantName: "Bryant",
+                // applicantName: "Bryant",
                 executedQty: 1.0,
                 tradeType: "short",
                 priceIn: "67783.10000",
@@ -449,7 +449,7 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "670e0efbc053496882b89514",
                 applicantId: "A2000",
-                applicantName: "Bryant",
+                // applicantName: "Bryant",
                 executedQty: 1.0,
                 tradeType: "short",
                 priceIn: "67295.60000",
@@ -463,7 +463,7 @@ const seedApplicant = async (req, res) => {
             // {
             //     _id: "670e0efbc050096882c89513", // to check on object id
             //     applicantId: "A3000",
-            //     applicantName: "Cathy",
+            //     //applicantName: "Cathy",
             //     priceIn: 69394.9848,
             //     timeIn: "2024-04-02T03:08:00.448Z",
             //     priceOut: 65118.9248,
@@ -487,7 +487,7 @@ const seedApplicant = async (req, res) => {
             // {
             //     _id: "670e0df3c050096882c8950b", // to check on object id
             //     applicantId: "A3000",
-            //     applicantName: "Cathy",
+            //     //applicantName: "Cathy",
             //     executedQty: 1.0,
             //     tradeType: "long",
             //     priceIn: "27485.60000",
@@ -518,7 +518,7 @@ const seedApplicant = async (req, res) => {
             // {
             //     _id: "670e0e74c050096882c8950d", // to check on object id
             //     applicantId: "A3000",
-            //     applicantName: "Cathy",
+            //     //applicantName: "Cathy",
             //     executedQty: 1.0,
             //     tradeType: "long",
             //     priceIn: "38290.00000",
@@ -551,7 +551,7 @@ const seedApplicant = async (req, res) => {
             // {
             //     _id: "670e0ea3c050096882c8950f", // to check on object id
             //     applicantId: "A3000",
-            //     applicantName: "Cathy",
+            //     //applicantName: "Cathy",
             //     executedQty: 1.0,
             //     tradeType: "long",
             //     priceIn: "44384.14286",
@@ -581,7 +581,7 @@ const seedApplicant = async (req, res) => {
             // {
             //     _id: "670e0ecbc050096882c89511", // to check on object id
             //     applicantId: "A3000",
-            //     applicantName: "Cathy",
+            //     //applicantName: "Cathy",
             //     executedQty: 1.0,
             //     tradeType: "long",
             //     priceIn: "42677.00000",
@@ -593,7 +593,7 @@ const seedApplicant = async (req, res) => {
             // {
             //     _id: "670e0efbc053496882c89414",
             //     applicantId: "A3000",
-            //     applicantName: "Cathy",
+            //     //applicantName: "Cathy",
             //     executedQty: 1.0,
             //     tradeType: "short",
             //     priceIn: "52183.14286",
@@ -605,7 +605,7 @@ const seedApplicant = async (req, res) => {
             // {
             //     _id: "670e0efbc053496882c89313",
             //     applicantId: "A3000",
-            //     applicantName: "Cathy",
+            //     //applicantName: "Cathy",
             //     executedQty: 1.0,
             //     tradeType: "long",
             //     priceIn: "51452.00000",
@@ -617,7 +617,7 @@ const seedApplicant = async (req, res) => {
             // {
             //     _id: "670e0efbc053496882c89583",
             //     applicantId: "A3000",
-            //     applicantName: "Cathy",
+            //     //applicantName: "Cathy",
             //     executedQty: 1.0,
             //     tradeType: "long",
             //     priceIn: "68270.00000",
@@ -629,7 +629,7 @@ const seedApplicant = async (req, res) => {
             // {
             //     _id: "670e0efbc053496882c89511",
             //     applicantId: "A3000",
-            //     applicantName: "Cathy",
+            //     //applicantName: "Cathy",
             //     executedQty: 1.0,
             //     tradeType: "short",
             //     priceIn: "67783.10000",
@@ -641,7 +641,7 @@ const seedApplicant = async (req, res) => {
             // {
             //     _id: "670e0efbc053496882c89514",
             //     applicantId: "A3000",
-            //     applicantName: "Cathy",
+            //     //applicantName: "Cathy",
             //     executedQty: 1.0,
             //     tradeType: "short",
             //     priceIn: "67295.60000",
@@ -728,8 +728,8 @@ const updateApplicantRecord = async (req, res) => {
 
         if ("applicantId" in req.body)
             updateApplicant.applicantId = req.body.applicantId;
-        if ("applicantName" in req.body)
-            updateApplicant.applicantName = req.body.applicantName;
+        // if ("applicantName" in req.body)
+            // updateApplicant.applicantName = req.body.applicantName;
         if ("priceIn" in req.body) updateApplicant.priceIn = req.body.priceIn;
         if ("timeIn" in req.body) updateApplicant.timeIn = req.body.timeIn;
         if ("priceOut" in req.body)

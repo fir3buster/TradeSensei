@@ -8,26 +8,30 @@ const ccxt = require("ccxt");
 const ApplicantRecordModel = require("../models/ApplicantRecordModel");
 // const { timeout } = require("ccxt/js/src/base/functions");
 async function seedApplicant(traderData) {
-    try {
+    try {        
         await ApplicantRecordModel.deleteMany({});        
         for (const cycleNumber in traderData) {
             console.log(JSON.stringify(traderData));
 
-            await ApplicantRecordModel.create([
-                {
-                    _id: traderData[cycleNumber]._id,
-                    pageNumber: traderData[cycleNumber].pageNumber,
-                    applicantId: traderData[cycleNumber].applicantId,
-                    applicantName: "Adam",
-                    executedQty: traderData[cycleNumber].executedQty,
-                    tradeType: traderData[cycleNumber].tradeType,
-                    priceIn: traderData[cycleNumber].princeIn,
-                    timeIn: traderData[cycleNumber].timeIn,
-                    priceOut: traderData[cycleNumber].princeOut,
-                    timeOut: traderData[cycleNumber].timeOut,
-                    managers: [],
-                },
-            ]);
+            const IsExist = await ApplicantRecordModel.findById(traderData[cycleNumber]._id)
+
+            if(!IsExist){
+                await ApplicantRecordModel.create([
+                    {
+                        _id: traderData[cycleNumber]._id,
+                        pageNumber: traderData[cycleNumber].pageNumber,
+                        applicantId: traderData[cycleNumber].applicantId,
+                        // applicantName: "Adam",
+                        executedQty: traderData[cycleNumber].executedQty,
+                        tradeType: traderData[cycleNumber].tradeType,
+                        priceIn: traderData[cycleNumber].princeIn,
+                        timeIn: traderData[cycleNumber].timeIn,
+                        priceOut: traderData[cycleNumber].princeOut,
+                        timeOut: traderData[cycleNumber].timeOut,
+                        managers: [],
+                    },
+                ]);
+            }
         }
     } catch (error) {
         console.error(error.message);
