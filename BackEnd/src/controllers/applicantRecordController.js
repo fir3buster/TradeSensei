@@ -830,7 +830,7 @@ const updateApplicantManagerRecord = async (req, res) => {
                     "managers.staffId": req.body.staffId,
                 },
                 {
-                    $Set: {
+                    $set: {
                         "managers.staffId": req.body.staffId,
                         "managers.grade": req.body.grade,
                         "managers.comment": req.body.comment,
