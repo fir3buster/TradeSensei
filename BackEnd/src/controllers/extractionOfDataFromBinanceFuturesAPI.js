@@ -9,12 +9,13 @@ const ApplicantRecordModel = require("../models/ApplicantRecordModel");
 // const { timeout } = require("ccxt/js/src/base/functions");
 async function seedApplicant(traderData) {
     try {        
-        await ApplicantRecordModel.deleteMany({});        
+        // console.log(JSON.stringify(traderData));
+        // await ApplicantRecordModel.deleteMany({});        
         for (const cycleNumber in traderData) {
-            console.log(JSON.stringify(traderData));
+
 
             const IsExist = await ApplicantRecordModel.findById(traderData[cycleNumber]._id)
-
+            console.log("IsExist=" + IsExist)
             if(!IsExist){
                 await ApplicantRecordModel.create([
                     {
@@ -31,7 +32,10 @@ async function seedApplicant(traderData) {
                         managers: [],
                     },
                 ]);
+            }else{
+                console.log("not creating new records")
             }
+
         }
     } catch (error) {
         console.error(error.message);
@@ -110,12 +114,9 @@ async function applicantData() {
     // console.log(datediff)
     // const datediffString = new Date(datediff)
     // console.log(`datediffString=${datediffString}`)
-    console.log(
-        "adsfdsfjdsalfkdjflkdsjflkadsjflksajlfkdsajflkdsajfldaksfjldksfjldsakjfkdskjfldsjlfdsa  "
-    );
-    console.log("hello" + JSON.stringify(traderData));
+    // console.log("hello" + JSON.stringify(traderData));
     traderData = structuredClone(demoApplicantData())
-    console.log("hello2" + JSON.stringify(traderData));
+    // console.log("hello2" + JSON.stringify(traderData));
     seedApplicant(traderData);
     return traderData;
 } // end of function applicantData
@@ -461,7 +462,7 @@ function demoApplicantData() {
                 
 
     ];
-    console.log(`traderData= ${JSON.stringify(traderData)}`);
+    // console.log(`traderData= ${JSON.stringify(traderData)}`);
     return traderData;
 }
 
@@ -572,15 +573,15 @@ const getFullRangeOfPriceChart = async (req, res) => {
 
     const applicantTrades= await applicantData()
     // const applicantTrades = demoApplicantData();
-    console.log("after demo = " + JSON.stringify(applicantTrades));
+    // console.log("after demo = " + JSON.stringify(applicantTrades));
 
     let getApplicantDataAndPriceChart = [];
     let oneData = {};
-    console.log("for loop");
+    // console.log("for loop");
     for (const tradeNumber in applicantTrades) {
-        console.log(`tradeNumber=${tradeNumber}`);
+        // console.log(`tradeNumber=${tradeNumber}`);
         const trade = applicantTrades[tradeNumber];
-        console.log(JSON.stringify(trade));
+        // console.log(JSON.stringify(trade));
 
         const offSetDays = 5;
 
@@ -599,13 +600,13 @@ const getFullRangeOfPriceChart = async (req, res) => {
         };
         getApplicantDataAndPriceChart.push(oneData);
     }
-    console.log(JSON.stringify(getApplicantDataAndPriceChart));
+    // console.log(JSON.stringify(getApplicantDataAndPriceChart));
     res.json(getApplicantDataAndPriceChart);
 };
 
 function getDayDiff(timeIn, timeOut) {
-    console.log(JSON.stringify(timeIn));
-    console.log(JSON.stringify(timeOut));
+    // console.log(JSON.stringify(timeIn));
+    // console.log(JSON.stringify(timeOut));
 
     const date1 = new Date(timeIn.split("T")[0]);
     let date2 = new Date(timeOut.split("T")[0]);
