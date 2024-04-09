@@ -58,8 +58,9 @@ const login = async (req, res) => {
             email: req.body.email,
         });
         if (!userAuth) {
+            console.log("in usernot authorized statement!")
             return res
-                .json(400)
+                .status(400)
                 .json({ status: "error", msg: "not authorized" });
         }
 
@@ -121,4 +122,4 @@ const login = async (req, res) => {
 //     }
 // };
 
-module.exports = { getAllUsers, register, login};
+module.exports = { getAllUsers, register, login };
