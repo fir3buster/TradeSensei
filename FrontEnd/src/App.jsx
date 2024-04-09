@@ -13,7 +13,6 @@ function App() {
   const [userScoreCtx, setUserScoreCtx] = useState({});
   const [nextPageCtx, setNextPageCtx] = useState({});
   const [prevPageCtx, setPrevPageCtx] = useState({});
-  const [activeApplicantId, setActiveApplicantId] = useState("");
   const [applicantIds, setApplicantIds] = useState([]);
   const [page, setPage] = useState(-1);
 
@@ -23,6 +22,8 @@ function App() {
     {}
   );
   const [activePageContext, setActivePageContext] = useState({});
+  const [activeApplicantId, setActiveApplicantId] = useState("");
+  const [activeStaffId, setActiveStaffId] = useState("");
 
   return (
     <div>
@@ -59,7 +60,10 @@ function App() {
           activePageContext,
           setActivePageContext,
           applicantIds, 
-          setApplicantIds,          
+          setApplicantIds,     
+          
+          activeStaffId, 
+          setActiveStaffId,
         }}
       >
         <ChartScore></ChartScore>
