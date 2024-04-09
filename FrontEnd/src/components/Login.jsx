@@ -3,7 +3,7 @@ import useFetch from "../hooks/useFetch";
 import UserContext from "../context/user";
 import { jwtDecode } from "jwt-decode";
 
-const Login = () => {
+const Login = (props) => {
   const fetchData = useFetch();
 
   const userCtx = useContext(UserContext);
@@ -11,7 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
-    const res = await fetchData("/login", "POST", { email, password });
+    const res = await fetchData("/auth/login", "POST", { email, password });
 
     if (res.ok) {
       // set access token
@@ -60,7 +60,7 @@ const Login = () => {
       <br />
       <div className="row">
         <div className="col-md-4"></div>
-        <button className="col-md-4" type="submit">
+        <button className="col-md-4" type="submit" onClick={() => props.setShowLogin(false)}>
           go to registration screen
         </button>
         <div className="col-md-4"></div>

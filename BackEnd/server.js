@@ -26,10 +26,10 @@ app.use(limiter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("", loginAuth);
+app.use("/auth", loginAuth);
 app.use("/api", applicants);
 app.use("/api/chart", extractionOfDataFromBinanceFuturesAPI);
-app.use("", roles);
+app.use("/roles", roles);
 
 app.listen(process.env.PORT, () => {
     console.log(`listening to ${process.env.PORT}`);

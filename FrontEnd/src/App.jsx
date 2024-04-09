@@ -62,14 +62,14 @@ function App() {
           setApplicantIds,          
         }}
       >
-        <ChartScore></ChartScore>
-        {/* {accessToken.length > 0 && <ChartScore></ChartScore>}
+        {/* <ChartScore></ChartScore> */}
+        {accessToken.length > 0 && <ChartScore></ChartScore>}
         {accessToken.length === 0 && showLogin && (
           <Login setShowLogin={setShowLogin}></Login>
         )}
         {accessToken.length === 0 && !showLogin && (
           <Registration setShowLogin={setShowLogin}></Registration>
-        )} */}
+        )}
       </UserContext.Provider>
     </div>
   );
