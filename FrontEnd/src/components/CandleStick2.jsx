@@ -19,7 +19,7 @@ const CandleStick2 = (props) => {
         if(props.tradeData){        
             // Lightweight Charts™ Example: Series Markers
             // https://tradingview.github.io/lightweight-charts/tutorials/how_to/series-markers
-            console.log(`USEEFFECT JSON= ${JSON.stringify(props.tradeData)}`)
+            // console.log(`USEEFFECT JSON= ${JSON.stringify(props.tradeData)}`)
             const chartOptions = {
                 layout: {
                     textColor: 'white',
