@@ -42,8 +42,9 @@ const Score = () => {
         console.log("patch data=" + rate + comment);
         // create params: (useContext => app => candidate) applicantId + (useContext => app => score) pageNumber to use for multiple applicants
         // currently use for one
+        // {{server}}/api/flights?airline=AIRASIA&airport=KUL
         const res = await fetchData(
-            "/api/applicants/managers/" + pageNumber ,
+            "/api/applicants/managers?" + pageNumber ,
             "PATCH",
             {
                 // applicantId: userCtx.activeApplicantId,
