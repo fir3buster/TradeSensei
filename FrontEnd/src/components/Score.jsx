@@ -33,7 +33,7 @@ const Score = ({ totalPages }) => {
     }
   };
 
-            "PATCH",
+
   const addScore = async (pageNumber) => {
     // console.log("patch data=" + rate + comment);
     const res = await fetchData(
