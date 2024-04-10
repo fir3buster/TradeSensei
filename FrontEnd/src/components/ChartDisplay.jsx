@@ -104,7 +104,6 @@ const ChartDisplay = () => {
   return (
     <div className="">
       <div className={styles.chartwrapper}>
-        {page} {tradeData.length}
         <div className={styles.chart}>
           <CandleStick2
             activePage={page}
