@@ -728,8 +728,6 @@ const updateApplicantRecord = async (req, res) => {
 
         if ("applicantId" in req.body)
             updateApplicant.applicantId = req.body.applicantId;
-        // if ("applicantName" in req.body)
-        // updateApplicant.applicantName = req.body.applicantName;
         if ("priceIn" in req.body) updateApplicant.priceIn = req.body.priceIn;
         if ("timeIn" in req.body) updateApplicant.timeIn = req.body.timeIn;
         if ("priceOut" in req.body)
@@ -751,128 +749,8 @@ const updateApplicantRecord = async (req, res) => {
     }
 };
 
-// update manager's grade and comment
-// const updateApplicantManagerRecord = async (req, res) => {
-//     try {
-//         console.log("in function")
-//         const updateManager = {
-//             staffId: req.body.staffId,
-//             grade: req.body.grade,
-//             comment: req.body.comment,
-//         };
-
-//         // check if manager's record is already in
-//         const existingRecord = await ApplicantRecordModel.findOne({
-//             _id: req.params.id,
-
-//             "managers.staffId": req.body.staffId,
-//         });
-
-//         // if exist, update the grade and comment of existing staffId
-//         if (existingRecord) {
-//             const response = await ApplicantRecordModel.updateOne(
-//                 {
-//                     _id: req.params.id,
-//                     "managers.staffId": req.body.staffId,
-//                 },
-//                 {
-//                     $Set: {
-//                         "managers.staffId": req.body.staffId,
-//                         "managers.grade": req.body.grade,
-//                         "managers.comment": req.body.comment,
-//                     },
-//                 }
-//             );
-
-//             return res.json({ status: "ok", msg: "manager grade updated" });
-//         }
-
-//         const response = await ApplicantRecordModel.updateOne(
-//             {
-//                 _id: req.params.id,
-//             },
-//             {
-//                 $addToSet: { managers: updateManager },
-//             }
-//         );
-
-//         return res.json({ status: "ok", msg: "manager grade updated" });
-//     } catch (error) {
-//         console.error(error.message);
-//         res.status(400).json({
-//             status: "error",
-//             msg: "Error updating applicant record",
-//         });
-//     }
-// };
-
-// const updateApplicantManagerRecord = async (req, res) => {
-//     // console.log("req = " + JSON.stringify(req.params));
-//     try {
-//         console.log("in updateApplicantManagerRecord");
-//         console.log("req = " + JSON.stringify(req.body));
-//         // console.log(JSON.stringify(req.body));
-
-//         // check if manager's record is already in
-//         // const existingRecord = await ApplicantRecordModel.findOne({
-//         //     $and: [
-//         //         { pageNumber: req.params.pageNumber },
-//         //         { applicantId: req.body.applicantId },
-//         //         { "managers.staffId": req.body.staffId },
-//         //     ],
-//         // });
-//         // console.log("existingRecord= " + JSON.stringify(existingRecord));
-
-//         // if exist, update the grade and comment of existing staffId
-
-//         const response = await ApplicantRecordModel.findOneAndUpdate(
-//             {
-//                 $and: [
-//                     { pageNumber: req.params.pageNumber },
-//                     { applicantId: req.body.applicantId },
-//                     // { "managers.staffId": req.body.staffId },
-//                 ],
-//             },
-//             {
-//                 "managers.staffId": req.body.staffId,
-//                 "managers.grade": req.body.grade,
-//                 "managers.comment": req.body.comment,
-//             },
-//             {
-//                 new: false,
-//                 upsert: true, // Make this update into an upsert
-//             }
-//         );
-
-//         console.log(`check for response= ${response}`);
-//         return res.json({ status: "ok", msg: "manager grade updated" });
-
-//         // const response = await ApplicantRecordModel.updateOne(
-//         //     {
-//         //         pageNumber: req.params.pageNumber,
-//         //         applicantId: req.body.applicantId,
-//         //     },
-//         //     {
-//         //         $addToSet: { managers: updateManager },
-//         //     }
-//         // );
-
-//         // return res.json({ status: "ok", msg: "manager grade updated" });
-//     } catch (error) {
-//         console.error(error.message);
-//         res.status(400).json({
-//             status: "error",
-//             msg: "Error updating applicant record",
-//         });
-//     }
-// };
-
 const updateApplicantManagerRecord = async (req, res) => {
-    // console.log("in function")
     try {
-        console.log("in function");
-        console.log(JSON.stringify(req.body));
-        console.log(req.params);
         const updateManager = {
             staffId: req.body.staffId,
             grade: req.body.grade,
@@ -911,71 +789,6 @@ const updateApplicantManagerRecord = async (req, res) => {
 
             return res.json({ status: "ok", msg: "manager grade updated" });
         }
-
-        // if exist, update the grade and comment of existing staffId
-        // if (existingManagerRecord.length > 0) {
-        //     console.log(
-        //         "checking exisitng manager record: " + existingManagerRecord,
-        //         typeof existingManagerRecord
-        //     );
-        //     console.log(
-        //         "manger records of particular applicant and page number is exist"
-        //     );
-        //     const response = await ApplicantRecordModel.findByOneAndUpdate(
-        //         {
-        //             // _id: existingManagerRecord[0]._id.toString()
-        //         },
-        //         {
-        //             $set: {
-        //                 // "managers.staffId": req.body.staffId,
-        //                 "managers.grade": req.body.grade,
-        //                 "managers.comment": req.body.comment,
-        //             },
-        //         }
-        //     );
-
-        //     return res.json({ status: "ok", msg: "manager grade updated" });
-        // } else {
-        //     const existingRecord = await ApplicantRecordModel.find({
-        //         pageNumber: req.params.pageNumber,
-        //         applicantId: req.body.applicantId,
-        //     });
-
-        //     console.log(
-        //         "no manager record found: " +
-        //             existingRecord +
-        //             typeof existingRecord,
-        //         existingRecord[0]._id.toString()
-        //     );
-        //     const response = await ApplicantRecordModel.findByIdAndUpdate(
-        //         {
-        //             _id: existingRecord[0]._id.toString(),
-        //         },
-        //         {
-        //             $addToSet: { managers: updateManager },
-        //         }
-        //     );
-
-        //     return res.json({ status: "ok", msg: "manager grade updated" });
-        // }
-
-        // console.log(existingRecord);
-
-        // let existingApplicantRecord = [];
-
-        // // existingRecord.forEach((record) => {
-        // //     if (record.applicantId === req.body.applicantId) {
-        // //         existingApplicantRecord.push(record)
-        // //     }
-        // // });
-        // if (existingRecord.length > 0) {
-        //     for (const record of existingRecord) {
-        //         console.log(record.applicantId)
-        //         if (record.managers. === req.body.applicantId) {
-        //         existingApplicantRecord.push(record)
-        //         }
-        //     }
-        // }
     } catch (error) {
         console.error(error.message);
         res.status(400).json({
@@ -1013,7 +826,6 @@ const seedManager = async (req, res) => {
                 staffId: "M20000",
                 finalGrade: 80,
                 isRecommended: true,
-                generalManagerRecord: "660f9baa2b01b98bd7b6f56f",
             },
             {
                 _id: "660e187fc050096882b89518", // to check on object id
@@ -1021,7 +833,6 @@ const seedManager = async (req, res) => {
                 staffId: "M30000",
                 finalGrade: 78,
                 isRecommended: true,
-                generalManagerRecord: "660f9baa2b01b98bd7b6f34d",
             },
             {
                 _id: "660e1892c050096882b8951a", // to check on object id
@@ -1029,7 +840,6 @@ const seedManager = async (req, res) => {
                 staffId: "M40000",
                 finalGrade: 50,
                 isRecommended: false,
-                generalManagerRecord: "660f9baa2b01b98bd7b6f56f",
             },
         ]);
         res.json({ status: "ok", msg: "seeding successful" });
@@ -1076,30 +886,19 @@ const getManagersFinalRecordsByApplicantId = async (req, res) => {
 // adding record
 
 const addNewManagersRecord = async (req, res) => {
-    console.log("in add new managers record");
     try {
-        console.log("in add new managers record");
         const applicantManagerRecord = await ApplicantRecordModel.find({
             applicantId: req.body.applicantId,
             "managers.staffId": req.body.staffId,
         });
 
-        // console.log("test: " + applicantManagerRecord);
-        // console.log(
-        //     "checking for applicant manager record of id and staffid: " +
-        //         applicantManagerRecord
-        // );
-
         let gradeSum = 0;
         if (applicantManagerRecord.length > 0) {
-            console.log("in side if appmanagerrecord condition");
             gradeSum = calculateGradeSumByManager(
                 applicantManagerRecord,
                 req.body.staffId
             );
         }
-
-        console.log("outside function:" + gradeSum);
 
         const existingRecord = await ManagerFinalRecordModel.findOneAndUpdate(
             {
@@ -1140,7 +939,6 @@ const updateManagerFinalRecord = async (req, res) => {
         if ("isRecommended" in req.body) {
             updateManagerRecord.isRecommended = req.body.isRecommended;
         }
-        console.log("inside Update: " + req.body.isRecommended);
         await ManagerFinalRecordModel.findByIdAndUpdate(
             req.params.id,
             updateManagerRecord
@@ -1213,28 +1011,6 @@ const getAllGeneralManagersRecords = async (req, res) => {
     }
 };
 
-// const getGeneralManagersRecordsByApplicantId = async (req, res) => {
-//     try {
-//         const allGeneralManagerRecordsByApplicantId =
-//             await GeneralManagerRecordModel.find({
-//                 applicantId: req.params.applicantId,
-//             });
-//         console.log(allGeneralManagerRecordsByApplicantId[0]._id);
-//         const ManagersFinalRecordsByApplicantId =
-//             await ManagerFinalRecordModel.find({
-//                 generalManagerRecord:
-//                     allGeneralManagerRecordsByApplicantId[0]._id,
-//             });
-//         res.json({
-//             allGeneralManagerRecordsByApplicantId,
-//             ManagersFinalRecordsByApplicantId,
-//         });
-//     } catch (error) {
-//         console.error(error.message);
-//         res.status(400).json({ status: "error", msg: " not record found" });
-//     }
-// };
-
 const getGeneralManagersRecordsByApplicantId = async (req, res) => {
     try {
         const allGeneralManagerRecordsByApplicantId =
@@ -1252,21 +1028,16 @@ const getGeneralManagersRecordsByApplicantId = async (req, res) => {
 };
 
 const addNewGeneralManagerRecord = async (req, res) => {
-    console.log("inside newgeneral managaer record: final boss");
-    console.log(req.body.applicantId)
     try {
         const generalManagerRecord = await GeneralManagerRecordModel.find({
             applicantId: req.body.applicantId,
             // staffId: req.body.staffId,
         });
 
-        console.log("checkfor general manager:" + generalManagerRecord);
-        
         if (generalManagerRecord.length > 0) {
             return `record of ${req.body.applicantId} already exist in general manager`;
         }
 
-        console.log("to add new GM record into database")
         const newGeneralManagerRecord = new GeneralManagerRecordModel({
             applicantId: req.body.applicantId,
             // staffId: req.body.staffId,
@@ -1330,15 +1101,11 @@ const deleteGeneralManagerRecord = async (req, res) => {
 // functions
 const calculateGradeSumByManager = (applicantManagerRecords, staffId) => {
     let gradeSum = 0;
-    // const managerArray = [];
     for (const record of applicantManagerRecords) {
-        console.log(staffId);
-        // console.log(`in calculation: ${record}`);
         record.managers.forEach((manager) => {
             if (manager.staffId === staffId) gradeSum += manager.grade;
         });
     }
-    console.log(gradeSum);
     return gradeSum;
 };
 

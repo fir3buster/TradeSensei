@@ -12,7 +12,7 @@ async function seedApplicant(traderData) {
         for (const cycleNumber in traderData) {
 
             const IsExist = await ApplicantRecordModel.findById(traderData[cycleNumber]._id)
-            console.log("IsExist=" + IsExist)
+            // console.log("IsExist=" + IsExist)
             if(!IsExist){
                 await ApplicantRecordModel.create([
                     {
@@ -86,7 +86,6 @@ async function applicantData() {
                 data["priceOut"] = exchangeData[datum].info.avgPrice;
                 data["timeOut"] = exchangeData[datum].datetime;
                 traderData.push(data);
-                // console.log(data)
             }
         }
     }
@@ -438,7 +437,6 @@ function demoApplicantData() {
                 
 
     ];
-    // console.log(`traderData= ${JSON.stringify(traderData)}`);
     return traderData;
 }
 

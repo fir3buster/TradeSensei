@@ -25,23 +25,34 @@ const { authManager, authGeneralManager } = require("../middleware/auth");
 
 const router = express.Router();
 
-router.get("/seedApplicant", seedApplicant);
-router.get("/applicants", getAllApplicantsRecords);
-router.get("/applicants/:applicantId", getApplicantRecordsByApplicantId);
-router.post("/applicants", addNewApplicantRecord);
-router.patch("/applicants/:id", updateApplicantRecord);
-// router.patch("/applicants/manager/:id", updateApplicantManagerRecord);
-router.patch("/applicants/managers/:pageNumber", updateApplicantManagerRecord);
-router.delete("/applicants/:id", deleteApplicantRecord);
+router.get("/seedApplicant", authManager, seedApplicant);
+router.get("/applicants", authManager, getAllApplicantsRecords);
+router.get(
+    "/applicants/:applicantId",
+    authManager,
+    getApplicantRecordsByApplicantId
+);
+router.post("/applicants", authManager, addNewApplicantRecord);
+router.patch("/applicants/:id", authManager, updateApplicantRecord);
+router.patch(
+    "/applicants/managers/:pageNumber",
+    authManager,
+    updateApplicantManagerRecord
+);
+router.delete("/applicants/:id", authManager, deleteApplicantRecord);
 
-router.get("/seedManager", seedManager);
-router.get("/managers", getAllManagersFinalRecords);
-router.get("/managers/:applicantId", getManagersFinalRecordsByApplicantId);
-router.post("/managers", addNewManagersRecord);
-router.patch("/managers/:id", updateManagerFinalRecord);
-router.delete("/managers/:id", deleteManagerFinalRecord);
+router.get("/seedManager", authManager, seedManager);
+router.get("/managers", authManager, getAllManagersFinalRecords);
+router.get(
+    "/managers/:applicantId",
+    authManager,
+    getManagersFinalRecordsByApplicantId
+);
+router.post("/managers", authManager, addNewManagersRecord);
+router.patch("/managers/:id", authManager, updateManagerFinalRecord);
+router.delete("/managers/:id", authManager, deleteManagerFinalRecord);
 
-router.get("/seedGeneralManager", seedGeneralManager);
+router.get("/seedGeneralManager", authManager, seedGeneralManager);
 router.get(
     "/generalManagers",
     authGeneralManager,
@@ -52,7 +63,7 @@ router.get(
     authGeneralManager,
     getGeneralManagersRecordsByApplicantId
 );
-router.post("/generalManagers", addNewGeneralManagerRecord);
+router.post("/generalManagers", authManager, addNewGeneralManagerRecord);
 router.patch(
     "/generalManagers/:id",
     authGeneralManager,
@@ -63,30 +74,5 @@ router.delete(
     authGeneralManager,
     deleteGeneralManagerRecord
 );
-
-// router.get("/seedApplicant", authManager, seedApplicant);
-// router.get("/applicants", authManager, getAllApplicantsRecords);
-// router.get("/applicants/:applicantId", authManager, getApplicantRecordsByApplicantId);
-// router.post("/applicants", authManager, addNewApplicantRecord);
-// router.patch("/applicants/:id", authManager, updateApplicantRecord);
-// router.patch("/applicants/manager/:id", authManager, updateApplicantManagerRecord);
-// router.delete("/applicants/:id", authManager, deleteApplicantRecord);
-
-// router.get("/seedManager", authManager, seedManager);
-// router.get("/managers", authManager, getAllManagersFinalRecords);
-// router.get("/managers/:applicantId", authManager, getManagersFinalRecordsByApplicantId);
-// router.post("/managers", authManager, addNewManagersRecord);
-// router.patch("/managers/:id", authManager, updateManagerFinalRecord);
-// router.delete("/managers/:id", authManager, deleteManagerFinalRecord);
-
-// router.get("/seedGeneralManager", authGeneralManager, seedGeneralManager);
-// router.get("/generalManagers", authGeneralManager, getAllGeneralManagersRecords);
-// router.get(
-//     "/generalManagers/:applicantId", authGeneralManager,
-//     getGeneralManagersRecordsByApplicantId
-// );
-// router.post("/generalManagers", authGeneralManager, addNewGeneralManagerRecord);
-// router.patch("/generalManagers/:id", authGeneralManager, updateGeneralManagerRecord);
-// router.delete("/generalManagers/:id", authGeneralManager, deleteGeneralManagerRecord);
 
 module.exports = router;
