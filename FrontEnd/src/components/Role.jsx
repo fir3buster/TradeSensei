@@ -3,55 +3,44 @@ import styles from "./Chart.module.css";
 import UserContext from "../context/user";
 
 const Role = (props) => {
-    // const [role, setRole] = useState("User");
-    // const [context, setContext] = useContext(UserContext);
+  const userCtx = useContext(UserContext);
+  const [isUserDropDown, setIsUserDropDown] = useState(false);
 
-    // useEffect(() => {
+  const toggleUserDropDown = () => {
+    setIsUserDropDown(!isUserDropDown);
+  };
 
-    //   fetchAccountRole()
-    //     .then((role) => {
+  const signOut = () => {
+    console.log("USER SIGN OUT!");
+    userCtx.setAccessToken("");
+    // logic to reset any states to default if necessary
+    window.location.reload();
+  };
 
-    //       setRole(role || "User");
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error fetching account role:", error);
+  return (
+    <>
+      <div className={styles.header}>
+        {/* Display the account holder's role */}
+        {/* <div className={styles.user}>{role}</div> */}
+        <div className={styles.userRole}>
+          <button
+            onClick={toggleUserDropDown}
+            className={`${styles.role} ${isUserDropDown ? styles.active : ""}`}
+          >
+            {userCtx.activeStaffId}
+          </button>
+        </div>
 
-    //       setRole("User");
-    //     });
-    // }, []);
-
-    const userCtx = useContext(UserContext);
-    const [isUserDropDown, setIsUserDropDown] = useState(false);
-
-    const toggleUserDropDown = () => {
-        setIsUserDropDown(!isUserDropDown);
-    };
-
-    const signOut = () => {
-        console.log("USER SIGN OUT!");
-        userCtx.setAccessToken("");
-        // logic to reset any states to default if necessary
-        window.location.reload();
-    };
-
-    return (
-        <>
-            <div className={styles.header}>
-                {/* Display the account holder's role */}
-                {/* <div className={styles.user}>{role}</div> */}
-                <div className={styles.user}>Role - Manager</div>
-                <button onClick={toggleUserDropDown}>
-                    {userCtx.activeStaffId}
-                </button>
-
-                {isUserDropDown && (
-                    <div>
-                        <button onClick={signOut}>Sign Out</button>
-                    </div>
-                )}
-            </div>
-        </>
-    );
+        {isUserDropDown && (
+          <div className={styles.dropdownContent}>
+            <button onClick={signOut} className={styles.dropdownItem}>
+              Sign Out
+            </button>
+          </div>
+        )}
+      </div>
+    </>
+  );
 };
 
 export default Role;

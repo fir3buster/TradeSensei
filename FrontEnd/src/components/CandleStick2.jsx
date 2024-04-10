@@ -8,13 +8,13 @@ const CandleStick2 = (props) => {
     const userCtx = useContext(UserContext);
 
 
-    console.log("into candlestick2")
+    // console.log("into candlestick2")
     // console.log(`JSON candlestick2= ${JSON.stringify(props.tradeData)}`)    
 
     // console.log(`activePage=${activePage}`)
-    console.log(`props.activePage=${props.activePage}`)
+    // console.log(`props.activePage=${props.activePage}`)
     if (activePage != props.activePage){
-        console.log(`inside condition: ${activePage}, ${props.activePage}`)
+        // console.log(`inside condition: ${activePage}, ${props.activePage}`)
         // console.log(`inside condition:  JSON= ${JSON.stringify(props.tradeData)}`)        
         setActivePage(props.activePage)
     }
@@ -93,8 +93,8 @@ const CandleStick2 = (props) => {
             let shortPnL = ((priceIn-priceOut)*executedQty)
             shortPnL= (Math.round(shortPnL * 100) / 100).toFixed(2);
 
-            console.log(`longPnL=${longPnL}`)
-            console.log(`shortPnL=${shortPnL}`)
+            // console.log(`longPnL=${longPnL}`)
+            // console.log(`shortPnL=${shortPnL}`)
 
             if (props.tradeData["applicantTrade"]["tradeType"]==="long"){
                 markers.push({

@@ -9,30 +9,31 @@ import GmScore from "./GmScore";
 import ChartFunctionsContext from "../context/ChartFunctionsContext";
 
 const Score = ({ totalPages }) => {
-    const userCtx = useContext(UserContext);
-    const [rate, setRate] = useState(0);
-    const [score, setScore] = useState([]);
-    const [comment, setComment] = useState("");
-    const [finalScoreSubmitted, setFinalScoreSubmitted] = useState(false);
-    const { nextPage, prevPage, resetRateAndComment } = useContext(
-        ChartFunctionsContext
-    );
-    const fetchData = useFetch();
+  const userCtx = useContext(UserContext);
+  const [rate, setRate] = useState(0);
+  const [score, setScore] = useState([]);
+  const [comment, setComment] = useState("");
+  const [finalScoreSubmitted, setFinalScoreSubmitted] = useState(false);
+  const { nextPage, prevPage, resetRateAndComment } = useContext(
+    ChartFunctionsContext
+  );
+  const fetchData = useFetch();
 
-    const getScore = async () => {
-        const res = await fetchData(
-            "/api/applicants",
-            "GET",
-            undefined,
-            userCtx.accessToken
-        );
-        if (res.ok) {
-            setScore(res.data);
-        } else {
-            alert(JSON.stringify(res.data));
-            console.log(res.data);
-        }
-    };
+  const getScore = async () => {
+    const res = await fetchData(
+      "/api/applicants",
+      "GET",
+      undefined,
+      userCtx.accessToken
+    );
+    if (res.ok) {
+      // console.log("getScore=" + JSON.stringify(res.data))
+      setScore(res.data);
+    } else {
+      alert(JSON.stringify(res.data));
+      console.log(res.data);
+    }
+  };
 
     const addScore = async (pageNumber) => {
         console.log(userCtx.activeApplicantId);
@@ -52,7 +53,7 @@ const Score = ({ totalPages }) => {
         if (res.ok) {
             getScore();
             nextPage();
-            console.log(res.data);
+            console.log("addScore = " + JSON.stringify(res.data));
         } else {
             alert(JSON.stringify(res.data));
             console.log(res.data);
@@ -109,49 +110,63 @@ const Score = ({ totalPages }) => {
         }
     };
 
-    useEffect(() => {
-        getScore();
-    }, []);
+  useEffect(() => {
+    getScore();
+  }, []);
 
-    useEffect(() => {
-        resetRateAndComment();
-    }, []);
+  useEffect(() => {
+    resetRateAndComment();
+  }, []);
 
-    useEffect(() => {
-        console.log("triggered");
-        getScore();
-        console.log("userCtx.activePageContext=" + userCtx.activePageContext);
-        if (score[userCtx.activePageContext]) {
+  useEffect(() => {
+    console.log("triggered");
+    getScore();
+    console.log("userCtx.activePageContext=" + userCtx.activePageContext);
+
+    console.log("total record=" + score.length);
+    let recordNumber = -1;
+    for (const record in score) {
+      if (
+        score[record]["pageNumber"] === userCtx.activePageContext &&
+        score[record]["applicantId"] === userCtx.activeApplicantId
+      ) {
+        recordNumber = record;
+      }
+    }
+
+    if (score[recordNumber]) {
+      console.log("score[recordNumber]=" + JSON.stringify(score[recordNumber]));
+      console.log(
+        "managers=" + JSON.stringify(score[recordNumber]["managers"])
+      );
+      console.log(
+        "score[recordNumber][pageNumber]=" +
+          JSON.stringify(score[recordNumber]["pageNumber"])
+      );
+      console.log("userCtx.role=" + userCtx.role);
+      console.log("userCtx.activeStaffId=" + userCtx.activeStaffId);
+      if (score[recordNumber]["managers"]) {
+        console.log("into managers");
+        setComment("");
+        setRate(0);
+        for (const manager in score[recordNumber]["managers"]) {
+          if (
+            score[recordNumber]["managers"][manager]["staffId"] ===
+            userCtx.activeStaffId
+          ) {
             console.log(
-                "score=" + JSON.stringify(score[userCtx.activePageContext])
+              "grade=" + score[recordNumber]["managers"][manager]["grade"]
             );
             console.log(
-                "managers=" +
-                    JSON.stringify(score[userCtx.activePageContext]["managers"])
+              "comment=" + score[recordNumber]["managers"][manager]["comment"]
             );
-            console.log("userCtx.role=" + userCtx.role);
-            if (score[userCtx.activePageContext]["managers"]) {
-                console.log("into managers");
-                if (
-                    score[userCtx.activePageContext]["managers"] ===
-                    userCtx.activeStaffId
-                ) {
-                    console.log(
-                        "grade=" +
-                            score[userCtx.activePageContext]["managers"][
-                                "grade"
-                            ]
-                    );
-                    console.log(
-                        "comment=" +
-                            score[userCtx.activePageContext]["managers"][
-                                "comment"
-                            ]
-                    );
-                }
-            }
+            setComment(score[recordNumber]["managers"][manager]["comment"]);
+            setRate(score[recordNumber]["managers"][manager]["grade"]);
+          }
         }
-    }, [userCtx.activePageContext]);
+      }
+    }
+  }, [userCtx.activePageContext]);
 
     const handleSubmitAllScores = () => {
         setFinalScoreSubmitted(true);
@@ -198,40 +213,38 @@ const Score = ({ totalPages }) => {
                         </div>
                     </Container>
 
-                    <div className={styles.commentbox}>
-                        <div className="">Your comment:</div>
-                        <input
-                            type="text"
-                            value={comment}
-                            onChange={(e) => setComment(e.target.value)}
-                            className={styles.box}
-                        />
-                    </div>
+          <div className={styles.commentbox}>
+            <div className="">Your comment:</div>
+            <input
+              type="text"
+              
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              className={styles.box}
+            />
+          </div>
 
-                    <div>
-                        <button
-                            onClick={() => {
-                                addScore(userCtx.activePageContext + 1);
-                                // nextPage();
-                                setComment("");
-                                if (
-                                    userCtx.activePageContext ===
-                                    totalPages - 1
-                                ) {
-                                    handleSubmitAllScores();
-                                }
-                            }}
-                            className={styles.button}
-                        >
-                            {userCtx.activePageContext === totalPages - 1
-                                ? "Submit All Scores"
-                                : "Grade"}
-                        </button>
-                    </div>
-                </div>
-            )}
+          <div>
+            <button
+              onClick={() => {
+                addScore(userCtx.activePageContext);
+                // nextPage();
+                // setComment("");
+                if (userCtx.activePageContext === totalPages - 1) {
+                  handleSubmitAllScores();
+                }
+              }}
+              className={styles.button}
+            >
+              {userCtx.activePageContext === totalPages
+                ? "Submit All Scores"
+                : "Grade"}
+            </button>
+          </div>
         </div>
-    );
+      )}
+    </div>
+  );
 };
 
 export default Score;

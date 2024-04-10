@@ -29,14 +29,13 @@ function App() {
     <div>
       <UserContext.Provider
         value={{
-
           nextPage: () => {},
           prevPage: () => {},
-          resetRateAndComment: () => {},          
+          resetRateAndComment: () => {},
 
-          score, 
+          score,
           setScore,
-          page, 
+          page,
           setPage,
 
           accessToken,
@@ -55,14 +54,14 @@ function App() {
           setPrevPageCtx,
           resetRateAndCommentContext,
           setResetRateAndCommentContext,
-          activeApplicantId,          
+          activeApplicantId,
           setActiveApplicantId,
           activePageContext,
           setActivePageContext,
-          applicantIds, 
-          setApplicantIds,     
-          
-          activeStaffId, 
+          applicantIds,
+          setApplicantIds,
+
+          activeStaffId,
           setActiveStaffId,
         }}
       >

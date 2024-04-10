@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Role from "./components/Role";
 import Candidate from "./components/Candidate";
-// import Chart from "./components/Chart";
-// import Carousel from "./components/Carousel";
 import ChartDisplay from "./components/ChartDisplay";
 import ChartFunctionsContext from "./context/ChartFunctionsContext";
-import Score from "./components/Score";
 
 const ChartScore = () => {
   const [page, setPage] = useState(-1);

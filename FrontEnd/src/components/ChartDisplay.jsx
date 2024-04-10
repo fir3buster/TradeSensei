@@ -5,6 +5,7 @@ import UserContext from "../context/user";
 import styles from "./Chart.module.css";
 import Score from "./Score";
 import FinalScore from "./FinalScore";
+import ChartSkeleton from "./ChartSkeleton";
 
 const ChartDisplay = () => {
   const userCtx = useContext(UserContext);
@@ -12,6 +13,7 @@ const ChartDisplay = () => {
   const [tradeData, setTradeData] = useState([]);
   const [page, setPage] = useState(-1);
   const [finalScoreSubmitted, setFinalScoreSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = useFetch();
 
@@ -25,6 +27,7 @@ const ChartDisplay = () => {
     );
 
     if (res.ok) {
+      setIsLoading(false);
       // console.log("getTradeData data ok");
 
       // console.log(
@@ -70,7 +73,7 @@ const ChartDisplay = () => {
 
       setTradeData(activeData);
       // setTradeData(res.data);
-      setPage(0);
+      setPage(1);
       userCtx.setActivePageContext(1); // real world number
     } else {
       alert(JSON.stringify(res.data));
@@ -79,25 +82,11 @@ const ChartDisplay = () => {
   };
 
   const nextPage = () => {
-    if (page < tradeData.length - 1) {
+    if (page < tradeData.length) {
       setPage(page + 1);
       userCtx.setActivePageContext(page + 1);
       // get function to post api into db (grade & comments )
-      // update frunction to post api into db (grade & comments )
-      const getScore = async () => {
-        const res = await fetchData(
-          "/api/applicants",
-          "GET",
-          undefined,
-          userCtx.accessToken
-        );
-        if (res.ok) {
-          setScore(res.data);
-        } else {
-          alert(JSON.stringify(res.data));
-          console.log(res.data);
-        }
-      };
+      // update frunction to post api into db (grade & comments )      
     }
   };
 
@@ -117,33 +106,36 @@ const ChartDisplay = () => {
 
   return (
     <div className="">
-      <div className={styles.chartwrapper}>
-        <div className={styles.chart}>
-          <CandleStick2
-            activePage={page}
-            tradeData={tradeData[page]}
-            changePage={userCtx.activeApplicantId}
-          ></CandleStick2>
+      {isLoading ? (
+        <ChartSkeleton /> // Display the placeholder while loading
+      ) : (
+        <div className={styles.chartwrapper}>
+          <div className={styles.chart}>
+            <CandleStick2
+              activePage={page}
+              tradeData={tradeData[page-1]}
+              changePage={userCtx.activeApplicantId}
+            ></CandleStick2>
+          </div>
+          <div className={styles.chartbuttons}>
+            <button
+              className={styles.buttonchart}
+              onClick={prevPage}
+              disabled={page === 1}
+            >
+              Prev Chart
+            </button>
+            <label>Page {page}</label>
+            <button
+              className={styles.buttonchart}
+              onClick={nextPage}
+              disabled={page === 10}
+            >
+              Next Chart
+            </button>
+          </div>
         </div>
-        <div className={styles.chartbuttons}>
-          <button
-            className={styles.buttonchart}
-            onClick={prevPage}
-            disabled={page === 0}
-          >
-            Prev Chart
-          </button>
-          <label>Page {page + 1}</label>
-          <button
-            className={styles.buttonchart}
-            onClick={nextPage}
-            disabled={page === tradeData.length - 1}
-          >
-            Next Chart
-          </button>
-        </div>
-      </div>
-
+      )}
       <div>
         <Score totalPages={tradeData.length}></Score>
         {/* {finalScoreSubmitted && <FinalScore />} */}
