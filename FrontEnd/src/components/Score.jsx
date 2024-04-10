@@ -72,41 +72,50 @@ const Score = ({ totalPages }) => {
     getScore();
     console.log("userCtx.activePageContext=" + userCtx.activePageContext);
 
-    console.log("total record=" + score.length)
-    let recordNumber=-1
-    for (const record in score){
-        if (
-        (score[record]["pageNumber"]===(userCtx.activePageContext)) &&
-        (score[record]["applicantId"]===(userCtx.activeApplicantId))
-        ){
-            recordNumber=record
-        }
+    console.log("total record=" + score.length);
+    let recordNumber = -1;
+    for (const record in score) {
+      if (
+        score[record]["pageNumber"] === userCtx.activePageContext &&
+        score[record]["applicantId"] === userCtx.activeApplicantId
+      ) {
+        recordNumber = record;
+      }
     }
 
     if (score[recordNumber]) {
-        console.log("score[recordNumber]=" + JSON.stringify(score[recordNumber]));
-        console.log("managers=" + JSON.stringify(score[recordNumber]["managers"]));
-        console.log("score[recordNumber][pageNumber]=" + JSON.stringify(score[recordNumber]["pageNumber"]));
-        console.log("userCtx.role=" + userCtx.role);
-        console.log("userCtx.activeStaffId=" + userCtx.activeStaffId);
-        if (score[recordNumber]["managers"]) {
-            console.log("into managers");
-            setComment("")
-            setRate(0)
-            for (const manager in score[recordNumber]["managers"]){
-                if (score[recordNumber]["managers"][manager]["staffId"] === userCtx.activeStaffId) {
-                    console.log("grade=" +score[recordNumber]["managers"][manager]["grade"]);
-                    console.log("comment=" +score[recordNumber]["managers"][manager]["comment"]);
-                    setComment(score[recordNumber]["managers"][manager]["comment"])
-                    setRate(score[recordNumber]["managers"][manager]["grade"])
-                }
-            }
+      console.log("score[recordNumber]=" + JSON.stringify(score[recordNumber]));
+      console.log(
+        "managers=" + JSON.stringify(score[recordNumber]["managers"])
+      );
+      console.log(
+        "score[recordNumber][pageNumber]=" +
+          JSON.stringify(score[recordNumber]["pageNumber"])
+      );
+      console.log("userCtx.role=" + userCtx.role);
+      console.log("userCtx.activeStaffId=" + userCtx.activeStaffId);
+      if (score[recordNumber]["managers"]) {
+        console.log("into managers");
+        setComment("");
+        setRate(0);
+        for (const manager in score[recordNumber]["managers"]) {
+          if (
+            score[recordNumber]["managers"][manager]["staffId"] ===
+            userCtx.activeStaffId
+          ) {
+            console.log(
+              "grade=" + score[recordNumber]["managers"][manager]["grade"]
+            );
+            console.log(
+              "comment=" + score[recordNumber]["managers"][manager]["comment"]
+            );
+            setComment(score[recordNumber]["managers"][manager]["comment"]);
+            setRate(score[recordNumber]["managers"][manager]["grade"]);
+          }
         }
+      }
     }
   }, [userCtx.activePageContext]);
-
-    
-
 
   const handleSubmitAllScores = () => {
     setFinalScoreSubmitted(true);
@@ -162,7 +171,7 @@ const Score = ({ totalPages }) => {
               onClick={() => {
                 addScore(userCtx.activePageContext);
                 // nextPage();
-                setComment("");
+                // setComment("");
                 if (userCtx.activePageContext === totalPages - 1) {
                   handleSubmitAllScores();
                 }
