@@ -1,8 +1,8 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState,  } from "react";
 import styles from "./Chart.module.css";
 import UserContext from "../context/user";
 
-const Role = (props) => {
+const Role = () => {
   const userCtx = useContext(UserContext);
   const [isUserDropDown, setIsUserDropDown] = useState(false);
 
