@@ -76,7 +76,7 @@ const Score = ({ totalPages }) => {
         let recordNumber=-1
         for (const record in score){
             if (
-            (score[record]["pageNumber"]===(userCtx.activePageContext+1)) &&
+            (score[record]["pageNumber"]===(userCtx.activePageContext)) &&
             (score[record]["applicantId"]===(userCtx.activeApplicantId))
             ){
                 recordNumber=record
@@ -156,7 +156,7 @@ const Score = ({ totalPages }) => {
                     <div>
                         <button
                             onClick={() => {
-                                addScore(userCtx.activePageContext + 1);
+                                addScore(userCtx.activePageContext);
                                 // nextPage();
                                 setComment("");
                                 if (
@@ -168,10 +168,12 @@ const Score = ({ totalPages }) => {
                             }}
                             className={styles.button}
                         >
-                            {userCtx.activePageContext === totalPages - 1
+                            {userCtx.activePageContext === totalPages
                                 ? "Submit All Scores"
                                 : "Grade"}
                         </button>
+                        {userCtx.activePageContext}<br/>   
+                        {totalPages}
                     </div>
                 </div>
             )}
