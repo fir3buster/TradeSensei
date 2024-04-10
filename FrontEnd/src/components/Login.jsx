@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import useFetch from "../hooks/useFetch";
 import UserContext from "../context/user";
 import { jwtDecode } from "jwt-decode";
+import logo from "../ts_logo.png";
 
 const Login = (props) => {
   const fetchData = useFetch();
@@ -42,9 +43,9 @@ const Login = (props) => {
     <>
       <br />
       <div className="login">
-        <div>TradeSei</div>
-        <div className="row">
-          <div className="col-md-4"></div>
+        <img src={logo} className="logo"></img>
+        <div className="">
+          <div className=""></div>
           <input
             type="text"
             className="email"
@@ -52,10 +53,10 @@ const Login = (props) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <div className="col-md-4"></div>
+          <div className=""></div>
         </div>
-        <div className="row">
-          <div className="col-md-4"></div>
+        <div className="">
+          <div className=""></div>
           <input
             type="password"
             className="password"
@@ -63,26 +64,26 @@ const Login = (props) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <div className="col-md-4"></div>
+          <div className=""></div>
         </div>
-        <div className="row">
-          <div className="col-md-4"></div>
+        <div className="">
+          <div className=""></div>
           <button className="loginButton" onClick={handleLogin} type="submit">
             login
           </button>
-          <div className="col-md-4"></div>
+          <div className=""></div>
         </div>
         <br />
-        <div className="row">
-          <div className="goToRegisterButton"></div>
+        <div className="">
+          <div className=""></div>
           <button
-            className="col-md-4"
+            className="goToRegisterButton"
             type="submit"
             onClick={() => props.setShowLogin(false)}
           >
             go to registration screen
           </button>
-          <div className="col-md-4"></div>
+          <div className=""></div>
         </div>
       </div>
     </>

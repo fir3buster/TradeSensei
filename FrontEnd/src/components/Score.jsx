@@ -35,80 +35,80 @@ const Score = ({ totalPages }) => {
     }
   };
 
-    const addScore = async (pageNumber) => {
-        console.log(userCtx.activeApplicantId);
-        console.log(userCtx.activePageContext, pageNumber, rate, comment);
-        // console.log("patch data=" + rate + comment);
-        const res = await fetchData(
-            "/api/applicants/managers/" + pageNumber,
-            "PATCH",
-            {
-                applicantId: userCtx.activeApplicantId,
-                staffId: userCtx.activeStaffId,
-                grade: rate,
-                comment: comment,
-            },
-            userCtx.accessToken
-        );
-        if (res.ok) {
-            getScore();
-            nextPage();
-            console.log("addScore = " + JSON.stringify(res.data));
-        } else {
-            alert(JSON.stringify(res.data));
-            console.log(res.data);
-        }
-    };
+  const addScore = async (pageNumber) => {
+    console.log(userCtx.activeApplicantId);
+    console.log(userCtx.activePageContext, pageNumber, rate, comment);
+    // console.log("patch data=" + rate + comment);
+    const res = await fetchData(
+      "/api/applicants/managers/" + pageNumber,
+      "PATCH",
+      {
+        applicantId: userCtx.activeApplicantId,
+        staffId: userCtx.activeStaffId,
+        grade: rate,
+        comment: comment,
+      },
+      userCtx.accessToken
+    );
+    if (res.ok) {
+      getScore();
+      nextPage();
+      console.log("addScore = " + JSON.stringify(res.data));
+    } else {
+      alert(JSON.stringify(res.data));
+      console.log(res.data);
+    }
+  };
 
-    const createManagerRecord = async () => {
-        console.log(userCtx.activeStaffId, userCtx.activeApplicantId);
-        try {
-            const res = await fetchData(
-                "/api/managers/",
-                "POST",
-                {
-                    staffId: userCtx.activeStaffId,
-                    applicantId: userCtx.activeApplicantId,
-                },
-                userCtx.accessToken
-            );
+  const createManagerRecord = async () => {
+    console.log(userCtx.activeStaffId, userCtx.activeApplicantId);
+    try {
+      const res = await fetchData(
+        "/api/managers/",
+        "POST",
+        {
+          staffId: userCtx.activeStaffId,
+          applicantId: userCtx.activeApplicantId,
+        },
+        userCtx.accessToken
+      );
 
-            if (res.ok) {
-                console.log(JSON.stringify(res.data));
-                // getFinalScore()
-            } else {
-                alert(JSON.stringify(res.data));
-                console.log(res.data);
-            }
-        } catch (error) {
-            console.error("Error creating manager:", error);
-        }
-    };
+      if (res.ok) {
+        console.log(JSON.stringify(res.data));
+        // getFinalScore()
+      } else {
+        alert(JSON.stringify(res.data));
+        console.log(res.data);
+      }
+    } catch (error) {
+      console.error("Error creating manager:", error);
+    }
+  };
 
-    const createGeneralManagerRecord = async () => {
-        console.log("inside CreteGeneralManager front end");
-        try {
-            const res = await fetchData(
-                "/api/generalManagers/",
-                "POST",
-                {
-                    applicantId: userCtx.activeApplicantId,
-                    // staffId: userCtx.staffId,
-                },
-                userCtx.accessToken
-            );
+  const createGeneralManagerRecord = async () => {
+    console.log("inside CreteGeneralManager front end");
+    try {
+      const res = await fetchData(
+        "/api/generalManagers/",
+        "POST",
+        {
+          applicantId: userCtx.activeApplicantId,
+          // staffId: userCtx.staffId,
+        },
+        userCtx.accessToken
+      );
 
-            if (res.ok) {
-                console.log("received resposne from adding GM Record")
-                console.log(JSON.stringify(res.data));
-            } else {
-                alert(JSON.stringify(res.data));
-                console.log(res.data);
-            }
-        } catch (error) {
-            console.error("Error creating general manager: ", error);
-        }
-    };
+      if (res.ok) {
+        console.log("received resposne from adding GM Record");
+        console.log(JSON.stringify(res.data));
+      } else {
+        alert(JSON.stringify(res.data));
+        console.log(res.data);
+      }
+    } catch (error) {
+      console.error("Error creating general manager: ", error);
+    }
+  };
 
   useEffect(() => {
     getScore();
@@ -168,56 +168,53 @@ const Score = ({ totalPages }) => {
     }
   }, [userCtx.activePageContext]);
 
-    const handleSubmitAllScores = () => {
-        setFinalScoreSubmitted(true);
-        createManagerRecord();
-        createGeneralManagerRecord();
-    };
+  const handleSubmitAllScores = () => {
+    setFinalScoreSubmitted(true);
+    createManagerRecord();
+    createGeneralManagerRecord();
+  };
 
-    return (
-        <div className={styles.score}>
-            {userCtx.role === "general manager" ? (
-                <GmScore />
-            ) : finalScoreSubmitted ? (
-                <FinalScore />
-            ) : (
-                <div>
-                    <Container>
-                        <div className="">
-                            <div className={styles.scoregrade}>
-                                What is your grade for this trade?
-                            </div>
-                            {[...Array(5)].map((item, index) => {
-                                const givenRating = index + 1;
-                                return (
-                                    <label key={index}>
-                                        <Radio
-                                            type="radio"
-                                            value={givenRating}
-                                            onClick={() => {
-                                                setRate(givenRating);
-                                            }}
-                                        />
-                                        <Rating>
-                                            <FaStar
-                                                color={
-                                                    givenRating <= rate
-                                                        ? "#FFD700"
-                                                        : "rgb(192,192,192)"
-                                                }
-                                            />
-                                        </Rating>
-                                    </label>
-                                );
-                            })}
-                        </div>
-                    </Container>
+  return (
+    <div className={styles.score}>
+      {userCtx.role === "general manager" ? (
+        <GmScore />
+      ) : finalScoreSubmitted ? (
+        <FinalScore />
+      ) : (
+        <div>
+          <Container>
+            <div className="">
+              <div className={styles.scoregrade}>
+                What is your grade for this trade?
+              </div>
+              {[...Array(5)].map((item, index) => {
+                const givenRating = index + 1;
+                return (
+                  <label key={index}>
+                    <Radio
+                      type="radio"
+                      value={givenRating}
+                      onClick={() => {
+                        setRate(givenRating);
+                      }}
+                    />
+                    <Rating>
+                      <FaStar
+                        color={
+                          givenRating <= rate ? "#FFD700" : "rgb(192,192,192)"
+                        }
+                      />
+                    </Rating>
+                  </label>
+                );
+              })}
+            </div>
+          </Container>
 
-          <div className={styles.commentbox}>
+          <div className={styles.box}>
             <div className="">Your comment:</div>
-            <input
+            <textarea
               type="text"
-              
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               className={styles.box}
