@@ -3,7 +3,6 @@ import Role from "./components/Role";
 import Candidate from "./components/Candidate";
 import ChartDisplay from "./components/ChartDisplay";
 import ChartFunctionsContext from "./context/ChartFunctionsContext";
-import Score from "./components/Score";
 
 const ChartScore = () => {
     const [page, setPage] = useState(-1);
@@ -28,7 +27,6 @@ const ChartScore = () => {
                 <div className="header">
                     <Role /> <Candidate />
                 </div>
-                {/* <Score /> */}
                 <ChartDisplay />
             </ChartFunctionsContext.Provider>
         </div>
