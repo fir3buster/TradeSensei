@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import CandleStick2 from "./CandleStick2";
 import useFetch from "../hooks/useFetch";
 import UserContext from "../context/user";
@@ -30,16 +30,14 @@ const ChartDisplay = () => {
       let temp = [];
       for (let index = 0; index < res.data.length; index++) {
         if (temp.includes(res.data[index]["applicantTrade"]["applicantId"])) {
-          // console.log("have already");
         } else {
           temp.push(res.data[index]["applicantTrade"]["applicantId"]);
         }
       }
-
       userCtx.setApplicantIds(temp);
 
       userCtx.setActiveApplicantId(
-        res.data[0]["applicantTrade"]["applicantId"]// take the first trade record
+        res.data[0]["applicantTrade"]["applicantId"]
       );
 
       let activeData = [];
@@ -54,10 +52,9 @@ const ChartDisplay = () => {
 
       setTradeData(activeData);
       setPage(1);
-      userCtx.setActivePageContext(1);
+      userCtx.setActivePageContext(1); // real world number
     } else {
       alert(JSON.stringify(res.data));
-      console.log(res.data);
     }
   };
 
@@ -76,20 +73,19 @@ const ChartDisplay = () => {
   };
 
   useEffect(() => {
-    console.log("chartdisplay useeffect");
     getTradeData();
   }, []);
 
   return (
     <div className="">
       {isLoading ? (
-        <ChartSkeleton /> // Display the placeholder while loading
+        <ChartSkeleton />
       ) : (
         <div className={styles.chartwrapper}>
           <div className={styles.chart}>
             <CandleStick2
               activePage={page}
-              tradeData={tradeData[page-1]}
+              tradeData={tradeData[page - 1]}
               changePage={userCtx.activeApplicantId}
             ></CandleStick2>
           </div>

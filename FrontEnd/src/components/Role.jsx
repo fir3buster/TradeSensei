@@ -1,8 +1,8 @@
-import React, { useContext, useState,  } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./Chart.module.css";
 import UserContext from "../context/user";
 
-const Role = () => {
+const Role = (props) => {
   const userCtx = useContext(UserContext);
   const [isUserDropDown, setIsUserDropDown] = useState(false);
 
@@ -11,7 +11,6 @@ const Role = () => {
   };
 
   const signOut = () => {
-    console.log("USER SIGN OUT!");
     userCtx.setAccessToken("");
     // logic to reset any states to default if necessary
     window.location.reload();
@@ -20,8 +19,6 @@ const Role = () => {
   return (
     <>
       <div className={styles.header}>
-        {/* Display the account holder's role */}
-        {/* <div className={styles.user}>{role}</div> */}
         <div className={styles.userRole}>
           <button
             onClick={toggleUserDropDown}

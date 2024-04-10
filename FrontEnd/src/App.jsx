@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState } from "react";
 import ChartScore from "./ChartScore";
 import UserContext from "./context/user";
 import Login from "./components/Login";
