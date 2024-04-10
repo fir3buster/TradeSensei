@@ -28,8 +28,8 @@ const ChartScore = () => {
                 <div className="header">
                     <Role /> <Candidate />
                 </div>
-                <Score />
-                {/* <ChartDisplay /> */}
+                {/* <Score /> */}
+                <ChartDisplay />
             </ChartFunctionsContext.Provider>
         </div>
     );
