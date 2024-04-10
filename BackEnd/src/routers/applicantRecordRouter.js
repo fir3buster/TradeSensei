@@ -19,7 +19,6 @@ const {
     addNewGeneralManagerRecord,
     updateGeneralManagerRecord,
     deleteGeneralManagerRecord,
-    seedGeneralManagerRecords,
 } = require("../controllers/applicantRecordController");
 
 const { authManager, authGeneralManager } = require("../middleware/auth");
@@ -32,7 +31,7 @@ router.get("/applicants/:applicantId", getApplicantRecordsByApplicantId);
 router.post("/applicants", addNewApplicantRecord);
 router.patch("/applicants/:id", updateApplicantRecord);
 // router.patch("/applicants/manager/:id", updateApplicantManagerRecord);
-router.patch("/applicants/managers/:pageNumber", updateApplicantManagerRecord)
+router.patch("/applicants/managers/:pageNumber", updateApplicantManagerRecord);
 router.delete("/applicants/:id", deleteApplicantRecord);
 
 router.get("/seedManager", seedManager);
@@ -43,14 +42,27 @@ router.patch("/managers/:id", updateManagerFinalRecord);
 router.delete("/managers/:id", deleteManagerFinalRecord);
 
 router.get("/seedGeneralManager", seedGeneralManager);
-router.get("/generalManagers", getAllGeneralManagersRecords);
+router.get(
+    "/generalManagers",
+    authGeneralManager,
+    getAllGeneralManagersRecords
+);
 router.get(
     "/generalManagers/:applicantId",
+    authGeneralManager,
     getGeneralManagersRecordsByApplicantId
 );
 router.post("/generalManagers", addNewGeneralManagerRecord);
-router.patch("/generalManagers/:id", updateGeneralManagerRecord);
-router.delete("/generalManagers/:id", deleteGeneralManagerRecord);
+router.patch(
+    "/generalManagers/:id",
+    authGeneralManager,
+    updateGeneralManagerRecord
+);
+router.delete(
+    "/generalManagers/:id",
+    authGeneralManager,
+    deleteGeneralManagerRecord
+);
 
 // router.get("/seedApplicant", authManager, seedApplicant);
 // router.get("/applicants", authManager, getAllApplicantsRecords);

@@ -14,7 +14,7 @@ const Registration = (props) => {
         if (res.ok) {
             setRoles(res.data);
         } else {
-            console.log(res.data);
+            alert(JSON.stringify(res.data));
         }
     };
 
@@ -31,9 +31,9 @@ const Registration = (props) => {
             setPassword("");
             setRole("");
             alert("successfully Registered!");
-            props.setShowLogin(true)
+            props.setShowLogin(true);
         } else {
-            console.log(res.data);
+            alert(JSON.stringify(res.data));
         }
     };
 

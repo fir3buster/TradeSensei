@@ -57,7 +57,8 @@ const GmScore = () => {
     const UpdateGeneralManagerRecord = async (recommend) => {
         try {
             const res = await fetchData(
-                "/api/managers/" + gmId,
+                // "/api/generalManagers/" + gmId,
+                "/api/generalManagers/" + "66163bc33b9da3bbc75342ce",
                 "PATCH",
                 {
                     isRecommended: recommend
@@ -65,7 +66,7 @@ const GmScore = () => {
                 userCtx.accessToken
             );
             if (res.ok) {
-                getScore();
+                getGeneralManagersRecordsByApplicantId()
             } else {
                 alert(JSON.stringify(res.data));
                 console.log(res.data);
