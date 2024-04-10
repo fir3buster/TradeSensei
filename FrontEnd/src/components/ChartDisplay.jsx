@@ -4,7 +4,6 @@ import useFetch from "../hooks/useFetch";
 import UserContext from "../context/user";
 import styles from "./Chart.module.css";
 import Score from "./Score";
-import FinalScore from "./FinalScore";
 import ChartSkeleton from "./ChartSkeleton";
 
 const ChartDisplay = () => {
@@ -12,7 +11,6 @@ const ChartDisplay = () => {
 
   const [tradeData, setTradeData] = useState([]);
   const [page, setPage] = useState(-1);
-  const [finalScoreSubmitted, setFinalScoreSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = useFetch();
@@ -41,7 +39,7 @@ const ChartDisplay = () => {
       userCtx.setApplicantIds(temp);
 
       userCtx.setActiveApplicantId(
-        res.data[0]["applicantTrade"]["applicantId"]
+        res.data[0]["applicantTrade"]["applicantId"]// take the first trade record
       );
 
       let activeData = [];
@@ -56,7 +54,7 @@ const ChartDisplay = () => {
 
       setTradeData(activeData);
       setPage(1);
-      userCtx.setActivePageContext(1); // real world number
+      userCtx.setActivePageContext(1);
     } else {
       alert(JSON.stringify(res.data));
       console.log(res.data);
@@ -67,8 +65,6 @@ const ChartDisplay = () => {
     if (page < tradeData.length) {
       setPage(page + 1);
       userCtx.setActivePageContext(page + 1);
-      // get function to post api into db (grade & comments )
-      // update frunction to post api into db (grade & comments )      
     }
   };
 
@@ -76,8 +72,6 @@ const ChartDisplay = () => {
     if (page > 0) {
       setPage(page - 1);
       userCtx.setActivePageContext(page - 1);
-      // get function to post api into db (grade & comments )
-      // update frunction to post api into db (grade & comments )
     }
   };
 
@@ -120,8 +114,6 @@ const ChartDisplay = () => {
       )}
       <div>
         <Score totalPages={tradeData.length}></Score>
-        {/* {finalScoreSubmitted && <FinalScore />} */}
-        {/* <FinalScore></FinalScore> */}
       </div>
     </div>
   );
