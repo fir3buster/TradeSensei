@@ -28,51 +28,33 @@ const ChartDisplay = () => {
 
     if (res.ok) {
       setIsLoading(false);
-      // console.log("getTradeData data ok");
-
-      // console.log(
-      //   `res.data[0]["applicantTrade"]["applicantId"] = ${JSON.stringify(
-      //     res.data[0]["applicantTrade"]["applicantId"]
-      //   )}`
-      // );
 
       let temp = [];
       for (let index = 0; index < res.data.length; index++) {
         if (temp.includes(res.data[index]["applicantTrade"]["applicantId"])) {
           // console.log("have already");
         } else {
-          // console.log(
-          //   "hellokitty: " + res.data[index]["applicantTrade"]["applicantId"]
-          // );
           temp.push(res.data[index]["applicantTrade"]["applicantId"]);
         }
       }
 
-      // console.log("temp array = " + JSON.stringify(temp));
       userCtx.setApplicantIds(temp);
 
       userCtx.setActiveApplicantId(
         res.data[0]["applicantTrade"]["applicantId"]
       );
 
-      // console.log("userCtx.activeApplicantId = " + userCtx.activeApplicantId);
-      // console.log("res.data" + res.data);
       let activeData = [];
       for (const datum in res.data) {
         if (
           res.data[0]["applicantTrade"]["applicantId"] ===
           res.data[datum]["applicantTrade"]["applicantId"]
         ) {
-          // console.log(
-          //   "hello dino" + res.data[datum]["applicantTrade"]["applicantId"]
-          // );
           activeData.push(res.data[datum]);
         }
       }
-      // console.log("activeData" + JSON.stringify(activeData));
 
       setTradeData(activeData);
-      // setTradeData(res.data);
       setPage(1);
       userCtx.setActivePageContext(1); // real world number
     } else {
