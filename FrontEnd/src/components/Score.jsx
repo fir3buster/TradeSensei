@@ -5,6 +5,7 @@ import styles from "./Chart.module.css";
 import { FaStar } from "react-icons/fa";
 import { Container, Radio, Rating } from "./ScoreStyles";
 import FinalScore from "./FinalScore";
+import GmScore from "./GmScore";
 import ChartFunctionsContext from "../context/ChartFunctionsContext";
 
 const Score = ({ totalPages }) => {
@@ -51,10 +52,60 @@ const Score = ({ totalPages }) => {
         if (res.ok) {
             getScore();
             nextPage();
-            console.log(res.data)
+            console.log(res.data);
         } else {
             alert(JSON.stringify(res.data));
             console.log(res.data);
+        }
+    };
+
+    const createManagerRecord = async () => {
+        console.log(userCtx.activeStaffId, userCtx.activeApplicantId);
+        try {
+            const res = await fetchData(
+                "/api/managers/",
+                "POST",
+                {
+                    staffId: userCtx.activeStaffId,
+                    applicantId: userCtx.activeApplicantId,
+                },
+                userCtx.accessToken
+            );
+
+            if (res.ok) {
+                console.log(JSON.stringify(res.data));
+                // getFinalScore()
+            } else {
+                alert(JSON.stringify(res.data));
+                console.log(res.data);
+            }
+        } catch (error) {
+            console.error("Error creating manager:", error);
+        }
+    };
+
+    const createGeneralManagerRecord = async () => {
+        console.log("inside CreteGeneralManager front end");
+        try {
+            const res = await fetchData(
+                "/api/generalManagers/",
+                "POST",
+                {
+                    applicantId: userCtx.activeApplicantId,
+                    // staffId: userCtx.staffId,
+                },
+                userCtx.accessToken
+            );
+
+            if (res.ok) {
+                console.log("received resposne from adding GM Record")
+                console.log(JSON.stringify(res.data));
+            } else {
+                alert(JSON.stringify(res.data));
+                console.log(res.data);
+            }
+        } catch (error) {
+            console.error("Error creating general manager: ", error);
         }
     };
 
@@ -104,11 +155,15 @@ const Score = ({ totalPages }) => {
 
     const handleSubmitAllScores = () => {
         setFinalScoreSubmitted(true);
+        createManagerRecord();
+        createGeneralManagerRecord();
     };
 
     return (
         <div className={styles.score}>
-            {finalScoreSubmitted ? (
+            {userCtx.role === "general manager" ? (
+                <GmScore />
+            ) : finalScoreSubmitted ? (
                 <FinalScore />
             ) : (
                 <div>

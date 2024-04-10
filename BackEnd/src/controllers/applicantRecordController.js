@@ -880,20 +880,21 @@ const updateApplicantManagerRecord = async (req, res) => {
         };
 
         // check if manager's record is already in
-        const existingManagerRecord = await ApplicantRecordModel.findOneAndUpdate(
-            {
-                pageNumber: req.params.pageNumber,
-                applicantId: req.body.applicantId,
-                "managers.staffId": req.body.staffId,
-            },
-            {
-                $set: {
-                    // "managers.staffId": req.body.staffId,
-                    "managers.$.grade": req.body.grade,
-                    "managers.$.comment": req.body.comment,
+        const existingManagerRecord =
+            await ApplicantRecordModel.findOneAndUpdate(
+                {
+                    pageNumber: req.params.pageNumber,
+                    applicantId: req.body.applicantId,
+                    "managers.staffId": req.body.staffId,
                 },
-            }
-        );
+                {
+                    $set: {
+                        // "managers.staffId": req.body.staffId,
+                        "managers.$.grade": req.body.grade,
+                        "managers.$.comment": req.body.comment,
+                    },
+                }
+            );
 
         if (existingManagerRecord) {
             return res.json({ status: "ok", msg: "manager grade updated" });
@@ -1073,54 +1074,55 @@ const getManagersFinalRecordsByApplicantId = async (req, res) => {
 };
 
 // adding record
+
 const addNewManagersRecord = async (req, res) => {
+    console.log("in add new managers record");
     try {
-        const isExist = await GeneralManagerRecordModel.findOne({
-            _id: req.body.generalManagerRecord,
-        });
-        if (!isExist) {
-            return res
-                .status(400)
-                .json({ status: "error", msg: "GM record does not exist" });
-        }
-
-        const managerRecord = await ManagerFinalRecordModel.find({
-            applicantId: req.body.applicantId,
-            staffId: req.body.staffId,
-        });
-
-        console.log(managerRecord);
-
-        if (managerRecord.length > 0) {
-            return res.json({
-                status: "error",
-                msg: "applicant manager records already exist!",
-            });
-        }
-
+        console.log("in add new managers record");
         const applicantManagerRecord = await ApplicantRecordModel.find({
             applicantId: req.body.applicantId,
-            staffId: req.body.staffId,
+            "managers.staffId": req.body.staffId,
         });
 
-        const gradeSum = 0;
+        // console.log("test: " + applicantManagerRecord);
+        // console.log(
+        //     "checking for applicant manager record of id and staffid: " +
+        //         applicantManagerRecord
+        // );
+
+        let gradeSum = 0;
         if (applicantManagerRecord.length > 0) {
+            console.log("in side if appmanagerrecord condition");
             gradeSum = calculateGradeSumByManager(
                 applicantManagerRecord,
                 req.body.staffId
             );
         }
 
-        const newRecord = new ManagerFinalRecordModel({
-            applicantId: req.body.applicantId,
-            staffId: req.body.staffId,
-            finalGrade: gradeSum,
-            isRecommended: req.body.isRecommended,
-            generalManagerRecord: req.body.generalManagerRecord,
-        });
+        console.log("outside function:" + gradeSum);
 
-        await ManagerFinalRecordModel.create(newRecord);
-        res.json({ status: "ok", msg: "manager final record created" });
+        const existingRecord = await ManagerFinalRecordModel.findOneAndUpdate(
+            {
+                applicantId: req.body.applicantId,
+                staffId: req.body.staffId,
+            },
+            {
+                finalGrade: gradeSum,
+            }
+        );
+        if (existingRecord) {
+            return res.json({ status: "ok", msg: "grade is updated" });
+        } else {
+            const newRecord = new ManagerFinalRecordModel({
+                applicantId: req.body.applicantId,
+                staffId: req.body.staffId,
+                finalGrade: gradeSum,
+                isRecommended: req.body.isRecommended,
+            });
+
+            await ManagerFinalRecordModel.create(newRecord);
+            res.json({ status: "ok", msg: "manager final record created" });
+        }
     } catch (error) {
         console.error(error.message);
         res.status(400).json({
@@ -1134,97 +1136,11 @@ const addNewManagersRecord = async (req, res) => {
 const updateManagerFinalRecord = async (req, res) => {
     try {
         const updateManagerRecord = {};
-        const existingRecord = await ManagerFinalRecordModel.findById(
-            req.params.id
-        );
 
-        if (existingRecord.length === 0) {
-            return res.json({
-                status: "error",
-                msg: "manager final record not found!",
-            });
+        if ("isRecommended" in req.body) {
+            updateManagerRecord.isRecommended = req.body.isRecommended;
         }
-
-        if ("applicantId" in req.body && "staffId" in req.body) {
-            const applicantManagerRecord = await ApplicantRecordModel.find({
-                applicantId: req.body.applicantId,
-                "managers.staffId": req.body.staffId,
-            });
-
-            console.log(`1. : ${applicantManagerRecord}`);
-            if (applicantManagerRecord.length === 0) {
-                return res.json({
-                    status: "error",
-                    msg: "no applicant manager records found",
-                });
-            }
-
-            let gradeSum = 0;
-            if (applicantManagerRecord.length > 0) {
-                gradeSum = calculateGradeSumByManager(
-                    applicantManagerRecord,
-                    req.body.staffId
-                );
-            }
-
-            console.log("after calculation");
-            updateManagerRecord.applicantId = req.body.applicantId;
-            updateManagerRecord.staffId = req.body.staffId;
-            updateManagerRecord.finalGrade = gradeSum;
-            if ("isRecommended" in req.body) {
-                updateManagerRecord.isRecommended = req.body.isRecommended;
-            }
-        }
-
-        // if ("applicantId" in req.body && !("staffId" in req.body)) {
-        //     const applicantManagerRecord = await ManagerFinalRecordModel.find({
-        //         applicantId: req.body.applicantId,
-        //         staffId: existingRecord.staffId,
-        //     });
-
-        //     console.log(`2. : ${applicantManagerRecord}`)
-        //     if (applicantManagerRecord.length === 0) {
-        //         return res.json({
-        //             status: "error",
-        //             msg: "no applicant manager records found",
-        //         });
-        //     }
-
-        //     const gradeSum = calculateGradeSumByManager(
-        //         applicantManagerRecord,
-        //         existingRecord.staffId
-        //     );
-
-        //     updateManagerRecord.applicantId = req.body.applicantId;
-        //     updateManagerRecord.grade = gradeSum;
-        //     updateManagerRecord.isRecommended = req.body.isRecommended;
-        // }
-
-        // if (!("applicantId" in req.body) && "staffId" in req.body) {
-        //     const applicantManagerRecord = await ManagerFinalRecordModel.find({
-        //         applicantId: existingRecord.applicantId,
-        //         staffId: req.body.staffId,
-        //     });
-
-        //     console.log(`3. : ${applicantManagerRecord}`)
-        //     if (applicantManagerRecord.length === 0) {
-        //         return res.json({
-        //             status: "error",
-        //             msg: "no applicant manager records found",
-        //         });
-        //     }
-
-        //     const gradeSum = calculateGradeSumByManager(
-        //         applicantManagerRecord,
-        //         req.body.staffId
-        //     );
-
-        //     updateManagerRecord.staffId = req.body.staffId;
-        //     updateManagerRecord.grade = gradeSum;
-        //     updateManagerRecord.isRecommended = req.body.isRecommended;
-        // }
-
-        console.log(JSON.stringify(updateManagerRecord));
+        console.log("inside Update: " + req.body.isRecommended);
         await ManagerFinalRecordModel.findByIdAndUpdate(
             req.params.id,
             updateManagerRecord
@@ -1263,12 +1179,14 @@ const seedGeneralManager = async (req, res) => {
         await GeneralManagerRecordModel.create([
             {
                 _id: "660f9baa2b01b98bd7b6f56f",
+                staffId: "GM2343",
                 applicantId: "A1000",
                 isRecommended: false,
                 managerFinalRecords: [],
             },
             {
                 _id: "660f9baa2b01b98bd7b6f34d",
+                staffId: "GM2547",
                 applicantId: "A2000",
                 isRecommended: false,
                 managerFinalRecords: [],
@@ -1295,21 +1213,37 @@ const getAllGeneralManagersRecords = async (req, res) => {
     }
 };
 
+// const getGeneralManagersRecordsByApplicantId = async (req, res) => {
+//     try {
+//         const allGeneralManagerRecordsByApplicantId =
+//             await GeneralManagerRecordModel.find({
+//                 applicantId: req.params.applicantId,
+//             });
+//         console.log(allGeneralManagerRecordsByApplicantId[0]._id);
+//         const ManagersFinalRecordsByApplicantId =
+//             await ManagerFinalRecordModel.find({
+//                 generalManagerRecord:
+//                     allGeneralManagerRecordsByApplicantId[0]._id,
+//             });
+//         res.json({
+//             allGeneralManagerRecordsByApplicantId,
+//             ManagersFinalRecordsByApplicantId,
+//         });
+//     } catch (error) {
+//         console.error(error.message);
+//         res.status(400).json({ status: "error", msg: " not record found" });
+//     }
+// };
+
 const getGeneralManagersRecordsByApplicantId = async (req, res) => {
     try {
         const allGeneralManagerRecordsByApplicantId =
             await GeneralManagerRecordModel.find({
                 applicantId: req.params.applicantId,
             });
-        console.log(allGeneralManagerRecordsByApplicantId[0]._id);
-        const ManagersFinalRecordsByApplicantId =
-            await ManagerFinalRecordModel.find({
-                generalManagerRecord:
-                    allGeneralManagerRecordsByApplicantId[0]._id,
-            });
+
         res.json({
             allGeneralManagerRecordsByApplicantId,
-            ManagersFinalRecordsByApplicantId,
         });
     } catch (error) {
         console.error(error.message);
@@ -1318,26 +1252,28 @@ const getGeneralManagersRecordsByApplicantId = async (req, res) => {
 };
 
 const addNewGeneralManagerRecord = async (req, res) => {
+    console.log("inside newgeneral managaer record: final boss");
+    console.log(req.body.applicantId)
     try {
         const generalManagerRecord = await GeneralManagerRecordModel.find({
             applicantId: req.body.applicantId,
+            // staffId: req.body.staffId,
         });
-        console.log(generalManagerRecord);
 
+        console.log("checkfor general manager:" + generalManagerRecord);
+        
         if (generalManagerRecord.length > 0) {
-            return res.json({
-                status: "error",
-                msg: "applicant general manager record already exist!",
-            });
+            return `record of ${req.body.applicantId} already exist in general manager`;
         }
 
+        console.log("to add new GM record into database")
         const newGeneralManagerRecord = new GeneralManagerRecordModel({
             applicantId: req.body.applicantId,
-            isRecommended: req.body.isRecommended,
+            // staffId: req.body.staffId,
         });
 
         await GeneralManagerRecordModel.create(newGeneralManagerRecord);
-        res.json({ status: "ok", msg: "record created" });
+        res.json({ status: "ok", msg: "general manager record is created" });
     } catch (error) {
         console.error(error.message);
         res.status(400).json({ status: "error", msg: "record not created" });

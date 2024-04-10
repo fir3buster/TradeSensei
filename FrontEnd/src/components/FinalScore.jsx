@@ -4,28 +4,11 @@ import UserContext from "../context/user";
 import styles from "./Chart.module.css";
 
 const FinalScore = () => {
+    const [finalId, setFinalId] = useState("");
     const [finalScore, setFinalScore] = useState([]);
     const [recommend, setRecommend] = useState(null);
     const userCtx = useContext(UserContext);
     const fetchData = useFetch();
-
-    const createManager = async () => {
-
-        console.log(userCtx.activeStaffId, userCtx.activeApplicantId)
-        try {
-            const res = await fetchData(
-                "/api/managers/",
-                "POST",
-                {
-                    staffId: userCtx.activeStaffId,
-                    applicantId: userCtx.activeApplicantId,
-                },
-                userCtx.accessToken
-            );
-        } catch (error) {
-            console.error("Error adding score:", error);
-        }
-    };
 
     const getFinalScore = async () => {
         try {
@@ -37,7 +20,12 @@ const FinalScore = () => {
             );
             if (res.ok) {
                 console.log(JSON.stringify(res.data));
-                // setFinalScore(res.data);
+                for (const data of res.data) {
+                    if (data.staffId === userCtx.activeStaffId) {
+                        setFinalScore(data.finalGrade);
+                        setFinalId(data._id);
+                    }
+                }
             } else {
                 alert(JSON.stringify(res.data));
                 console.log(res.data);
@@ -47,19 +35,18 @@ const FinalScore = () => {
         }
     };
 
-    const addFinalScore = async () => {
+    const updateFinalRecord = async (recommend) => {
         try {
             const res = await fetchData(
-                "/api/managers/" + _id,
+                "/api/managers/" + finalId,
                 "PATCH",
                 {
-                    staffId: userCtx.activeStaffId,
-                    isRecommend: recommend ? 1 : 0,
+                    isRecommended: recommend,
                 },
                 userCtx.accessToken
             );
             if (res.ok) {
-                getScore();
+                getFinalScore();
             } else {
                 alert(JSON.stringify(res.data));
                 console.log(res.data);
@@ -69,35 +56,40 @@ const FinalScore = () => {
         }
     };
 
+    const handleRecommend = (recommend) => {
+        setRecommend(recommend);
+        console.log("check recommend:" + recommend);
+        updateFinalRecord(recommend);
+    };
+
     useEffect(() => {
-        createManager();
         getFinalScore();
     }, []);
 
     return (
         <div className={styles.score}>
             <div>This candidate's final score:{finalScore}</div>
-            <div>
-                <button
-                    className={styles.nextbutton}
-                    onClick={() => {
-                        setRecommend(true);
-                        addFinalScore(true);
-                    }}
-                >
-                    Recommend
-                </button>
+            {recommend === null ? (
+                <div>
+                    <button
+                        className={styles.nextbutton}
+                        onClick={() => handleRecommend(true)}
+                    >
+                        Recommend
+                    </button>
 
-                <button
-                    className={styles.nextbutton}
-                    onClick={() => {
-                        setRecommend(false);
-                        addFinalScore(false);
-                    }}
-                >
-                    Not recommended
-                </button>
-            </div>
+                    <button
+                        className={styles.nextbutton}
+                        onClick={() => handleRecommend(false)}
+                    >
+                        Not recommended
+                    </button>
+                </div>
+            ) : recommend === true ? (
+                <div>Recommended!</div>
+            ) : (
+                <div>Not Recommended!</div>
+            )}
         </div>
     );
 };
