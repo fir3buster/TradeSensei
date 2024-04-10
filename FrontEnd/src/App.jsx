@@ -65,7 +65,6 @@ function App() {
           setActiveStaffId,
         }}
       >
-        {/* <ChartScore></ChartScore> */}
         {accessToken.length > 0 && <ChartScore></ChartScore>}
         {accessToken.length === 0 && showLogin && (
           <Login setShowLogin={setShowLogin}></Login>
