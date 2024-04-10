@@ -52,7 +52,7 @@ const Score = ({ totalPages }) => {
         if (res.ok) {
             getScore();
             nextPage();
-            console.log(res.data)
+            console.log("addScore = " + JSON.stringify(res.data))
         } else {
             alert(JSON.stringify(res.data));
             console.log(res.data);
@@ -91,12 +91,15 @@ const Score = ({ totalPages }) => {
             console.log("userCtx.activeStaffId=" + userCtx.activeStaffId);
             if (score[recordNumber]["managers"]) {
                 console.log("into managers");
-                for (const manager in score[recordNumber]["managers"])
-                if (score[recordNumber]["managers"][manager]["staffId"] === userCtx.activeStaffId) {
-                    console.log("grade=" +score[recordNumber]["managers"][manager]["grade"]);
-                    console.log("comment=" +score[recordNumber]["managers"][manager]["comment"]);
-                    setComment(score[recordNumber]["managers"][manager]["comment"])
-                    setRate(score[recordNumber]["managers"][manager]["grade"])
+                setComment("")
+                setRate(0)
+                for (const manager in score[recordNumber]["managers"]){
+                    if (score[recordNumber]["managers"][manager]["staffId"] === userCtx.activeStaffId) {
+                        console.log("grade=" +score[recordNumber]["managers"][manager]["grade"]);
+                        console.log("comment=" +score[recordNumber]["managers"][manager]["comment"]);
+                        setComment(score[recordNumber]["managers"][manager]["comment"])
+                        setRate(score[recordNumber]["managers"][manager]["grade"])
+                    }
                 }
             }
         }
@@ -172,8 +175,6 @@ const Score = ({ totalPages }) => {
                                 ? "Submit All Scores"
                                 : "Grade"}
                         </button>
-                        {userCtx.activePageContext}<br/>   
-                        {totalPages}
                     </div>
                 </div>
             )}
