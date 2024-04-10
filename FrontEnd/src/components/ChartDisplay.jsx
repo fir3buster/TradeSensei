@@ -66,11 +66,11 @@ const ChartDisplay = () => {
           activeData.push(res.data[datum]);
         }
       }
-      // console.log("activeData" + JSON.stringify(activeData));
+      console.log("activeData" + JSON.stringify(activeData));
 
       setTradeData(activeData);
       // setTradeData(res.data);
-      setPage(0);
+      setPage(1);
       userCtx.setActivePageContext(1); // real world number
     } else {
       alert(JSON.stringify(res.data));
@@ -79,25 +79,11 @@ const ChartDisplay = () => {
   };
 
   const nextPage = () => {
-    if (page < tradeData.length - 1) {
+    if (page < tradeData.length) {
       setPage(page + 1);
       userCtx.setActivePageContext(page + 1);
       // get function to post api into db (grade & comments )
-      // update frunction to post api into db (grade & comments )
-      const getScore = async () => {
-        const res = await fetchData(
-          "/api/applicants",
-          "GET",
-          undefined,
-          userCtx.accessToken
-        );
-        if (res.ok) {
-          setScore(res.data);
-        } else {
-          alert(JSON.stringify(res.data));
-          console.log(res.data);
-        }
-      };
+      // update frunction to post api into db (grade & comments )      
     }
   };
 
@@ -118,10 +104,11 @@ const ChartDisplay = () => {
   return (
     <div className="">
       <div className={styles.chartwrapper}>
+        {page} {tradeData.length}
         <div className={styles.chart}>
           <CandleStick2
             activePage={page}
-            tradeData={tradeData[page]}
+            tradeData={tradeData[page-1]}
             changePage={userCtx.activeApplicantId}
           ></CandleStick2>
         </div>
@@ -129,15 +116,15 @@ const ChartDisplay = () => {
           <button
             className={styles.buttonchart}
             onClick={prevPage}
-            disabled={page === 0}
+            disabled={page === 1}
           >
             Prev Chart
           </button>
-          <label>Page {page + 1}</label>
+          <label>Page {page}</label>
           <button
             className={styles.buttonchart}
             onClick={nextPage}
-            disabled={page === tradeData.length - 1}
+            disabled={page === 10}
           >
             Next Chart
           </button>
