@@ -8,71 +8,70 @@ import FinalScore from "./FinalScore";
 import ChartFunctionsContext from "../context/ChartFunctionsContext";
 
 const Score = ({ totalPages }) => {
-    const userCtx = useContext(UserContext);
-    const [rate, setRate] = useState(0);
-    const [score, setScore] = useState([]);
-    const [comment, setComment] = useState("");
-    const [finalScoreSubmitted, setFinalScoreSubmitted] = useState(false);
-    const { nextPage, prevPage, resetRateAndComment } = useContext(
-        ChartFunctionsContext
+  const userCtx = useContext(UserContext);
+  const [rate, setRate] = useState(0);
+  const [score, setScore] = useState([]);
+  const [comment, setComment] = useState("");
+  const [finalScoreSubmitted, setFinalScoreSubmitted] = useState(false);
+  const { nextPage, prevPage, resetRateAndComment } = useContext(
+    ChartFunctionsContext
+  );
+  const fetchData = useFetch();
+
+  const getScore = async () => {
+    const res = await fetchData(
+      "/api/applicants",
+      "GET",
+      undefined,
+      userCtx.accessToken
     );
-    const fetchData = useFetch();
+    if (res.ok) {
+      // console.log("getScore=" + JSON.stringify(res.data))
+      setScore(res.data);
+    } else {
+      alert(JSON.stringify(res.data));
+      console.log(res.data);
+    }
+  };
 
-    const getScore = async () => {
-        const res = await fetchData(
-            "/api/applicants",
-            "GET",
-            undefined,
-            userCtx.accessToken
-        );
-        if (res.ok) {
-            // console.log("getScore=" + JSON.stringify(res.data))
-            setScore(res.data);
-        } else {
-            alert(JSON.stringify(res.data));
-            console.log(res.data);
-        }
-    };
+  const addScore = async (pageNumber) => {
+    console.log(userCtx.activeApplicantId);
+    console.log(userCtx.activePageContext, pageNumber, rate, comment);
+    // console.log("patch data=" + rate + comment);
+    const res = await fetchData(
+      "/api/applicants/managers/" + pageNumber,
+      "PATCH",
+      {
+        applicantId: userCtx.activeApplicantId,
+        staffId: userCtx.activeStaffId,
+        grade: rate,
+        comment: comment,
+      },
+      userCtx.accessToken
+    );
+    if (res.ok) {
+      getScore();
+      nextPage();
+      console.log("addScore = " + JSON.stringify(res.data));
+    } else {
+      alert(JSON.stringify(res.data));
+      console.log(res.data);
+    }
+  };
 
-    const addScore = async (pageNumber) => {
-        console.log(userCtx.activeApplicantId);
-        console.log(userCtx.activePageContext, pageNumber, rate, comment);
-        // console.log("patch data=" + rate + comment);
-        const res = await fetchData(
-            "/api/applicants/managers/" + pageNumber,
-            "PATCH",
-            {
-                applicantId: userCtx.activeApplicantId,
-                staffId: userCtx.activeStaffId,
-                grade: rate,
-                comment: comment,
-            },
-            userCtx.accessToken
-        );
-        if (res.ok) {
-            getScore();
-            nextPage();
-            console.log("addScore = " + JSON.stringify(res.data))
-        } else {
-            alert(JSON.stringify(res.data));
-            console.log(res.data);
-        }
-    };
+  useEffect(() => {
+    getScore();
+  }, []);
 
-    useEffect(() => {
-        getScore();
-    }, []);
+  useEffect(() => {
+    resetRateAndComment();
+  }, []);
 
-    useEffect(() => {
-        resetRateAndComment();
-    }, []);
-
-    useEffect(() => {
-        console.log("triggered");
-        getScore();
-        console.log("userCtx.activePageContext=" + userCtx.activePageContext);
-
-        console.log("total record=" + score.length)
+  useEffect(() => {
+    console.log("triggered");
+    getScore();
+    console.log("userCtx.activePageContext=" + userCtx.activePageContext);
+    console.log("total record=" + score.length)
         let recordNumber=-1
         for (const record in score){
             if (
@@ -82,7 +81,6 @@ const Score = ({ totalPages }) => {
                 recordNumber=record
             }
         }
-
         if (score[recordNumber]) {
             console.log("score[recordNumber]=" + JSON.stringify(score[recordNumber]));
             console.log("managers=" + JSON.stringify(score[recordNumber]["managers"]));
@@ -102,84 +100,81 @@ const Score = ({ totalPages }) => {
                     }
                 }
             }
-        }
-    }, [userCtx.activePageContext]);
+        }, [userCtx.activePageContext]);
 
-    const handleSubmitAllScores = () => {
-        setFinalScoreSubmitted(true);
-    };
+    
 
-    return (
-        <div className={styles.score}>
-            {finalScoreSubmitted ? (
-                <FinalScore />
-            ) : (
-                <div>
-                    <Container>
-                        <div className="">
-                            <div className={styles.scoregrade}>
-                                What is your grade for this trade?
-                            </div>
-                            {[...Array(5)].map((item, index) => {
-                                const givenRating = index + 1;
-                                return (
-                                    <label key={index}>
-                                        <Radio
-                                            type="radio"
-                                            value={givenRating}
-                                            onClick={() => {
-                                                setRate(givenRating);
-                                            }}
-                                        />
-                                        <Rating>
-                                            <FaStar
-                                                color={
-                                                    givenRating <= rate
-                                                        ? "#FFD700"
-                                                        : "rgb(192,192,192)"
-                                                }
-                                            />
-                                        </Rating>
-                                    </label>
-                                );
-                            })}
-                        </div>
-                    </Container>
 
-                    <div className={styles.commentbox}>
-                        <div className="">Your comment:</div>
-                        <input
-                            type="text"
-                            value={comment}
-                            onChange={(e) => setComment(e.target.value)}
-                            className={styles.box}
-                        />
-                    </div>
+  const handleSubmitAllScores = () => {
+    setFinalScoreSubmitted(true);
+  };
 
-                    <div>
-                        <button
-                            onClick={() => {
-                                addScore(userCtx.activePageContext);
-                                // nextPage();
-                                setComment("");
-                                if (
-                                    userCtx.activePageContext ===
-                                    totalPages - 1
-                                ) {
-                                    handleSubmitAllScores();
-                                }
-                            }}
-                            className={styles.button}
-                        >
-                            {userCtx.activePageContext === totalPages
-                                ? "Submit All Scores"
-                                : "Grade"}
-                        </button>
-                    </div>
-                </div>
-            )}
+  return (
+    <div className={styles.score}>
+      {finalScoreSubmitted ? (
+        <FinalScore />
+      ) : (
+        <div>
+          <Container>
+            <div className="">
+              <div className={styles.scoregrade}>
+                What is your grade for this trade?
+              </div>
+              {[...Array(5)].map((item, index) => {
+                const givenRating = index + 1;
+                return (
+                  <label key={index}>
+                    <Radio
+                      type="radio"
+                      value={givenRating}
+                      onClick={() => {
+                        setRate(givenRating);
+                      }}
+                    />
+                    <Rating>
+                      <FaStar
+                        color={
+                          givenRating <= rate ? "#FFD700" : "rgb(192,192,192)"
+                        }
+                      />
+                    </Rating>
+                  </label>
+                );
+              })}
+            </div>
+          </Container>
+
+          <div className={styles.commentbox}>
+            <div className="">Your comment:</div>
+            <input
+              type="text"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              className={styles.box}
+            />
+          </div>
+
+          <div>
+            <button
+              onClick={() => {
+                addScore(userCtx.activePageContext);
+                // nextPage();
+                setComment("");
+                if (userCtx.activePageContext === totalPages - 1) {
+                  handleSubmitAllScores();
+                }
+              }}
+              className={styles.button}
+            >
+              {userCtx.activePageContext === totalPages
+                ? "Submit All Scores"
+                : "Grade"}
+            </button>
+          </div>
         </div>
-    );
+      )}
+    </div>
+  );
 };
 
 export default Score;
