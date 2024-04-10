@@ -1,41 +1,275 @@
 .chart {
-  /* background-color: white; */
-  width: 900px;
-  height: 600px;
-  margin: 20px 0px 0px 100px;
-}
-
-.carousel {
-  position: absolute;
-  bottom: 0px;
-  width: 1000px;
-  height: 100px;
-  background-color: grey;
-  margin: 30px;
+  position: relative;
 }
 
 .header {
-  margin: 30px 0px 20px 30px;
+  padding: 30px;
   font-size: 20px;
 }
 
-/* body {
-  margin: 0;
-  padding: 0;
-} */
-
-h3 {
-  font-size: 40px;
-  background-color: red;
-  display: flex;
-  justify-content: center;
-  border-radius: 5px;
-  padding: 250px 0;
-  margin: 0px auto;
-  font-family: sans-serif;
-  margin: 0 50px;
+.score {
+  position: fixed;
+  margin-top: 140px;
+  padding: 30px;
+  width: 400px;
+  top: 0;
+  right: 30px;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: black;
 }
 
-.slick-dots {
-  color: white; /* Change 'red' to your desired color */
+.candidate {
+  color: white;
+  padding: 20px;
+  position: fixed;
+  right: 30px;
+  top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.scoregrade {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.box {
+  height: 200px;
+  width: 100%;
+  border-radius: 12px;
+  margin: 30px 30px 100px 0px;
+  padding: 10px;
+  overflow-wrap: break-word;
+}
+
+.button {
+  width: 100%;
+  height: 40px;
+  border-radius: 30px;
+  border: none;
+  background-color: #01c187;
+  color: white;
+  cursor: pointer;
+  outline: inherit;
+  padding: 10px;
+}
+
+.chartbuttons {
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonchart {
+  width: 100px;
+  border-radius: 30px;
+  border: none;
+  background-color: #01c187;
+  color: white;
+  cursor: pointer;
+  outline: inherit;
+  margin: 20px;
+}
+
+.candidatebox {
+  border-radius: 6px;
+  background-color: black;
+  color: white;
+  border-color: white;
+  cursor: pointer;
+  border-top-right-radius: 1px;
+  outline: inherit;
+  font-weight: 600;
+  margin-left: 20px;
+  width: 120px;
+}
+
+.candidatedropdown {
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  background: black;
+  border-radius: 12px;
+  margin-left: 20px;
+  margin-top: 6px;
+  width: 120px;
+  font-size: 20px;
+}
+
+.scoringbox {
+  background-color: black;
+}
+
+.chartwrapper {
+  margin-top: 60px;
+  width: 80%;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.finalscore {
+  font-size: 100px;
+  margin: 10px 0px 30px 0px;
+}
+
+.recobutton {
+  width: 100%;
+  height: 40px;
+  border-radius: 30px;
+  background-color: #01c187;
+  color: white;
+  cursor: pointer;
+  border: none;
+  outline: inherit;
+  margin: 20px 0px 20px 0px;
+}
+
+.norecobutton {
+  width: 100%;
+  height: 40px;
+  border-radius: 30px;
+  border: none;
+  background-color: #ff5454;
+  color: white;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.userRole {
+  display: flex;
+}
+
+.role {
+  border-radius: 6px;
+  background-color: black;
+  color: white;
+  border-color: white;
+  cursor: pointer;
+  border-top-right-radius: 1px;
+  outline: inherit;
+  font-weight: 600;
+  margin-left: 20px;
+  width: 120px;
+}
+
+.active {
+  background-color: #333;
+  color: white;
+  border-radius: 4px;
+}
+
+.dropdownItem {
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  background: black;
+  border-radius: 12px;
+  margin-left: 20px;
+  margin-top: 6px;
+  width: 120px;
+  font-size: 20px;
+}
+
+.dropdownItem:hover {
+  background-color: #ff5454;
+  color: white;
+}
+
+.skeletonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.skeleton {
+  display: flex;
+  justify-content: center;
+  align-items: top;
+  padding-top: 300px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: black;
+  color: white;
+  font-size: 60px;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.5) 60%,
+    rgba(255, 255, 255, 0)
+  );
+  animation: shimmer 1.5s infinite;
+  transform: translateX(-100%);
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.finalreco {
+  font-size: 30px;
+  color: #01c187;
+}
+
+.finalnoreco {
+  font-size: 30px;
+  color: #ff5454;
+}
+
+.finalboard {
+  position: fixed;
+  width: 300px;
+  margin-top: 140px;
+  padding: 30px;
+  top: 0;
+  right: 30px;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: black;
+  width: 400px;
+}
+
+.gm {
+  padding: 10px;
+  border: 0.5px solid grey;
+  border-radius: 12px;
+  margin-top: 10px;
+  display: flex;
+}
+
+.staffgrade {
+  margin-right: 30px;
+  justify-content: space-between;
 }

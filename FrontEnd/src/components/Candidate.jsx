@@ -1,35 +1,30 @@
-import React, { useState, useEffect } from "react";
-import styles from "./Score.module.css";
+import React, { useContext } from "react";
+import styles from "./Chart.module.css";
+import UserContext from "../context/user";
 
 const Candidate = () => {
-  // const [candidateIDs, setCandidateIDs] = useState([]);
+  const userCtx = useContext(UserContext);
 
-  // const [selectedID, setSelectedID] = useState("");
-
-  // useEffect(() => {
-
-  //   fetchCandidateIDs()
-  //     .then((ids) => setCandidateIDs(ids))
-  //     .catch((error) => console.error("Error fetching candidate IDs:", error));
-  // }, []);
-
-  // const handleSelectChange = (event) => {
-  //   setSelectedID(event.target.value);
-  // };
+  const handleOnChange = (event) => {
+    userCtx.setActiveApplicantId(event.target.value);
+  };
 
   return (
     <div>
       <div className={styles.candidate}>
-        {/* Render dropdown */}
-        {/* <select value={selectedID} onChange={handleSelectChange}> */}
-        <select>
-          <option value="">Select Candidate ID</option>
-          {/* Map over candidateIDs to render options */}
-          {/* {candidateIDs.map((id) => (
-            <option key={id} value={id}>
-              {id}
-            </option>
-          ))} */}
+        <div>Select the Applicant's ID:</div>
+
+        <select onChange={handleOnChange} className={styles.candidatebox}>
+          {userCtx.applicantIds &&
+            userCtx.applicantIds.map((applicantId, idx) => (
+              <option
+                key={idx}
+                value={applicantId}
+                className={styles.candidatedropdown}
+              >
+                {applicantId}
+              </option>
+            ))}
         </select>
         <hr />
       </div>

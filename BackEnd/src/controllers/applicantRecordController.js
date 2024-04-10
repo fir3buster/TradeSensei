@@ -1,88 +1,7 @@
 const ApplicantRecordModel = require("../models/ApplicantRecordModel");
 const ManagerFinalRecordModel = require("../models/ManagerFinalRecordModel");
+const GeneralManagerRecordModel = require("../models/GeneralManagerRecordModel");
 
-// {
-//     applicantId: { type: Number, required: true, match: /[A][1-9]\d{3}/ },
-//     username: { type: String, required: true, minLength: 5, maxLenght: 15 },
-//     priceIn: { type: Number, required: true },
-//     timeIn: { type: Date, required: true },
-//     priceOut: { type: Number, required: true },
-//     timeOut: { type: Date, required: true },
-//     managerA: { type: [ManagerASchema] },
-//     managerB: { type: [ManagerBSchema] },
-//     managerC: { type: [ManagerCSchema] },
-//     created_at: { type: Date, default: Date.now },
-// }
-
-// {
-//     grade: { type: Number, required: true, min: 0, max: 5 },
-//     comment: { type: String, required: true, min: 0, max: 250 },
-//     profile: {
-//         type: mongoose.Schema.Types.ObjectId,
-//         ref: "LoginAuth",
-//         required: true,
-//     }
-// }
-
-//
-//     {
-//       applicantId: "A1000",
-//
-//     },
-//     {
-//       applicantId: "A1000",
-//       executedQty: 1.0,
-//       tradeType: "short",
-//       priceIn: "52183.14286",
-//       timeIn: "2024-02-15T14:47:27.131Z",
-//       priceOut: "52183.20000",
-//       timeOut: "2024-02-22T14:47:50.690Z",
-//     },
-//     {
-//       applicantId: "A1000",
-//       executedQty: 1.0,
-//       tradeType:"long",
-//       priceIn: "51452.00000",
-//       timeIn: "2024-02-24T03:08:00.448Z",
-//       priceOut: "61689.00000",
-//       timeOut: "2024-02-29T03:10:50.919Z",
-//     },
-//     {
-//       applicantId: "A1000",
-//       executedQty: 1.0,
-//       tradeType:"long",
-//       priceIn: "68270.00000",
-//       timeIn: "2024-03-04T04:52:27.270Z",
-//       priceOut: "61202.57497",
-//       timeOut: "2024-03-05T11:03:52.544Z",
-//     },
-//     {
-//       applicantId: "A1000",
-//       executedQty: 1.0,
-//       tradeType: "short",
-//       priceIn: "67783.10000",
-//       timeIn: "2024-03-08T11:04:59.819Z",
-//       priceOut: "72170.00000",
-//       timeOut: "2024-03-11T11:05:19.755Z",
-//     },
-//     {
-//       applicantId: "A1000",
-//       executedQty: 1.0,
-//       tradeType: "short",
-//       priceIn: "67295.60000",
-//       timeIn: "2024-03-19T11:09:53.263Z",
-//       priceOut: "64614.20000",
-//       timeOut: "2024-03-24T11:10:00.331Z",
-//     },
-//     {
-//       applicantId: "A1000",
-//       executedQty: 1.0,
-//       priceIn: "64614.60000",
-//       timeIn: "2024-03-24T11:10:11.055Z",
-//       priceOut: "69002.27788",
-//       timeOut: "2024-03-27T11:10:15.312Z",
-//     },
-//   ]
 
 const seedApplicant = async (req, res) => {
     try {
@@ -92,7 +11,7 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "660e0df3c050096882b8950b", // to check on object id
                 applicantId: "A1000",
-                applicantName: "Adam",
+                // applicantName: "Adam",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "27485.60000",
@@ -104,26 +23,22 @@ const seedApplicant = async (req, res) => {
                         staffId: "M20000",
                         grade: 4.5,
                         comment: "applicant priced out at the right time!",
-                        // profile: "loginAuth ObjectId", // get the object id from loginAuth
                     },
                     {
                         staffId: "M30000",
                         grade: 4.0,
-                        comment: "NA",
-                        // profile: "loginAuth ObjectId", // get the object id from loginAuth
+                        comment: "NA",   
                     },
                     {
                         staffId: "M40000",
                         grade: 4.5,
                         comment: "expecting a lower price-in",
-                        // profile: "loginAuth ObjectId", // get the object id from loginAuth
                     },
                 ],
             },
             {
                 _id: "660e0e74c050096882b8950d", // to check on object id
                 applicantId: "A1000",
-                applicantName: "Adam",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "38290.00000",
@@ -136,27 +51,23 @@ const seedApplicant = async (req, res) => {
                         grade: 3.5,
                         comment:
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat sodales gravida.",
-                        // profile: "loginAuth ObjectId", // get the object id from loginAuth
                     },
                     {
                         staffId: "M30000",
                         grade: 4.0,
                         comment: "NA",
-                        // profile: "loginAuth ObjectId", // get the object id from loginAuth
                     },
                     {
                         staffId: "M40000",
                         grade: 4.5,
                         comment:
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat sodales gravida.",
-                        // profile: "loginAuth ObjectId", // get the object id from loginAuth
                     },
                 ],
             },
             {
                 _id: "660e0ea3c050096882b8950f", // to check on object id
                 applicantId: "A1000",
-                applicantName: "Adam",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "44384.14286",
@@ -186,7 +97,6 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "660e0ecbc050096882b89511", // to check on object id
                 applicantId: "A1000",
-                applicantName: "Adam",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "42677.00000",
@@ -198,79 +108,72 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "660e0efbc053496882b89414",
                 applicantId: "A1000",
-                applicantName: "Adam",
                 executedQty: 1.0,
                 tradeType: "short",
                 priceIn: "52183.14286",
                 timeIn: "2024-02-15T14:47:27.131Z",
                 priceOut: "52183.20000",
                 timeOut: "2024-02-22T14:47:50.690Z",
-                manager: []
+                manager: [],
             },
             {
                 _id: "660e0efbc053496882b89313",
                 applicantId: "A1000",
-                applicantName: "Adam",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "51452.00000",
                 timeIn: "2024-02-24T03:08:00.448Z",
                 priceOut: "61689.00000",
                 timeOut: "2024-02-29T03:10:50.919Z",
-                manager: []
+                manager: [],
             },
             {
                 _id: "660e0efbc053496882b89583",
                 applicantId: "A1000",
-                applicantName: "Adam",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "68270.00000",
                 timeIn: "2024-03-04T04:52:27.270Z",
                 priceOut: "61202.57497",
                 timeOut: "2024-03-05T11:03:52.544Z",
-                manager: []
+                manager: [],
             },
             {
                 _id: "660e0efbc053496882b89511",
                 applicantId: "A1000",
-                applicantName: "Adam",
                 executedQty: 1.0,
                 tradeType: "short",
                 priceIn: "67783.10000",
                 timeIn: "2024-03-08T11:04:59.819Z",
                 priceOut: "72170.00000",
                 timeOut: "2024-03-11T11:05:19.755Z",
-                manager: []
+                manager: [],
             },
             {
                 _id: "660e0efbc053496882b89514",
                 applicantId: "A1000",
-                applicantName: "Adam",
                 executedQty: 1.0,
                 tradeType: "short",
                 priceIn: "67295.60000",
                 timeIn: "2024-03-19T11:09:53.263Z",
                 priceOut: "64614.20000",
                 timeOut: "2024-03-24T11:10:00.331Z",
-                manager: []
+                manager: [],
             },
             {
                 _id: "660e0efbc053496882b89513",
                 applicantId: "A1000",
-                applicantName: "Adam",
                 executedQty: 1.0,
                 priceIn: "64614.60000",
                 timeIn: "2024-03-24T11:10:11.055Z",
                 priceOut: "69002.27788",
                 timeOut: "2024-03-27T11:10:15.312Z",
-                manager: []
+                manager: [],
             },
             // ----------------------------------------------------------------------------------------------------
             {
                 _id: "670e0efbc050096882b89513", // to check on object id
                 applicantId: "A2000",
-                applicantName: "Bryant",
                 priceIn: 69394.9848,
                 timeIn: "2024-04-02T03:08:00.448Z",
                 priceOut: 65118.9248,
@@ -280,21 +183,18 @@ const seedApplicant = async (req, res) => {
                         staffId: "M30000",
                         grade: 2.0,
                         comment: "NA",
-                        // profile: "loginAuth ObjectId", // get the object id from loginAuth
                     },
                     {
                         staffId: "M40000",
                         grade: 1.5,
                         comment:
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat sodales gravida.",
-                        // profile: "loginAuth ObjectId", // get the object id from loginAuth
                     },
                 ],
             },
             {
                 _id: "670e0df3c050096882b8950b", // to check on object id
                 applicantId: "A2000",
-                applicantName: "Bryant",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "27485.60000",
@@ -306,26 +206,22 @@ const seedApplicant = async (req, res) => {
                         staffId: "M20000",
                         grade: 4.5,
                         comment: "applicant priced out at the right time!",
-                        // profile: "loginAuth ObjectId", // get the object id from loginAuth
                     },
                     {
                         staffId: "M30000",
                         grade: 4.0,
                         comment: "NA",
-                        // profile: "loginAuth ObjectId", // get the object id from loginAuth
                     },
                     {
                         staffId: "M40000",
                         grade: 4.5,
                         comment: "expecting a lower price-in",
-                        // profile: "loginAuth ObjectId", // get the object id from loginAuth
                     },
                 ],
             },
             {
                 _id: "670e0e74c050096882b8950d", // to check on object id
                 applicantId: "A2000",
-                applicantName: "Bryant",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "38290.00000",
@@ -338,27 +234,23 @@ const seedApplicant = async (req, res) => {
                         grade: 3.5,
                         comment:
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat sodales gravida.",
-                        // profile: "loginAuth ObjectId", // get the object id from loginAuth
                     },
                     {
                         staffId: "M30000",
                         grade: 4.0,
                         comment: "NA",
-                        // profile: "loginAuth ObjectId", // get the object id from loginAuth
                     },
                     {
                         staffId: "M40000",
                         grade: 4.5,
                         comment:
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat sodales gravida.",
-                        // profile: "loginAuth ObjectId", // get the object id from loginAuth
                     },
                 ],
             },
             {
                 _id: "670e0ea3c050096882b8950f", // to check on object id
                 applicantId: "A2000",
-                applicantName: "Bryant",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "44384.14286",
@@ -388,7 +280,6 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "670e0ecbc050096882b89511", // to check on object id
                 applicantId: "A2000",
-                applicantName: "Bryant",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "42677.00000",
@@ -400,7 +291,180 @@ const seedApplicant = async (req, res) => {
             {
                 _id: "670e0efbc053496882b89414",
                 applicantId: "A2000",
-                applicantName: "Bryant",
+                executedQty: 1.0,
+                tradeType: "short",
+                priceIn: "52183.14286",
+                timeIn: "2024-02-15T14:47:27.131Z",
+                priceOut: "52183.20000",
+                timeOut: "2024-02-22T14:47:50.690Z",
+                manager: [],
+            },
+            {
+                _id: "670e0efbc053496882b89313",
+                applicantId: "A2000",
+                executedQty: 1.0,
+                tradeType: "long",
+                priceIn: "51452.00000",
+                timeIn: "2024-02-24T03:08:00.448Z",
+                priceOut: "61689.00000",
+                timeOut: "2024-02-29T03:10:50.919Z",
+                manager: [],
+            },
+            {
+                _id: "670e0efbc053496882b89583",
+                applicantId: "A2000",
+                executedQty: 1.0,
+                tradeType: "long",
+                priceIn: "68270.00000",
+                timeIn: "2024-03-04T04:52:27.270Z",
+                priceOut: "61202.57497",
+                timeOut: "2024-03-05T11:03:52.544Z",
+                manager: [],
+            },
+            {
+                _id: "670e0efbc053496882b89511",
+                applicantId: "A2000",
+                executedQty: 1.0,
+                tradeType: "short",
+                priceIn: "67783.10000",
+                timeIn: "2024-03-08T11:04:59.819Z",
+                priceOut: "72170.00000",
+                timeOut: "2024-03-11T11:05:19.755Z",
+                manager: [],
+            },
+            {
+                _id: "670e0efbc053496882b89514",
+                applicantId: "A2000",
+                executedQty: 1.0,
+                tradeType: "short",
+                priceIn: "67295.60000",
+                timeIn: "2024-03-19T11:09:53.263Z",
+                priceOut: "64614.20000",
+                timeOut: "2024-03-24T11:10:00.331Z",
+                manager: [],
+            },
+
+            // ----------------------------------------------------------------------------------------------------
+            {
+                _id: "670e0efbc050096882c89513", // to check on object id
+                applicantId: "A3000",
+                priceIn: 69394.9848,
+                timeIn: "2024-04-02T03:08:00.448Z",
+                priceOut: 65118.9248,
+                timeOut: "2024-04-02T03:10:50.919Z",
+                managers: [
+                    {
+                        staffId: "M30000",
+                        grade: 2.0,
+                        comment: "NA",
+                    },
+                    {
+                        staffId: "M40000",
+                        grade: 1.5,
+                        comment:
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat sodales gravida.",
+                    },
+                ],
+            },
+            {
+                _id: "670e0df3c050096882c8950b", // to check on object id
+                applicantId: "A3000",
+                executedQty: 1.0,
+                tradeType: "long",
+                priceIn: "27485.60000",
+                timeIn: "2023-10-16T11:10:29.551Z",
+                priceOut: "35460.00000",
+                timeOut: "2023-10-23T11:16:44.991Z",
+                managers: [
+                    {
+                        staffId: "M20000",
+                        grade: 4.5,
+                        comment: "applicant priced out at the right time!",
+                    },
+                    {
+                        staffId: "M30000",
+                        grade: 4.0,
+                        comment: "NA",
+                    },
+                    {
+                        staffId: "M40000",
+                        grade: 4.5,
+                        comment: "expecting a lower price-in",
+                    },
+                ],
+            },
+            {
+                _id: "670e0e74c050096882c8950d", // to check on object id
+                applicantId: "A3000",
+                executedQty: 1.0,
+                tradeType: "long",
+                priceIn: "38290.00000",
+                timeIn: "2023-12-01T11:16:52.687Z",
+                priceOut: "43896.71990",
+                timeOut: "2023-12-06T11:17:07.259Z",
+                managers: [
+                    {
+                        staffId: "M20000",
+                        grade: 3.5,
+                        comment:
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat sodales gravida.",
+                    },
+                    {
+                        staffId: "M30000",
+                        grade: 4.0,
+                        comment: "NA",
+                    },
+                    {
+                        staffId: "M40000",
+                        grade: 4.5,
+                        comment:
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat sodales gravida.",
+                    },
+                ],
+            },
+            {
+                _id: "670e0ea3c050096882c8950f", // to check on object id
+                applicantId: "A3000",
+                executedQty: 1.0,
+                tradeType: "long",
+                priceIn: "44384.14286",
+                timeIn: "2024-01-08T14:47:27.131Z",
+                priceOut: "45846.20000",
+                timeOut: "2024-01-12T14:47:50.690Z",
+                managers: [
+                    {
+                        staffId: "M20000",
+                        grade: 4.0,
+                        comment:
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat sodales gravida.",
+                    },
+                    {
+                        staffId: "M30000",
+                        grade: 3.0,
+                        comment:
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat sodales gravida.",
+                    },
+                    {
+                        staffId: "M40000",
+                        grade: 3.5,
+                        comment: "test onearok jfodije i",
+                    },
+                ],
+            },
+            {
+                _id: "670e0ecbc050096882c89511", // to check on object id
+                applicantId: "A3000",
+                executedQty: 1.0,
+                tradeType: "long",
+                priceIn: "42677.00000",
+                timeIn: "2024-02-04T11:16:52.687Z",
+                priceOut: "49502.71990",
+                timeOut: "2024-02-13T11:17:07.259Z",
+                managers: [],
+            },
+            {
+                _id: "670e0efbc053496882c89414",
+                applicantId: "A3000",
                 executedQty: 1.0,
                 tradeType: "short",
                 priceIn: "52183.14286",
@@ -410,9 +474,8 @@ const seedApplicant = async (req, res) => {
                 manager: []
             },
             {
-                _id: "670e0efbc053496882b89313",
-                applicantId: "A2000",
-                applicantName: "Bryant",
+                _id: "670e0efbc053496882c89313",
+                applicantId: "A3000",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "51452.00000",
@@ -422,9 +485,8 @@ const seedApplicant = async (req, res) => {
                 manager: []
             },
             {
-                _id: "670e0efbc053496882b89583",
-                applicantId: "A2000",
-                applicantName: "Bryant",
+                _id: "670e0efbc053496882c89583",
+                applicantId: "A3000",
                 executedQty: 1.0,
                 tradeType: "long",
                 priceIn: "68270.00000",
@@ -434,9 +496,8 @@ const seedApplicant = async (req, res) => {
                 manager: []
             },
             {
-                _id: "670e0efbc053496882b89511",
-                applicantId: "A2000",
-                applicantName: "Bryant",
+                _id: "670e0efbc053496882c89511",
+                applicantId: "A3000",
                 executedQty: 1.0,
                 tradeType: "short",
                 priceIn: "67783.10000",
@@ -446,9 +507,8 @@ const seedApplicant = async (req, res) => {
                 manager: []
             },
             {
-                _id: "670e0efbc053496882b89514",
-                applicantId: "A2000",
-                applicantName: "Bryant",
+                _id: "670e0efbc053496882c89514",
+                applicantId: "A3000",
                 executedQty: 1.0,
                 tradeType: "short",
                 priceIn: "67295.60000",
@@ -535,8 +595,6 @@ const updateApplicantRecord = async (req, res) => {
 
         if ("applicantId" in req.body)
             updateApplicant.applicantId = req.body.applicantId;
-        if ("username" in req.body)
-            updateApplicant.username = req.body.username;
         if ("priceIn" in req.body) updateApplicant.priceIn = req.body.priceIn;
         if ("timeIn" in req.body) updateApplicant.timeIn = req.body.timeIn;
         if ("priceOut" in req.body)
@@ -558,50 +616,46 @@ const updateApplicantRecord = async (req, res) => {
     }
 };
 
-// update manager's grade and comment
 const updateApplicantManagerRecord = async (req, res) => {
     try {
         const updateManager = {
             staffId: req.body.staffId,
             grade: req.body.grade,
-            comment: req.body.comment,
+            comment: req.body.comment || "",
         };
 
         // check if manager's record is already in
-        const existingRecord = await ApplicantRecordModel.findOne({
-            _id: req.params.id,
-            "managers.staffId": req.body.staffId,
-        });
-
-        // if exist, update the grade and comment of existing staffId
-        if (existingRecord) {
-            const response = await ApplicantRecordModel.updateOne(
+        const existingManagerRecord =
+            await ApplicantRecordModel.findOneAndUpdate(
                 {
-                    _id: req.params.id,
+                    pageNumber: req.params.pageNumber,
+                    applicantId: req.body.applicantId,
                     "managers.staffId": req.body.staffId,
                 },
                 {
-                    $Set: {
-                        "managers.staffId": req.body.staffId,
-                        "managers.grade": req.body.grade,
-                        "managers.comment": req.body.comment,
+                    $set: {
+                        // "managers.staffId": req.body.staffId,
+                        "managers.$.grade": req.body.grade,
+                        "managers.$.comment": req.body.comment,
                     },
+                }
+            );
+
+        if (existingManagerRecord) {
+            return res.json({ status: "ok", msg: "manager grade updated" });
+        } else {
+            const existingRecord = await ApplicantRecordModel.findOneAndUpdate(
+                {
+                    pageNumber: req.params.pageNumber,
+                    applicantId: req.body.applicantId,
+                },
+                {
+                    $addToSet: { managers: updateManager },
                 }
             );
 
             return res.json({ status: "ok", msg: "manager grade updated" });
         }
-
-        const response = await ApplicantRecordModel.updateOne(
-            {
-                _id: req.params.id,
-            },
-            {
-                $addToSet: { managers: updateManager },
-            }
-        );
-
-        return res.json({ status: "ok", msg: "manager grade updated" });
     } catch (error) {
         console.error(error.message);
         res.status(400).json({
@@ -665,9 +719,11 @@ const seedManager = async (req, res) => {
 // getting all managers final records info
 const getAllManagersFinalRecords = async (req, res) => {
     try {
-        const allManagersFinalRecordsByApplicantId =
-            await ManagerFinalRecordModel.find().sort({ staffId: 1 });
-        res.json(allManagersFinalRecordsByApplicantId);
+        const allManagersFinalRecords =
+            await ManagerFinalRecordModel.find().sort({
+                staffId: 1,
+            });
+        res.json(allManagersFinalRecords);
     } catch (error) {
         console.error(error.message);
         res.status(400).json({
@@ -680,10 +736,11 @@ const getAllManagersFinalRecords = async (req, res) => {
 // getting manager final record by applicant Id
 const getManagersFinalRecordsByApplicantId = async (req, res) => {
     try {
-        const allManagersFinalRecords = await ManagerFinalRecordModel.find({
-            applicantId: req.params.applicantId,
-        }).sort({ applicantId: 1 });
-        res.json(allManagersFinalRecords);
+        const allManagersFinalRecordsByApplicantId =
+            await ManagerFinalRecordModel.find({
+                applicantId: req.params.applicantId,
+            }).sort({ applicantId: 1 });
+        res.json(allManagersFinalRecordsByApplicantId);
     } catch (error) {
         console.error(error.message);
         res.status(400).json({
@@ -696,26 +753,12 @@ const getManagersFinalRecordsByApplicantId = async (req, res) => {
 // adding record
 const addNewManagersRecord = async (req, res) => {
     try {
-        const managerRecord = await ManagerFinalRecordModel.find({
-            applicantId: req.body.applicantId,
-            staffId: req.body.staffId,
-        });
-
-        console.log(managerRecord);
-
-        if (managerRecord.length > 0) {
-            return res.json({
-                status: "error",
-                msg: "applicant manager records already exist!",
-            });
-        }
-
         const applicantManagerRecord = await ApplicantRecordModel.find({
             applicantId: req.body.applicantId,
-            staffId: req.body.staffId,
+            "managers.staffId": req.body.staffId,
         });
 
-        const gradeSum = 0;
+        let gradeSum = 0;
         if (applicantManagerRecord.length > 0) {
             gradeSum = calculateGradeSumByManager(
                 applicantManagerRecord,
@@ -723,15 +766,28 @@ const addNewManagersRecord = async (req, res) => {
             );
         }
 
-        const newRecord = new ManagerFinalRecordModel({
-            applicantId: req.body.applicantId,
-            staffId: req.body.staffId,
-            finalGrade: gradeSum,
-            isRecommended: req.body.isRecommended,
-        });
+        const existingRecord = await ManagerFinalRecordModel.findOneAndUpdate(
+            {
+                applicantId: req.body.applicantId,
+                staffId: req.body.staffId,
+            },
+            {
+                finalGrade: gradeSum,
+            }
+        );
+        if (existingRecord) {
+            return res.json({ status: "ok", msg: "grade is updated" });
+        } else {
+            const newRecord = new ManagerFinalRecordModel({
+                applicantId: req.body.applicantId,
+                staffId: req.body.staffId,
+                finalGrade: gradeSum,
+                isRecommended: req.body.isRecommended,
+            });
 
-        await ManagerFinalRecordModel.create(newRecord);
-        res.json({ status: "ok", msg: "manager final record created" });
+            await ManagerFinalRecordModel.create(newRecord);
+            res.json({ status: "ok", msg: "manager final record created" });
+        }
     } catch (error) {
         console.error(error.message);
         res.status(400).json({
@@ -745,97 +801,10 @@ const addNewManagersRecord = async (req, res) => {
 const updateManagerFinalRecord = async (req, res) => {
     try {
         const updateManagerRecord = {};
-        const existingRecord = await ManagerFinalRecordModel.findById(
-            req.params.id
-        );
 
-        if (existingRecord.length === 0) {
-            return res.json({
-                status: "error",
-                msg: "manager final record not found!",
-            });
+        if ("isRecommended" in req.body) {
+            updateManagerRecord.isRecommended = req.body.isRecommended;
         }
-
-        if ("applicantId" in req.body && "staffId" in req.body) {
-            const applicantManagerRecord = await ApplicantRecordModel.find({
-                applicantId: req.body.applicantId,
-                "managers.staffId": req.body.staffId,
-            });
-
-            console.log(`1. : ${applicantManagerRecord}`);
-            if (applicantManagerRecord.length === 0) {
-                return res.json({
-                    status: "error",
-                    msg: "no applicant manager records found",
-                });
-            }
-
-            let gradeSum = 0;
-            if (applicantManagerRecord.length > 0) {
-                gradeSum = calculateGradeSumByManager(
-                    applicantManagerRecord,
-                    req.body.staffId
-                );
-            }
-
-            console.log("after calculation");
-            updateManagerRecord.applicantId = req.body.applicantId;
-            updateManagerRecord.staffId = req.body.staffId;
-            updateManagerRecord.finalGrade = gradeSum;
-            if ("isRecommended" in req.body) {
-                updateManagerRecord.isRecommended = req.body.isRecommended;
-            }
-        }
-
-        // if ("applicantId" in req.body && !("staffId" in req.body)) {
-        //     const applicantManagerRecord = await ManagerFinalRecordModel.find({
-        //         applicantId: req.body.applicantId,
-        //         staffId: existingRecord.staffId,
-        //     });
-
-        //     console.log(`2. : ${applicantManagerRecord}`)
-        //     if (applicantManagerRecord.length === 0) {
-        //         return res.json({
-        //             status: "error",
-        //             msg: "no applicant manager records found",
-        //         });
-        //     }
-
-        //     const gradeSum = calculateGradeSumByManager(
-        //         applicantManagerRecord,
-        //         existingRecord.staffId
-        //     );
-
-        //     updateManagerRecord.applicantId = req.body.applicantId;
-        //     updateManagerRecord.grade = gradeSum;
-        //     updateManagerRecord.isRecommended = req.body.isRecommended;
-        // }
-
-        // if (!("applicantId" in req.body) && "staffId" in req.body) {
-        //     const applicantManagerRecord = await ManagerFinalRecordModel.find({
-        //         applicantId: existingRecord.applicantId,
-        //         staffId: req.body.staffId,
-        //     });
-
-        //     console.log(`3. : ${applicantManagerRecord}`)
-        //     if (applicantManagerRecord.length === 0) {
-        //         return res.json({
-        //             status: "error",
-        //             msg: "no applicant manager records found",
-        //         });
-        //     }
-
-        //     const gradeSum = calculateGradeSumByManager(
-        //         applicantManagerRecord,
-        //         req.body.staffId
-        //     );
-
-        //     updateManagerRecord.staffId = req.body.staffId;
-        //     updateManagerRecord.grade = gradeSum;
-        //     updateManagerRecord.isRecommended = req.body.isRecommended;
-        // }
-
-        console.log(JSON.stringify(updateManagerRecord));
         await ManagerFinalRecordModel.findByIdAndUpdate(
             req.params.id,
             updateManagerRecord
@@ -865,18 +834,143 @@ const deleteManagerFinalRecord = async (req, res) => {
     }
 };
 
+// -----------------------------------------------------------------------------------------------------
+const seedGeneralManager = async (req, res) => {
+    try {
+        await GeneralManagerRecordModel.deleteMany({});
+
+        await GeneralManagerRecordModel.create([
+            {
+                _id: "660f9baa2b01b98bd7b6f56f",
+                staffId: "GM2343",
+                applicantId: "A1000",
+                isRecommended: false,
+                managerFinalRecords: [],
+            },
+            {
+                _id: "660f9baa2b01b98bd7b6f34d",
+                staffId: "GM2547",
+                applicantId: "A2000",
+                isRecommended: false,
+                managerFinalRecords: [],
+            },
+        ]);
+        res.json({ status: "ok", msg: "seeding successfully" });
+    } catch (error) {
+        console.error(error.message);
+        res.status(400).json({ status: "error", msg: "seeding error" });
+    }
+};
+
+const getAllGeneralManagersRecords = async (req, res) => {
+    try {
+        const allGeneralManagerRecords =
+            await GeneralManagerRecordModel.find().sort({ applicantId: 1 });
+        res.json(allGeneralManagerRecords);
+    } catch (error) {
+        console.error(error.message);
+        res.status(400).json({
+            status: "error",
+            msg: "getting all GM records error",
+        });
+    }
+};
+
+const getGeneralManagersRecordsByApplicantId = async (req, res) => {
+    try {
+        const allGeneralManagerRecordsByApplicantId =
+            await GeneralManagerRecordModel.find({
+                applicantId: req.params.applicantId,
+            });
+
+        res.json({
+            allGeneralManagerRecordsByApplicantId,
+        });
+    } catch (error) {
+        console.error(error.message);
+        res.status(400).json({ status: "error", msg: " not record found" });
+    }
+};
+
+const addNewGeneralManagerRecord = async (req, res) => {
+    try {
+        const generalManagerRecord = await GeneralManagerRecordModel.find({
+            applicantId: req.body.applicantId,
+            // staffId: req.body.staffId,
+        });
+
+        if (generalManagerRecord.length > 0) {
+            return `record of ${req.body.applicantId} already exist in general manager`;
+        }
+
+        const newGeneralManagerRecord = new GeneralManagerRecordModel({
+            applicantId: req.body.applicantId,
+            // staffId: req.body.staffId,
+        });
+
+        await GeneralManagerRecordModel.create(newGeneralManagerRecord);
+        res.json({ status: "ok", msg: "general manager record is created" });
+    } catch (error) {
+        console.error(error.message);
+        res.status(400).json({ status: "error", msg: "record not created" });
+    }
+};
+
+const updateGeneralManagerRecord = async (req, res) => {
+    try {
+        const updateGeneralManagerRecord = {};
+        const existingRecord = await GeneralManagerRecordModel.findById(
+            req.params.id
+        );
+
+        if (existingRecord.length === 0) {
+            return res.json({
+                status: "error",
+                msg: "manager final record not found!",
+            });
+        }
+
+        if ("isRecommended" in req.body)
+            updateGeneralManagerRecord.isRecommended = req.body.isRecommended;
+        if (
+            "applicantId" in req.body &&
+            req.body.applicantId !== existingRecord.applicantId
+        ) {
+            return res.json({
+                status: "error",
+                msg: "Should not change applicantId",
+            });
+        }
+
+        await GeneralManagerRecordModel.findByIdAndUpdate(
+            req.params.id,
+            updateGeneralManagerRecord
+        );
+        res.json({ status: "ok", msg: "record updated" });
+    } catch (error) {
+        console.error(error.message);
+        res.status(400).json({ status: "error", msg: "record not updated" });
+    }
+};
+
+const deleteGeneralManagerRecord = async (req, res) => {
+    try {
+        await GeneralManagerRecordModel.findByIdAndDelete(req.params.id);
+        return res.json({ status: "ok", msg: "record deleted" });
+    } catch (error) {
+        console.error(error.message);
+        res.status(400).json({ status: "error", msg: "record not deleted" });
+    }
+};
+
 // functions
 const calculateGradeSumByManager = (applicantManagerRecords, staffId) => {
     let gradeSum = 0;
-    // const managerArray = [];
     for (const record of applicantManagerRecords) {
-        console.log(staffId);
-        // console.log(`in calculation: ${record}`);
         record.managers.forEach((manager) => {
             if (manager.staffId === staffId) gradeSum += manager.grade;
         });
     }
-    console.log(gradeSum);
     return gradeSum;
 };
 
@@ -894,4 +988,10 @@ module.exports = {
     addNewManagersRecord,
     updateManagerFinalRecord,
     deleteManagerFinalRecord,
+    getAllGeneralManagersRecords,
+    getGeneralManagersRecordsByApplicantId,
+    addNewGeneralManagerRecord,
+    updateGeneralManagerRecord,
+    deleteGeneralManagerRecord,
+    seedGeneralManager,
 };

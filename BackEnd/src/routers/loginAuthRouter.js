@@ -4,24 +4,18 @@ const {
     register,
     login,
 } = require("../controllers/loginAuthController");
+const {
+    validateRegistrationData,
+    validateLoginData,
+    validateRefreshToken,
+} = require("../validators/loginAuth-validate");
 
-// const {
-//     validateLoginData,
-//     validateRefreshToken,
-//     validateRegistrationData,
-// } = require("../validators/auth-validate");
-
-// const { errorCheck } = require("../validators/errorsCheck");
-
+const { errorCheck } = require("../validators/errorChecks");
 const router = express.Router();
 
-// router.get("/users", getAllUsers);
-// router.put("/register", validateRegistrationData, errorCheck, register);
-// router.post("/login", validateLoginData, errorCheck, login);
-// router.post("/refresh", validateRefreshToken, errorCheck, refresh);
-
 router.get("/users", getAllUsers);
-router.put("/register", register);
-router.post("/login", login);
+router.put("/register", validateRegistrationData, errorCheck, register);
+router.post("/login", validateLoginData, errorCheck, login);
+// router.post("/refresh", validateRefreshToken, errorCheck, refresh);
 
 module.exports = router;
