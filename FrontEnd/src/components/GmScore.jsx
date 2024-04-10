@@ -59,8 +59,8 @@ const GmScore = () => {
     <div className={styles.score}>
       <div>{JSON.stringify(finalScore)}</div>
       <div>
-        <button className={styles.nextbutton}>Recommend</button>
-        <button className={styles.nextbutton}>Not recommended</button>
+        <button className={styles.recobutton}>Recommend</button>
+        <button className={styles.norecobutton}>Not recommended</button>
       </div>
     </div>
   );
