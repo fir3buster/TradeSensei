@@ -230,7 +230,7 @@ const Score = ({ totalPages }) => {
                 addScore(userCtx.activePageContext);
                 // nextPage();
                 // setComment("");
-                if (userCtx.activePageContext === totalPages - 1) {
+                if (userCtx.activePageContext === totalPages) {
                   handleSubmitAllScores();
                 }
               }}
