@@ -43,9 +43,17 @@ async function seedApplicant(traderData) {
 }
 
 async function applicantData() {
-    let binance = new ccxt.binance({
-        apiKey: "33abb9bbd90c07de6420d2c782df3efb8fbc7ab65be3b3091e1ad0de3a1f1831",
-        secret: "5c19a06e96ad5572c938b14f0b6776a6a19cde77d2e4f1baf10ba55bd1acc11c",
+
+    let exchange = new ccxt.bybit({
+        apiKey: "wmi0MJq6Jhlb0rTys6",
+        secret: "BR20iukMWQDWcsOKbanl7ZpZlwshh8275cbG",    
+
+    // let binance = new ccxt.binance({
+    //     apiKey: "bb39369a4a84f516c734fa74ec02f92b47d911fbcbc109b9699a00a913f96e5a",
+    //     secret: "b49e08b2d716c6555aabba9275448da30052378aee90ab87000af72931ea1959",
+
+        // apiKey: "33abb9bbd90c07de6420d2c782df3efb8fbc7ab65be3b3091e1ad0de3a1f1831",
+        // secret: "5c19a06e96ad5572c938b14f0b6776a6a19cde77d2e4f1baf10ba55bd1acc11c",
 
         // apiKey: `${process.env.BINANCE_PUBLIC_API_KEY}`,
         // secret: `${process.env.BINANCE_SECRET_PRIVATE_KEY}`,
@@ -56,21 +64,24 @@ async function applicantData() {
             urls: {
                 // api: "https://api.binance.com",
                 // test: "https://api.binance.com",
-                api: "https://testnet.binancefuture.com",
-                test: "https://testnet.binancefuture.com",
+                // api: "https://testnet.binancefuture.com",
+                // test: "https://testnet.binancefuture.com",
+
+                api: "https://testnet.bybit.com/en",
+                test: "https://testnet.bybit.com/en",                
             },
         },
     });
-    binance.set_sandbox_mode(true);
+    exchange.set_sandbox_mode(true);
 
     let data = { priceIn: 0.0, timeIn: "", priceOut: 0.0, timeOut: "" };
     let traderData = [];
     let isStart = false;
-    // const binanceData = await binance.fetch_closed_orders("BTCUSDT");
-    const binanceData = await binance.fetchClosedOrders("BTCUSDT");
+    // const exchangeData = await binance.fetch_closed_orders("BTCUSDT");
+    const exchangeData = await exchange.fetchClosedOrders("BTCUSDT");
 
-    for (const datum in binanceData) {
-        const reduceOnly = binanceData[datum].info.reduceOnly;
+    for (const datum in exchangeData) {
+        const reduceOnly = exchangeData[datum].info.reduceOnly;
         // console.log (datum + " reduceOnly = " +  JSON.stringify(reduceOnly) )
 
         if (!reduceOnly) {
@@ -78,9 +89,9 @@ async function applicantData() {
             if (isStart === false) {
                 isStart = true;
             }
-            // console.log (datum + " avgPrice = " + JSON.stringify(binanceData[datum].info.avgPrice) )
+            // console.log (datum + " avgPrice = " + JSON.stringify(exchangeData[datum].info.avgPrice) )
 
-            // let datetime = binanceData[datum].datetime; // example 2024-03-25T13:16:40.209Z
+            // let datetime = exchangeData[datum].datetime; // example 2024-03-25T13:16:40.209Z
             // let splitDate = datetime.split("T");
             // const date = splitDate[0];
             // const time = splitDate[1].split(".")[0]; // to hh:mm:ss
@@ -91,17 +102,17 @@ async function applicantData() {
 
             data = {
                 applicantId: "A1000", // need to change id as new applicant comes in
-                priceIn: binanceData[datum].info.avgPrice,
-                executedQty: binanceData[datum].info.executedQty,
-                timeIn: binanceData[datum].datetime,
+                priceIn: exchangeData[datum].info.avgPrice,
+                executedQty: exchangeData[datum].info.executedQty,
+                timeIn: exchangeData[datum].datetime,
                 priceOut: 0.0,
                 timeOut: "",
             };
         } else {
             // closing trade
             if (isStart === true) {
-                data["priceOut"] = binanceData[datum].info.avgPrice;
-                data["timeOut"] = binanceData[datum].datetime;
+                data["priceOut"] = exchangeData[datum].info.avgPrice;
+                data["timeOut"] = exchangeData[datum].datetime;
                 traderData.push(data);
                 // console.log(data)
             }
@@ -467,9 +478,16 @@ function demoApplicantData() {
 }
 
 async function priceData(dateString, numberOfDays) {
-    let binance = new ccxt.binance({
-        apiKey: "33abb9bbd90c07de6420d2c782df3efb8fbc7ab65be3b3091e1ad0de3a1f1831",
-        secret: "5c19a06e96ad5572c938b14f0b6776a6a19cde77d2e4f1baf10ba55bd1acc11c",
+    let exchange = new ccxt.bybit({
+        apiKey: "wmi0MJq6Jhlb0rTys6",
+        secret: "BR20iukMWQDWcsOKbanl7ZpZlwshh8275cbG",
+
+    // let exchange = new ccxt.binance({
+    //     apiKey: "bb39369a4a84f516c734fa74ec02f92b47d911fbcbc109b9699a00a913f96e5a",
+    //     secret: "b49e08b2d716c6555aabba9275448da30052378aee90ab87000af72931ea1959",
+
+        // apiKey: "33abb9bbd90c07de6420d2c782df3efb8fbc7ab65be3b3091e1ad0de3a1f1831",
+        // secret: "5c19a06e96ad5572c938b14f0b6776a6a19cde77d2e4f1baf10ba55bd1acc11c",
 
         // apiKey: `${process.env.BINANCE_PUBLIC_API_KEY}`,
         // secret: `${process.env.BINANCE_SECRET_PRIVATE_KEY}`,
@@ -479,12 +497,20 @@ async function priceData(dateString, numberOfDays) {
             urls: {
                 // api: "https://api.binance.com",
                 // test: "https://api.binance.com",
-                api: "https://testnet.binancefuture.com",
-                test: "https://testnet.binancefuture.com",
+
+                // api: "https://testnet.binancefuture.com",
+                // test: "https://testnet.binancefuture.com",
+
+                api: "https://api.bybit.com",
+                test: "https://api.bybit.com",
+
+                // api: "https://testnet.bybit.com/en",
+                // test: "https://testnet.bybit.com/en",
+                
             },
         },
     });
-    binance.set_sandbox_mode(true);
+    exchange.set_sandbox_mode(true);
     // console.log(JSON.stringify(binance.timeframes))
 
     let traderData = [];
@@ -493,7 +519,7 @@ async function priceData(dateString, numberOfDays) {
     // dateString = "2023-12-05T11:00:00Z" //working
     dateString = JSON.stringify(dateString);
     dateString = dateString.replace(/\"/g, "");
-    let from_ts = binance.parse8601(dateString);
+    let from_ts = exchange.parse8601(dateString);
     // console.log(`dateString=${dateString}`)
     // console.log(`from_ts=${from_ts}`)
     // fetchOHLCV(symbol: string, timeframe?: string, since?: Int, limit?: Int, params?: {}): Promise<OHLCV[]>;
@@ -505,7 +531,7 @@ async function priceData(dateString, numberOfDays) {
 
     // FOR 1d CALCULATION---------------
     // 30 constitute roughly 1 month
-    const binanceData = await binance.fetchOHLCV(
+    const exchangeData = await exchange.fetchOHLCV(
         "BTCUSDT",
         "1d",
         from_ts,
@@ -513,26 +539,26 @@ async function priceData(dateString, numberOfDays) {
     );
 
     // console.log(from_ts)
-    // console.log(new Date(binanceData[0][0]))
-    // console.log(new Date(binanceData[1][0]))
-    // console.log(binanceData[0][0])
-    // console.log("binanceData " + JSON.stringify(binanceData[0]))
+    // console.log(new Date(exchangeData[0][0]))
+    // console.log(new Date(exchangeData[1][0]))
+    // console.log(exchangeData[0][0])
+    // console.log("exchangeData " + JSON.stringify(exchangeData[0]))
 
-    // console.log(binanceData[0][0])  //1709251200000
-    // console.log(new Date(binanceData[0][0]))               //Fri Mar 01 2024 08:00:00 GMT+0800 (Singapore Standard Time)
-    // console.log(new Date(binanceData[0][0]).toUTCString()) //Fri Mar 01 2024 08:00:00 GMT+0800 (Singapore Standard Time)
-    // console.log(new Date(binanceData[0][0]).toDateString()) //Fri Mar 01 2024
-    // console.log(new Date(binanceData[0][0]).toTimeString()) //08:00:00 GMT+0800 (Singapore Standard Time)
-    // console.log(JSON.stringify(new Date(binanceData[0][0]))) // "2024-03-01T00:00:00.000Z"
-    // console.log(JSON.stringify(new Date(binanceData[0][0]).getFullYear())) //2024
-    // console.log(JSON.stringify(new Date(binanceData[0][0]).getDate())) //1
-    // console.log(JSON.stringify(new Date(binanceData[0][0]).getTime())) //1709251200000
-    // console.log(JSON.stringify(new Date(binanceData[0][0]).getHours())) //8
-    // console.log(JSON.stringify(new Date(binanceData[0][0]).getMinutes()))  //0
+    // console.log(exchangeData[0][0])  //1709251200000
+    // console.log(new Date(exchangeData[0][0]))               //Fri Mar 01 2024 08:00:00 GMT+0800 (Singapore Standard Time)
+    // console.log(new Date(exchangeData[0][0]).toUTCString()) //Fri Mar 01 2024 08:00:00 GMT+0800 (Singapore Standard Time)
+    // console.log(new Date(exchangeData[0][0]).toDateString()) //Fri Mar 01 2024
+    // console.log(new Date(exchangeData[0][0]).toTimeString()) //08:00:00 GMT+0800 (Singapore Standard Time)
+    // console.log(JSON.stringify(new Date(exchangeData[0][0]))) // "2024-03-01T00:00:00.000Z"
+    // console.log(JSON.stringify(new Date(exchangeData[0][0]).getFullYear())) //2024
+    // console.log(JSON.stringify(new Date(exchangeData[0][0]).getDate())) //1
+    // console.log(JSON.stringify(new Date(exchangeData[0][0]).getTime())) //1709251200000
+    // console.log(JSON.stringify(new Date(exchangeData[0][0]).getHours())) //8
+    // console.log(JSON.stringify(new Date(exchangeData[0][0]).getMinutes()))  //0
 
     // console.log("")
-    // console.log(JSON.stringify(new Date(binanceData[0][0]).getUTCMonth())) //2  why 2? should be 3 since it is march
-    // console.log(JSON.stringify(new Date(binanceData[0][0]).getMonth())) //2   why 2? should be 3 since it is march
+    // console.log(JSON.stringify(new Date(exchangeData[0][0]).getUTCMonth())) //2  why 2? should be 3 since it is march
+    // console.log(JSON.stringify(new Date(exchangeData[0][0]).getMonth())) //2   why 2? should be 3 since it is march
 
     let data = [];
     let singleData = {
@@ -544,8 +570,8 @@ async function priceData(dateString, numberOfDays) {
         volume: 0.0,
     };
 
-    for (const datum in binanceData) {
-        const date = new Date(binanceData[datum][0]);
+    for (const datum in exchangeData) {
+        const date = new Date(exchangeData[datum][0]);
 
         let year = date.getFullYear();
         let month = date.getMonth() + 1; //there is bug in the api of getMonth()
@@ -553,15 +579,15 @@ async function priceData(dateString, numberOfDays) {
 
         singleData = {
             time: { year: year, month: month, day: day },
-            open: binanceData[datum][1],
-            high: binanceData[datum][2],
-            low: binanceData[datum][3],
-            close: binanceData[datum][4],
-            volume: binanceData[datum][5],
+            open: exchangeData[datum][1],
+            high: exchangeData[datum][2],
+            low: exchangeData[datum][3],
+            close: exchangeData[datum][4],
+            volume: exchangeData[datum][5],
         };
         data.push(singleData);
-        // console.log(`${datum} ${new Date(binanceData[datum][0])} ${JSON.stringify(singleData)}`)
-        // console.log(datum + " " + new Date(binanceData[datum][0]))
+        // console.log(`${datum} ${new Date(exchangeData[datum][0])} ${JSON.stringify(singleData)}`)
+        // console.log(datum + " " + new Date(exchangeData[datum][0]))
     }
     // console.log(JSON.stringify(data))
     return data;
