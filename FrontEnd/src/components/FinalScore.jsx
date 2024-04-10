@@ -4,96 +4,94 @@ import UserContext from "../context/user";
 import styles from "./Chart.module.css";
 
 const FinalScore = () => {
-    const [finalId, setFinalId] = useState("");
-    const [finalScore, setFinalScore] = useState([]);
-    const [recommend, setRecommend] = useState(null);
-    const userCtx = useContext(UserContext);
-    const fetchData = useFetch();
+  const [finalId, setFinalId] = useState("");
+  const [finalScore, setFinalScore] = useState([]);
+  const [recommend, setRecommend] = useState(null);
+  const userCtx = useContext(UserContext);
+  const fetchData = useFetch();
 
-    const getFinalScore = async () => {
-        try {
-            const res = await fetchData(
-                "/api/managers/" + userCtx.activeApplicantId,
-                "GET",
-                undefined,
-                userCtx.accessToken
-            );
-            if (res.ok) {
-                for (const data of res.data) {
-                    if (data.staffId === userCtx.activeStaffId) {
-                        setFinalScore(data.finalGrade);
-                        setFinalId(data._id);
-                    }
-                }
-            } else {
-                // alert(JSON.stringify(res.data));
-                console.log(res.data);
-            }
-        } catch (error) {
-            console.error("error fetching final score:", error);
+  const getFinalScore = async () => {
+    try {
+      const res = await fetchData(
+        "/api/managers/" + userCtx.activeApplicantId,
+        "GET",
+        undefined,
+        userCtx.accessToken
+      );
+      if (res.ok) {
+        for (const data of res.data) {
+          if (data.staffId === userCtx.activeStaffId) {
+            setFinalScore(data.finalGrade);
+            setFinalId(data._id);
+          }
         }
-    };
+      } else {
+        alert(JSON.stringify(res.data));
+      }
+    } catch (error) {
+      console.error("error fetching final score:", error);
+    }
+  };
 
-    const updateFinalRecord = async (recommend) => {
-        try {
-            const res = await fetchData(
-                "/api/managers/" + finalId,
-                "PATCH",
-                {
-                    isRecommended: recommend,
-                },
-                userCtx.accessToken
-            );
-            if (res.ok) {
-                getFinalScore();
-            } else {
-                // alert(JSON.stringify(res.data));
-                console.log(res.data);
-            }
-        } catch (error) {
-            console.error("Error adding score:", error);
-        }
-    };
-
-    const handleRecommend = (recommend) => {
-        setRecommend(recommend);
-        updateFinalRecord(recommend);
-    };
-
-    useEffect(() => {
+  const updateFinalRecord = async (recommend) => {
+    try {
+      const res = await fetchData(
+        "/api/managers/" + finalId,
+        "PATCH",
+        {
+          isRecommended: recommend,
+        },
+        userCtx.accessToken
+      );
+      if (res.ok) {
         getFinalScore();
-    }, []);
+      } else {
+        alert(JSON.stringify(res.data));
+      }
+    } catch (error) {
+      console.error("Error adding score:", error);
+    }
+  };
 
-    return (
-        <div className={styles.finalboard}>
-            <div>
-                This candidate's final score:
-                <div className={styles.finalscore}> {finalScore}/50</div>
-            </div>
-            {recommend === null ? (
-                <div>
-                    <div>Do you recommend this candidate?</div>
-                    <button
-                        className={styles.recobutton}
-                        onClick={() => handleRecommend(true)}
-                    >
-                        Recommend
-                    </button>
+  const handleRecommend = (recommend) => {
+    setRecommend(recommend);
+    updateFinalRecord(recommend);
+  };
 
-                    <button
-                        className={styles.norecobutton}
-                        onClick={() => handleRecommend(false)}
-                    >
-                        Not recommended
-                    </button>
-                </div>
-            ) : recommend === true ? (
-                <div className={styles.finalreco}>Recommended!</div>
-            ) : (
-                <div className={styles.finalnoreco}>Not Recommended!</div>
-            )}
+  useEffect(() => {
+    getFinalScore();
+  }, []);
+
+  return (
+    <div className={styles.finalboard}>
+      <div>
+        This candidate's final score:
+        <div className={styles.finalscore}> {finalScore}/50</div>
+      </div>
+      {recommend === null ? (
+        <div>
+          <div>Do you recommend this candidate?</div>
+          <button
+            className={styles.recobutton}
+            onClick={() => handleRecommend(true)}
+          >
+            Recommend
+          </button>
+
+          <button
+            className={styles.norecobutton}
+            onClick={() => handleRecommend(false)}
+          >
+            Not recommended
+          </button>
         </div>
-    );
+      ) : recommend === true ? (
+        <div className={styles.finalreco}>Recommended!</div>
+      ) : (
+        <div className={styles.finalnoreco}>Not Recommended!</div>
+      )}
+    </div>
+  );
 };
 
 export default FinalScore;

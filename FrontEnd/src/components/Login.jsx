@@ -32,9 +32,7 @@ const Login = (props) => {
       // save refresh token into local storage
       localStorage.setItem(decoded.staffId, res.data.refresh);
       // // // quick check on localstorage key
-      console.log(localStorage);
     } else {
-      console.log("login response no ok");
       alert(JSON.stringify(res.data));
     }
   };

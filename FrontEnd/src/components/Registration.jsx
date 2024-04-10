@@ -27,7 +27,6 @@ const Registration = (props) => {
     });
 
     if (res.ok) {
-      // console.log("successfully Registered!")
       setEmail("");
       setPassword("");
       setRole("");
@@ -36,12 +35,6 @@ const Registration = (props) => {
     } else {
       alert(JSON.stringify(res.data));
     }
-  };
-
-  const handleOnChange = (event) => {
-    // console.log("selected option="+ props.reference)
-    console.log("event.target.value=" + event.target.value);
-    setRole(event.target.value);
   };
 
   useEffect(() => {

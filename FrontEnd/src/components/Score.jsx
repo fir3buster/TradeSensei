@@ -27,18 +27,13 @@ const Score = ({ totalPages }) => {
       userCtx.accessToken
     );
     if (res.ok) {
-      // console.log("getScore=" + JSON.stringify(res.data))
       setScore(res.data);
     } else {
       alert(JSON.stringify(res.data));
-      console.log(res.data);
     }
   };
 
   const addScore = async (pageNumber) => {
-    console.log(userCtx.activeApplicantId);
-    console.log(userCtx.activePageContext, pageNumber, rate, comment);
-    // console.log("patch data=" + rate + comment);
     const res = await fetchData(
       "/api/applicants/managers/" + pageNumber,
       "PATCH",
@@ -53,15 +48,12 @@ const Score = ({ totalPages }) => {
     if (res.ok) {
       getScore();
       nextPage();
-      console.log("addScore = " + JSON.stringify(res.data));
     } else {
       alert(JSON.stringify(res.data));
-      console.log(res.data);
     }
   };
 
   const createManagerRecord = async () => {
-    console.log(userCtx.activeStaffId, userCtx.activeApplicantId);
     try {
       const res = await fetchData(
         "/api/managers/",
@@ -74,11 +66,8 @@ const Score = ({ totalPages }) => {
       );
 
       if (res.ok) {
-        console.log(JSON.stringify(res.data));
-        // getFinalScore()
       } else {
         alert(JSON.stringify(res.data));
-        console.log(res.data);
       }
     } catch (error) {
       console.error("Error creating manager:", error);
@@ -86,24 +75,19 @@ const Score = ({ totalPages }) => {
   };
 
   const createGeneralManagerRecord = async () => {
-    console.log("inside CreteGeneralManager front end");
     try {
       const res = await fetchData(
         "/api/generalManagers/",
         "POST",
         {
           applicantId: userCtx.activeApplicantId,
-          // staffId: userCtx.staffId,
         },
         userCtx.accessToken
       );
 
       if (res.ok) {
-        console.log("received resposne from adding GM Record");
-        console.log(JSON.stringify(res.data));
       } else {
         alert(JSON.stringify(res.data));
-        console.log(res.data);
       }
     } catch (error) {
       console.error("Error creating general manager: ", error);
@@ -119,11 +103,7 @@ const Score = ({ totalPages }) => {
   }, []);
 
   useEffect(() => {
-    console.log("triggered");
     getScore();
-    console.log("userCtx.activePageContext=" + userCtx.activePageContext);
-
-    console.log("total record=" + score.length);
     let recordNumber = -1;
     for (const record in score) {
       if (
@@ -135,18 +115,7 @@ const Score = ({ totalPages }) => {
     }
 
     if (score[recordNumber]) {
-      console.log("score[recordNumber]=" + JSON.stringify(score[recordNumber]));
-      console.log(
-        "managers=" + JSON.stringify(score[recordNumber]["managers"])
-      );
-      console.log(
-        "score[recordNumber][pageNumber]=" +
-          JSON.stringify(score[recordNumber]["pageNumber"])
-      );
-      console.log("userCtx.role=" + userCtx.role);
-      console.log("userCtx.activeStaffId=" + userCtx.activeStaffId);
       if (score[recordNumber]["managers"]) {
-        console.log("into managers");
         setComment("");
         setRate(0);
         for (const manager in score[recordNumber]["managers"]) {
@@ -154,12 +123,6 @@ const Score = ({ totalPages }) => {
             score[recordNumber]["managers"][manager]["staffId"] ===
             userCtx.activeStaffId
           ) {
-            console.log(
-              "grade=" + score[recordNumber]["managers"][manager]["grade"]
-            );
-            console.log(
-              "comment=" + score[recordNumber]["managers"][manager]["comment"]
-            );
             setComment(score[recordNumber]["managers"][manager]["comment"]);
             setRate(score[recordNumber]["managers"][manager]["grade"]);
           }
@@ -225,8 +188,6 @@ const Score = ({ totalPages }) => {
             <button
               onClick={() => {
                 addScore(userCtx.activePageContext);
-                // nextPage();
-                // setComment("");
                 if (userCtx.activePageContext === totalPages) {
                   handleSubmitAllScores();
                 }
