@@ -7,12 +7,14 @@
 
 const ccxt = require("ccxt");
 const ApplicantRecordModel = require("../models/ApplicantRecordModel");
+
+
 async function seedApplicant(traderData) {
     try {        
         for (const cycleNumber in traderData) {
 
             const IsExist = await ApplicantRecordModel.findById(traderData[cycleNumber]._id)
-            // console.log("IsExist=" + IsExist)
+
             if(!IsExist){
                 await ApplicantRecordModel.create([
                     {
@@ -459,8 +461,6 @@ async function priceData(dateString, numberOfDays) {
     });
     exchange.set_sandbox_mode(true);
 
-    let traderData = [];
-    let isStart = false;
     dateString = JSON.stringify(dateString);
     dateString = dateString.replace(/\"/g, "");
     let from_ts = exchange.parse8601(dateString);
