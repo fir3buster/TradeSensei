@@ -2,6 +2,8 @@
 
 ![Prototype](https://github.com/fir3buster/TradeSensei/blob/main/img/prototype1.png?raw=true)
 
+![Working](https://github.com/fir3buster/TradeSensei/blob/develop/img/pre-presentation1.png?raw=true)
+
 # Start Program Now!
 [online](vercel app)
 
