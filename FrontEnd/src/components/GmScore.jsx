@@ -21,7 +21,7 @@ const GmScore = () => {
       if (res.ok) {
         setAllManagerRecords(res.data);
       } else {
-        alert(JSON.stringify(res.data));
+          JSON.stringify(res.data);
       }
     } catch (error) {
       console.error("error fetching final score:", error);
@@ -43,7 +43,7 @@ const GmScore = () => {
             setGmId(data._id);
           }
         }
-      } else alert(JSON.stringify(res.data));
+      } else JSON.stringify(res.data);
     } catch (error) {
       console.error("error fetching final score:", error);
     }
@@ -62,7 +62,7 @@ const GmScore = () => {
       if (res.ok) {
         getGeneralManagersRecordsByApplicantId();
       } else {
-        alert(JSON.stringify(res.data));
+        JSON.stringify(res.data);
       }
     } catch (error) {
       console.error("Error adding score:", error);
