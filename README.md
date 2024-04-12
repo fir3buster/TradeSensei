@@ -18,9 +18,6 @@ Before the interview, the junior traders send their crypto exchange api (readonl
 HR will key in the API secret key to gain access to the junior trader's last 2 year trade records.  Three managers within the firm will grade each trader's using our TradeSensei app by giving marks and comments, all in privacy.  Only the GM will be able to read the three managers' comments and grade, and recommendation for hiring.  The GM, being the top management, will process to choose and inform the HR of the result.
 
 # Screenshots
-![Prototype](https://github.com/fir3buster/TradeSensei/blob/main/img/prototype1.png?raw=true)
-
-![Working](https://github.com/fir3buster/TradeSensei/blob/main/img/pre-presentation1.png?raw=true)
 
 ![Register](https://github.com/fir3buster/TradeSensei/blob/main/img/1_register.png?raw=true)
 
