@@ -53,7 +53,7 @@ HR will key in the API secret key to gain access to the junior trader's last 2 y
 # Getting Started
 - [Public Board](https://junxiulow.atlassian.net/jira/software/projects/TRD/boards/3)
 - [Pitch Deck](https://docs.google.com/presentation/d/1JP4o74ilLmReu8Bxw2ohCwJlNCng1KS2KDnuBZUAibM/edit#slide=id.g26c376b6b4e_1_54)
-
+- Entity Relationship Diagram (ERD)
 ![EntityRelationshipDiagram](https://github.com/fir3buster/TradeSensei/blob/main/img/ERD.png?raw=true)
 
 # App Design
