@@ -82,8 +82,8 @@ As for the chart, we are using lightweight-charts which is the free version of t
 
 
 # Challenges
-1) different crypto exchange have different json output format
-2) setting up a dummy binance api server
+1) Different crypto exchange have different json output format
+2) Setting up a dummy binance api server
 3) Updating record schemas (applicant, manager, general manager) to reference the staffId from the LoginAuth schema enables the establishment of relationships between different records in the MongoDB database, fostering data integrity and streamlined querying. By associating records with the staffId from LoginAuth, it creates a cohesive linkage among entities, facilitating more efficient data management and analysis processes
 4) Connecting the chart’s buttons to the score component and setting the scores to the backend was a challenge to figure out. The importance of having a really clear understanding of how the backend will work with the frontend overall before creating components and coding
 
