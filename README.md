@@ -22,19 +22,19 @@ HR will key in the API secret key to gain access to the junior trader's last 2 y
 
 ![Working](https://github.com/fir3buster/TradeSensei/blob/main/img/pre-presentation1.png?raw=true)
 
-![Register](https://github.com/fir3buster/TradeSensei/blob/develop/img/1_register.png?raw=true)
+![Register](https://github.com/fir3buster/TradeSensei/blob/main/img/1_register.png?raw=true)
 
-![ManagerGrade](https://github.com/fir3buster/TradeSensei/blob/develop/img/2_managergrade.png?raw=true)
+![ManagerGrade](https://github.com/fir3buster/TradeSensei/blob/main/img/2_managergrade.png?raw=true)
 
-![Submit](https://github.com/fir3buster/TradeSensei/blob/develop/img/3_submit.png?raw=true)
+![Submit](https://github.com/fir3buster/TradeSensei/blob/main/img/3_submit.png?raw=true)
 
-![FinalScore](https://github.com/fir3buster/TradeSensei/blob/develop/img/4_finalscore.png?raw=true)
+![FinalScore](https://github.com/fir3buster/TradeSensei/blob/main/img/4_finalscore.png?raw=true)
 
-![Recommend](https://github.com/fir3buster/TradeSensei/blob/develop/img/5_recommend.png?raw=true)
+![Recommend](https://github.com/fir3buster/TradeSensei/blob/main/img/5_recommend.png?raw=true)
 
-![GwView](https://github.com/fir3buster/TradeSensei/blob/develop/img/6_gmview.png?raw=true)
+![GwView](https://github.com/fir3buster/TradeSensei/blob/main/img/6_gmview.png?raw=true)
 
-![GmRecommend](https://github.com/fir3buster/TradeSensei/blob/develop/img/7_gmrecommend.png?raw=true)
+![GmRecommend](https://github.com/fir3buster/TradeSensei/blob/main/img/7_gmrecommend.png?raw=true)
 
 <!-- # Start Program Now!
 [online](vercel app) -->
@@ -54,7 +54,7 @@ HR will key in the API secret key to gain access to the junior trader's last 2 y
 - [Public Board](https://junxiulow.atlassian.net/jira/software/projects/TRD/boards/3)
 - [Pitch Deck](https://docs.google.com/presentation/d/1JP4o74ilLmReu8Bxw2ohCwJlNCng1KS2KDnuBZUAibM/edit#slide=id.g26c376b6b4e_1_54)
 
-![EntityRelationshipDiagram](https://github.com/fir3buster/TradeSensei/blob/develop/img/ERD.png?raw=true)
+![EntityRelationshipDiagram](https://github.com/fir3buster/TradeSensei/blob/main/img/ERD.png?raw=true)
 
 # App Design
 
