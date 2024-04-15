@@ -19,8 +19,10 @@ HR will key in the API secret key to gain access to the junior trader's last 2 y
 
 # Screenshots
 
+##Registration/Login using JWT:
 ![Register](https://github.com/fir3buster/TradeSensei/blob/main/img/1_register.png?raw=true)
 
+##Manager logs in to view anonymised applicant/junior trader's trades:
 ![ManagerGrade](https://github.com/fir3buster/TradeSensei/blob/main/img/2_managergrade.png?raw=true)
 
 ![Submit](https://github.com/fir3buster/TradeSensei/blob/main/img/3_submit.png?raw=true)
@@ -29,6 +31,7 @@ HR will key in the API secret key to gain access to the junior trader's last 2 y
 
 ![Recommend](https://github.com/fir3buster/TradeSensei/blob/main/img/5_recommend.png?raw=true)
 
+##General Manager's Final View and Recommendation:
 ![GwView](https://github.com/fir3buster/TradeSensei/blob/main/img/6_gmview.png?raw=true)
 
 ![GmRecommend](https://github.com/fir3buster/TradeSensei/blob/main/img/7_gmrecommend.png?raw=true)
